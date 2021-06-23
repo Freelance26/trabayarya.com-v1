@@ -1,0 +1,205 @@
+
+<%- include ('./partials/header'); %>
+<% if (user.tipo_cuenta == 'Admin'){ %>
+<div class="container-margin">
+    <section class="section breadcrumbs-custom">
+      <div class="breadcrumbs-custom-main bg-image bg-primary">
+        <div class="container">
+          <h3 class="breadcrumbs-custom-title">Panel de administracion</h3>
+        </div>
+      </div>
+      <div class="breadcrumbs-custom-aside">
+        <div class="container">
+          <ul class="breadcrumbs-custom-path">
+            <li><a href="/">Inicio</a></li>
+            <li><a href="/lista-trabajos-admin/1">Ver anuncios</a></li>
+            <li class="active">Candidatos</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="section section-md">
+      <div class="container">
+        <form class="form-layout-search form-lg" method="GET" action="/administracion/panel/candidatos/1">
+          <div class="form-wrap form-wrap-icon">
+            <input class="form-input" id="form-name" type="text" name="buscar_free" data-constraints="@Required">
+            <label class="form-label" for="form-name"></label><span class="icon fl-bigmug-line-search74"></span>
+          </div>
+  
+          <div class="form-wrap form-wrap-button">
+            <button class="button button-lg button-primary" type="submit">Buscar</button>
+          </div>
+        </form>
+        <div class="row row-50 flex-lg-row-reverse">
+          <div class="col-lg-4 col-xl-3">
+            <div class="row row-30">
+  
+            </div>
+          </div>
+          <div class="col-md-12">
+            <!-- Profile Minimal-->
+            <% applicant.forEach(function(applicant){ %>
+              <article class="profile-minimal">
+                <div class="profile-minimal-inner">
+                  <div class="profile-minimal-main-outer">
+                    <div class="profile-minimal-main">
+
+                      <%if (applicant.email) { %>
+                        <img class="profile-minimal-image"
+                        src="https://i.imgur.com/mEtjVNd.png" alt="" width="101" height="96" />
+                        <% } %>
+                      
+                      <div class="profile-minimal-main-info">
+                        <h5 class="profile-minimal-name">
+                            
+                            <%if (applicant.email) { %>
+                              <%= applicant.email%>   
+                              <% } %>
+                          </h5>
+                          <h5 class="profile-minimal-name">
+                            <%if (applicant.email) { %>
+                              <span> Monto cancelado </span><%= applicant.monto%>   
+                              <% } %>
+                          </h5>
+                        
+                        <%if (applicant.email) { %>
+                         
+                          <p>Correo empleador : <%= applicant.email%> </p>
+                          <p>Id del pago : <%= applicant.id_payment%> </p>
+                          <p>Token : <%= applicant.token%> </p>
+                          <p>Id Paypal del usuario : <%= applicant.id_payer%> </p>
+                          
+                        <% } %>
+                 
+                        
+                        <p class="profile-minimal-position"><%= applicant.cargo%></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="profile-minimal-meta">
+                    <%if (applicant.username) { %>
+                    <a class="button button-primary" href="/perfil-user/<%= applicant.id%>" style="
+                            border-radius: 10px 10px 10px 10px;
+                            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver Perfil</a>
+                            <a class="button button-primary" href="/administracion/panel/<%= applicant.id%>" style="
+                              border-radius: 10px 10px 10px 10px;
+                              box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+                              padding: 14px;">Contraseña</a>
+
+                            <form action="/administracion/panel/eliminar/<%= applicant.id%>?_method=DELETE" method="POST">
+                              <input type="hidden" name="_method" value="DELETE">
+                              <button class="button button-primary" style="border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);"id="btSubmit" value="Submit" >
+                              <span class="icon mdi mdi-account"></span>
+                              Eliminar</button>
+                            </form>
+                            <% } %>
+
+                            <%if (applicant.payed_user) { %>
+                              <form action="/administracion/eliminar/<%= applicant.id%>?_method=DELETE" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="button button-primary" style="border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);"id="btSubmit" value="Submit" >
+                                <span class="icon mdi mdi-account"></span>
+                                Eliminar</button>
+                              </form>
+                            <% } %>
+                  </div>
+                </div>
+              </article>
+              <% }) %>
+                <!-- Paginacion -->
+                <!-- Inicio Paginacion -->
+                <div class="row">
+                  <% if(pages) { %>
+                    <nav class="mx-auto">
+                      <ul class="pagination">
+                      <!-- Primera Pagina -->
+                       <% if(current==1) { %>
+                        <li class="page-item disabled">
+                          <a href="" class="page-link">Primera Pagina</a>
+                        </li>
+                        <% } else { %>
+                          <li class="page-item">
+                            <a href="/candidatos/1" class="page-link">Primera Pagina</a>
+                          </li>
+                        <% } %>
+                      <!--Paginas-->
+                          <% var i=(Number(current)> 5 ? Number(current) - 4 : 1) %>
+                            <% if(i !==1) { %>
+                              <li class="page-item disabled">
+                                <a class="page-link" href="#">...</a>
+                              </li>
+                            <% } %>
+                            <% for(; i <=(Number(current) + 4) && i <=pages; i++) { %>
+                              <% if(i==current) { %>
+                                <li class="page-item active">
+                                  <a class="page-link" href="/candidatos/<%= i %>">
+                                    <%= i %>
+                                  </a>
+                                </li>
+                                  <% } else { %>
+                                    <li class="page-item">
+                                      <a class="page-link" href="/candidatos/<%= i %>">
+                                        <%= i %>
+                                      </a>
+                                    </li>
+                                  <% } %>
+                                      <% if (i==Number(current) + 4 && i < pages) { %>
+                                        <li class="page-item disabled">
+                                          <a class="page-link" href="#">...</a>
+                                        </li>
+                                        <% } %>
+                           <% } %>
+                          <!--Ultima Pagina-->
+                          <% if(current==pages){ %>
+                            <li class="page-item disabled">
+                              <a href="" class="page-link">Ultima Pagina</a>
+                            </li>
+                          <% } else { %>
+                            <li class="page-item">
+                              <a href="/candidatos/<%= pages %>">Ultima Pagina</a>
+                            </li>
+                          <% } %>
+                      </ul>
+                    </nav>
+                    <% } %>
+                </div>
+                <!-- Fin Paginacion -->
+          </div>
+        </div>
+    </section>
+  </div>
+
+
+ 
+
+  <% } else { %>
+
+    
+      <section class="section section-md bg-gray-100 text-center" style="min-height: 100vh;">
+        <div class="container">
+          <h3>Oh no!</h3>
+          <ul class="list-linked">
+            
+            
+            <li class="ll-item">
+              <div class="icon ll-item-icon">
+                <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                  <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+                </svg>
+                <img src="../images/apple-touch-icon.png" alt="" width="100">
+              </div>
+              <div class="ll-item-main">
+                <h5 class=""><a href="/">Entraste a una pagina que no debias! Vuelve al inicio!</a></h5>
+    
+              </div>
+            </li>
+          </ul>
+          <div class="ll-item-main pt-4"><a class="button button-sm button-primary-outline" href="/user/edit-perfil">Volver
+              </a></div>
+        </div>
+      </section>
+
+
+
+    <% }  %>
+<%- include('./partials/footer') %>

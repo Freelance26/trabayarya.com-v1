@@ -1,0 +1,35 @@
+      <!-- Welcome to JobsFactory-->
+<%- include ('../partials/header'); %>
+<body>
+  <div class="container-margin conreg">
+    <div class="">
+      <div class=" conregistro">
+        <div class="col-md-12 d-flex justify-content-center ">
+          <div class="card cardregistro ">
+            <!-- <div class="reg-sticky">
+              <img src="/images/bg-registroM.svg" alt="">
+            </div> -->
+            <div class="card-body">
+              <p class="pregistro">Cambio de credenciales</p>
+              <br>
+              <form action="/user/update-datos" method="POST">
+                  <div class="form-group">
+                    <input class="form-input" id="rd-navbar-register-password" type="password" name="password"
+                      data-constraints="@Required" placeholder="Contraseña" />
+                  </div>
+                  <div class="form-group">
+                    <input class="form-input" id="rd-navbar-register-password-confirm" type="password" name="password_confirm"
+                      data-constraints="@Required" placeholder="Confirmar Contraseña" />
+                  </div>
+                </div>
+                <button class="button button-xs button-primary button-icon button-icon-left rd-navbar-popup-toggle"
+                  data-rd-navbar-toggle="#rd-navbar-register" id="btSubmit" value="Submit"  ><span class="icon mdi mdi-account"></span>Cambiar credenciales</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div> 
+    </div>
+  </div>
+<%- include('../partials/footer') %>

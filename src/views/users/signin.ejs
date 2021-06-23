@@ -1,0 +1,66 @@
+
+
+<%- include ('../partials/header'); %>
+<body>
+  
+
+<!-- <% if(typeof exitoso != 'undefined') { %>
+  <% exitoso.forEach(function(msg) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <%=  msg.text %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <%})%>
+<%}%> -->
+<% if (success_msg.length > 0){ %>
+  
+  
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <%= success_msg %>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+ 
+  <% } %>
+
+  <% if (error.length > 0){ %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <%= error %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <% } %>
+    <!-- <div class="jc-decoration">
+
+    </div> -->
+<div class="conlogin">
+    <div class="container conregistro">
+      <div class="col-md-12 d-flex justify-content-left">
+        <div class="card cardregistro">
+          <div class="card-body">
+            <p class="pregistro">INGRESAR</p>
+            <br>
+            <form action="/user/login" method="POST">
+              <div class="form-group">
+                <input class="form-input" id="rd-navbar-register-email" type="email" name="email" placeholder="Correo" />
+              </div>
+              <div class="form-group">
+                <input class="form-input" id="rd-navbar-register-password" type="password" name="password"
+                  placeholder="Contraseña" />
+              </div>
+              <button class="button button-xs button-primary button-icon button-icon-left rd-navbar-popup-toggle"
+                data-rd-navbar-toggle="rd-navbar-login">
+                <span class="icon mdi mdi-import"></span>Ingresar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+</body>
+<%- include('../partials/footer') %>

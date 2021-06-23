@@ -1,0 +1,322 @@
+<%- include ('../partials/header'); %>
+  <section class="section breadcrumbs-custom">
+    <div class="breadcrumbs-custom-main bg-image bg-primary">
+      <div class="container">
+        <h3 class="breadcrumbs-custom-title">
+          <%= detailsJobs.titulo_trabajo %>
+        </h3>
+      </div>
+    </div>
+    <div class="breadcrumbs-custom-aside">
+      <div class="container">
+        <ul class="breadcrumbs-custom-path">
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/lista-trabajos/1">Volver a lista de trabajos</a></li>
+          <li class="active"> <%= detailsJobs.cat_trabajo %></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="section section-md">
+    <div class="container">
+      <div class="row row-50">
+        <div class="col-lg-8">
+          <div class="layout-details">
+            <article class="company-light company-light_1">
+              
+              <div class="company-light-main">
+                <% if (userCreador.nombre_empresa){ %>
+                  
+                  <h5 class="company-light-title">
+                    <%= userCreador.nombre_empresa %>
+                  </h5>
+                  <% } else { %>
+                    <h5 class="company-light-title">
+                      <%= userCreador.username %>  
+                    </h5>
+                    <% } %>
+                      <div class="company-light-info">
+                        <% if (detailsJobs){ %>
+                          <div class="row row-15 row-bordered">
+                            <figure class="company-light-logo"><img class="company-light-logo-image" src="<%= detailsJobs.perfil_img %>"
+                              alt="#" width="350" height="350" />
+                            </figure>
+                            <div class="col-sm-6">
+                              <ul class="list list-xs">
+                                <li>
+                                  <p class="object-inline object-inline_sm"><span
+                                      class="icon icon-1 text-primary mdi mdi-map-marker">
+                                      <%= detailsJobs.ubicacion %>
+                                    </span><span></span></p>
+                                </li>
+                                <li>
+                                  <p class="object-inline object-inline_sm"><span
+                                      class="icon icon-default text-primary mdi mdi-clock"></span><span>
+                                      <%= detailsJobs.createdAt %>
+                                    </span></p>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="col-sm-6">
+                              <ul class="list list-xs">
+                                <li>
+                                  <p class="object-inline object-inline_sm"><span
+                                      class="icon icon-sm text-primary mdi mdi-cash"></span><span>Salario:
+                                      <%=detailsJobs.salario%> $
+                                    </span></p>
+                                </li>
+                                <li>
+                                  <p class="object-inline object-inline_sm"><span
+                                      class="icon icon-1 text-primary mdi mdi-web"></span><span><a
+                                        href="<%= detailsJobs.url %>">
+                                        <%= detailsJobs.url %>
+                                      </a></span></p>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                      </div>
+              </div>
+            </article>
+          </div>
+          <p class="text-style-1">
+            <%= detailsJobs.descripcion %>
+          </p>
+          <% } %>
+            <div class="row row-30">
+              <div class="col-md-6">
+                <h4> Responsabilidades del trabajo </h4>
+                <ul class="list-marked-3">
+                  <li><%= detailsJobs.resp_ %></li>
+                  <li><%= detailsJobs.resp_1 %></li>
+                  <li><%= detailsJobs.resp_2 %></li>
+                  <li><%= detailsJobs.resp_3 %></li>
+                </ul>
+              </div>
+              <% if (userCreador.nombre_empresa){ %>
+                  
+                <h5 class="company-light-title">
+                  <%= userCreador.nombre_empresa %>
+                </h5>
+                <% } else { %>
+                  <div class="col-md-6">
+                <h4>¿Por qué trabajar con nosotros?</h4>
+                <ul class="list-marked-3">
+                  <li><%= userCreador.skill_ %></li>
+                  <li><%= userCreador.skill_1 %></li>
+                  <li><%= userCreador.skill_2 %></li>
+                  <li><%= userCreador.skill_3 %></li>
+                </ul>
+              </div>
+                  <% } %>
+
+
+              <!-- <div class="col-md-6">
+                <h4>Why Work With us</h4>
+                <ul class="list-marked-3">
+                  <li>Growth opportunity in one of the USA’s and Europe's fastest growing marketing agencies</li>
+                  <li>Being a part of a friendly and qualified team</li>
+                  <li>You’ll have a chance to work with industry leaders and renowned advertising experts</li>
+                  <li>Free healthcare and entertainment options</li>
+                </ul>
+              </div> -->
+
+            </div>
+            <!-- <div class="layout-1">
+              <div class="layout-1-inner">
+                <p>Share this vacancy</p>
+                <div>
+                  <ul class="list-inline list-inline-xs">
+                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-facebook" href="#"></a>
+                    </li>
+                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-google-plus"
+                        href="#"></a>
+                    </li>
+                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-twitter" href="#"></a>
+                    </li>
+                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-pinterest-p"
+                        href="#"></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div> -->
+            <!-- Inicio Postulados -->
+            <% if(user) { if(user.id===detailsJobs.id_user){ %>
+              <div class="block offset-top-2">
+                <h4>Postulados</h4>
+                <%  if(applications){ applications.forEach(function(applications){ %>
+                  <table class="table-job-listing table-responsive">
+                    <tr>
+                      <td class="table-job-listing-main">
+                        
+                        <!-- Company Minimal-->
+                        <article class="company-minimal">
+                          <figure class="company-minimal-figure">
+                            <img class="company-minimal-image"
+                              src="<%= applications.profile_img %>" alt="" width="250" height="250" />
+                          </figure>
+                          <div class="company-minimal-main">
+                            <h5 class="company-minimal-name"><a href="/perfil-user/<%= applications.id_applicant %>">
+                                <%= applications.name_applicant %>
+                              </a>
+                            </h5>
+                            <p>
+                              <div hidden>Email: <%= applications.email_applicant %></div>
+                              
+                            
+                            <hr>
+                            <p>
+                              <%= applications.message %>
+                            </p>
+                            <form class=" form-corporate form-spacing-small form-corporate_sm"
+                            data-form-output="form-output-global" data-form-type="contact" method="POST"
+                            action="/appli/pay">
+                            <h4>Trabajo listo? Págale al freelance</h4>
+                            <div class="form-wrap">
+                              <!-- <label class="form-label" for="contact-name">
+                                <%= user.username%>
+                              </label> -->
+                              <!-- <input class="form-input" type="hidden" name="id_applicant" value="<%= applications.id_applicant%>"
+                                readonly='readonly' disabled='disable' data-constraints="@Required"> -->
+                                <!-- <input class="form-input"  type="text" name="salario" value="<%= detailsJobs.salario %> $"
+                                readonly='readonly' disabled='disable' data-constraints="@Required"> -->
+                              <!-- <input class="form-input"  type="hidden" name="email_applicant" value="<%= applications.email_applicant%>"
+                                readonly='readonly' disabled='disable' data-constraints="@Required"> -->
+                              <input type="hidden" name="id_applicant" value="<%= applications.id_applicant%>">
+                              <input type="hidden" name="salario" value="<%= detailsJobs.salario %>">
+                              <input type="hidden" name="email_applicant" value="<%= applications.email_applicant %>">
+                              <input type="hidden" name="name_applicant" value="<%= applications.name_applicant %>">
+                              <input type="hidden"  name="id_jobs" value="<%= detailsJobs.id %>">
+                              <input type="hidden"  name="email" value="<%= detailsJobs.email %>">
+                              
+                            </div>
+     
+                              <div class="form-wrap">
+                                <p>Una vez verificado el pago, se le reenviara al freelancer</p>
+                                <button class="button button-block button-primary" type="submit">Pagar</button>
+                              </div>
+                          </form>
+                          </div>
+                          
+                        </article>
+                      </td>
+                    </tr>
+                  </table>
+                  <% })} %>
+              </div>
+              <% }} %>
+                <!-- Fin Postulados -->
+
+                <!-- Inicio Proyectos Relacionados -->
+                <% if(jobsRelacionados) { %>
+                  <div class="block offset-top-2">
+                    <h4>Proyectos Relacionados</h4>
+                    <% jobsRelacionados.forEach(function(jobsRelacionados){ %>
+                      <table class="table-job-listing table-responsive">
+                        <tr>
+                          <td class="table-job-listing-main">
+                            <!-- Company Minimal-->
+                            <article class="company-minimal">
+                              <figure class="company-minimal-figure"><img class="company-minimal-image"
+                                  src="<%= jobsRelacionados.perfil_img %>" alt="" width="150" height="100" />
+                              </figure>
+                              <div class="company-minimal-main">
+                                <h5 class="company-minimal-name"><a
+                                    href="/detalles-trabajo/<%= jobsRelacionados._id %>">
+                                    <%= jobsRelacionados.titulo_trabajo %>
+                                  </a></h5>
+                                <p>
+                                  <%= jobsRelacionados.ubicacion %>
+                                </p>
+                              </div>
+                            </article>
+                          </td>
+                        </tr>
+                      </table>
+                      <% }) %>
+                  </div>
+                  <% } %>
+                    <!-- Fin Proyectos Relacionados -->
+        </div>
+        <div class="col-lg-4">
+          <div class="row row-30 row-lg-50">
+            <div class="col-md-6 col-lg-12">
+              <!-- RD Mailform-->
+              <% if (user){ 
+                  if(user.tipo_cuenta==='Freelancer' ){ 
+                    if(userLoginPostulado){ 
+                      if(userLoginPostulado.length == 0){
+              %>
+                <form class="rd-mailform form-corporate form-spacing-small form-corporate_sm"
+                  data-form-output="form-output-global" data-form-type="contact" method="POST"
+                  action="/appli/newApplicantions">
+                  <h4>Contact <%= userCreador.username %> </h4>
+                  <div class="form-wrap">
+                    <label class="form-label" for="contact-name">
+                      <%= user.username%>
+                    </label>
+                    
+                    <input class="form-input" id="contact-name" type="text" name="name" value="<%= user.username%>"
+                      readonly='readonly' disabled='disable' data-constraints="@Required">
+                    <input type="hidden" name="name_applicant" value="<%= user.username%>">
+                    <input type="hidden" name="email_applicant" value="<%= user.email%>">
+                  </div>
+                  <div class="form-wrap">
+                    <!-- <label class="form-label" for="contact-email">
+                      <%= user.email%>
+                    </label>
+                    <input class="form-input" id="contact-email" type="email" name="email" value="<%= user.email%>"
+                      readonly='readonly' disabled='disable' data-constraints="@Required">
+                    <input type="hidden" name="email_applicant" value="<%= user.email%>" </div> -->
+                    <div class="form-wrap">
+                      <!-- <label class="form-label" for="contact-phone">Teléfono</label>
+                      <input class="form-input" id="contact-phone" type="text" name="phone_applicant"
+                        data-constraints="@PhoneNumber" hi> -->
+                    </div>
+                    <div class="form-wrap">
+                      <label class="form-label" for="contact-message">Mensaje</label>
+                      <textarea class="form-input" id="contact-message" name="message"
+                        data-constraints="@Required"></textarea>
+                        <input class="form-input" id="contact-email_user" type="text" name="email_user" data-constraints="@Required" value="<%= userCreador.email %>" hidden>
+                    </div>
+                    <div class="form-wrap">
+                      <input type="hidden" name='id_applicant' value="<%= user.id%>">
+                      <% if (detailsJobs) { %>
+                        <input type="hidden"  name="id_jobs" value="<%= detailsJobs.id %>">
+                        <% } %>
+                          <button class="button button-block button-primary" type="submit">Enviar mensaje</button>
+                    </div>
+                </form>
+            </div>
+            <!-- <article class="message-bubble">
+              <div class="message-bubble-inner">
+                <div class="icon mdi mdi-map-marker icon-sm text-primary"></div>
+                <div class="message-bubble-main">
+                  <p>116 Holland Park, Holland Park, W11 4UA</p>
+                  <p>Email:&nbsp;<a href="mailto:#">info@demolink.org</a></p>
+                </div>
+              </div>
+            </article> -->
+            <% } else { %>
+              <article class="message-bubble">
+                <div class="message-bubble-inner">
+                  <div class="icon mdi mdi-map-marker icon-sm text-primary"></div>
+                  <div class="message-bubble-main">
+                    <p>¡Hola!</p>
+                    <p>Ya te encuentras postulado para este trabajo.</p>
+                    
+                  </div>
+                </div>
+              </article>
+              <!-- <p><span>Ya estas postulado</span></p> -->
+              
+            <% } } } } %>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  <%- include('../partials/footer') %>

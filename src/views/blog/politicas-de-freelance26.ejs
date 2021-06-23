@@ -1,0 +1,135 @@
+<%- include ('../partials/header'); %>
+<style>
+  body {counter-reset:section;}
+    h4 {counter-reset:subsection;}
+    h4:before
+    {
+    counter-increment:section;
+    content:counter(section) ". ";
+        /* font-weight:bold; */
+    }
+    h5:before
+    {
+    counter-increment:subsection;
+    content:counter(section) "." counter(subsection) " ";
+    }
+    .politicas-list {
+      list-style-type: disc;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      padding-inline-start: 40px;
+    }
+  
+    .politicas-list li {
+        display: list-item;
+    }
+  </style>
+  <div class="container-margin">
+    <section class="section breadcrumbs-custom">
+      <div class="breadcrumbs-custom-main bg-image bg-primary">
+        <div class="container">
+          <h3 class="breadcrumbs-custom-title">Políticas de Freelance26</h3>
+        </div>
+      </div>
+  </section>
+  <section class="section section-md">
+    <div class="container">
+      <p>
+        En Freelance26 nos gusta ser claros con nuestros clientes desde el principio, por lo cual, enumeramos las políticas del sitio para la plataforma. Dichas políticas se irán actualizando constantemente.<br><br>
+
+        El uso de Freelance26, está regido por nuestras políticas de privacidad y términos de servicio.<br><br>
+      </p>
+      <h4>Utilización del sitio</h4>
+      <p>
+        Los mensajes deben ser siempre cordiales. Están prohibidos los malos tratos o insultos entre usuarios.<br><br>
+
+        <span class="text-danger">No comparta ninguna información de contacto (email, teléfono, skype, whatsapp, linkedin, instagram, Facebook, etc.).</span> <br><br>
+
+        <span class="text-danger">No se permite el envío de un enlace externo (sin excepciones). Nada que haga que un cliente y / o freelancer salga del sitio de Freelance26.</span><br><br>
+
+        <strong>Procura siempre establecer todos los contactos a través de Freelance26, para que nuestra garantía pueda ser aplicada en los casos que sea necesario.</strong> <br><br>
+
+        Respeta la privacidad de los mensajes y proyectos en Freelance26. A menos que hayas obtenido autorización escrita de la otra parte, no puedes hacer público mensajes o contenido del trabajo. <br><br>
+
+        El Spam no será aceptado de ninguna manera.<br><br>
+      </p>
+      <h4>Contenido del sitio</h4>
+      <p>
+        No publicarás proyectos, mensajes o contenido en el sitio de:
+      </p>
+      <ul class="politicas-list">
+        <li>Pornografía y contenido no apto para menores.</li>
+        <li>Contenido violento.</li>
+        <li>Contenido relacionado con la intolerancia racial o con el ataque a un particular, a un grupo o a una organización.</li>
+        <li>Contenido relacionado con la piratería informática.</li>
+        <li>Contenido relacionado con casinos y juegos de azar.</li>
+        <li>Contenido relacionado con drogas y artículos relacionados.</li>
+        <li>Contenido relacionado con la venta de armas o de munición (por ejemplo, armas de fuego y sus piezas, navajas o pistolas de descarga eléctrica).</li>
+        <li>Contenido relacionado con la venta de productos que sean réplicas o imitaciones de artículos de diseño o de otros artículos.</li>
+        <li>Software de índole malicioso (virus informáticos, etc.).</li>
+        <li>Cualquier otro contenido que sea ilegal, promocione una actividad ilegal o infrinja los derechos legales de otras personas.</li>
+      </ul>
+      <h4>Políticas para la publicación de trabajos</h4>
+      <p>
+        Si un trabajo se encuentra en violación de cualquiera de las políticas de Freelance26, será retirado del sitio. El cliente es libre para volver a publicar el trabajo sin la violación de las políticas.<br>
+        Las razones más comunes por qué se retira un anuncio de trabajo de Freelance26:
+      </p>
+      <ul class="politicas-list">
+        <li>Viola los Términos de servicio de otra empresa o entidad.</li>
+        <li>Pide a los proveedores realizar trabajo no remunerado.</li>
+        <li>El contenido viola la sección 2 de estas políticas.</li>
+        <li>El pago se ofrece por fuera de la plataforma de pago de Freelance26.</li>
+        <li>Viola la integridad de una institución académica, incluyendo hacer la tarea, escribir ensayos para la escuela, exámenes o presentación de solicitudes.</li>
+        <li>Viole cualquier ley de los EE.UU. o cualquier otro país.</li>
+        <li>No debe contener información personal o de contacto.</li>
+        <li>No debe promocionar otros servicios o productos.</li>
+        <li>No es para conseguir empleados de tiempo completo.</li>
+      </ul>
+      <h4>Políticas para la Presentación de Propuestas</h4>
+      <p>Al presentar una propuesta, el proveedor no puede:</p>
+      <ul class="politicas-list">
+        <li>Ofrecer sus servicios de forma gratuita.</li>
+        <li>Usar un lenguaje poco profesional.</li>
+        <li>Ofrecer recibir el pago fuera de Freelance26.</li>
+        <li>Utilice el envío de mensajes y propuestas para otro fin en vez de presentar una propuesta.</li>
+        <li>Incluya cualquier información de contacto. </li>
+      </ul>
+      <h5>Guía para la publicación de propuestas</h5>
+      <p>Como trabajador, usted se compromete a seguir las siguientes pautas al momento de enviar una propuesta:</p>
+      <ul class="politicas-list">
+        <li>Proporcionar propuestas sólo para los trabajos en los que usted es una buena opción y pueda completarlos en el tiempo establecido por el Cliente.</li>
+        <li>Ayudar al cliente a clarificar sus necesidades y desarrollar plenamente el alcance del trabajo y los resultados finales.</li>
+        <li>Establecer expectativas que puede cumplir o superar.</li>
+        <li>Especificar las condiciones de pago que se vinculan a la realización de hitos.</li>
+        <li>Especificar cómo las órdenes de cambios y revisiones serán manejadas.</li>
+        <li>Especificar cómo la garantía del trabajo será manejada.</li>
+        <li>Presentar una propuesta precisa que refleje su comprensión del alcance del trabajo y la cantidad de tiempo / esfuerzo que va a comprometer con el fin de lograr la satisfacción del cliente.</li>
+        <li>Informar al cliente de las horas de oficina y el tiempo de respuesta comprometido.</li>
+        <li>Presentar una propuesta de nuevo cuando sea necesario para reflejar cualquier cambio en la fecha de entrega de precios, o enfoque, antes del final del período de propuesta.</li>
+        <li>No presentar precios injustificadamente bajos, propuesta o propuestas de ensayo. Si desea presentar una propuesta, pero necesita más información sobre el trabajo, escriba un mensaje para solicitar más información, indicando sus suposiciones sobre el alcance del trabajo en su propuesta y explicitar que va a actualizar la propuesta una vez que reciba más información.</li>
+        <li>No presentar propuestas que se hacen con la intención de cometer fraude.</li>
+        <li>No presentar contenido repetitivo o propuestas genéricas.</li>
+      </ul>
+      <h4>Políticas para la publicación de su perfil</h4>
+      <p>El perfil de un trabajador no puede contener:</p>
+      <ul class="politicas-list">
+        <li>Información de contacto fuera de lo ofrecido a través de Freelance26.</li>
+        <li>Propuestas de recibir pagos fuera de la plataforma de Freelance26.</li>
+        <li>Ofertas de servicios gratuitos.</li>
+        <li>Ofertas de servicios que están en contra de las Condiciones del servicio de Freelance26 o de otra empresa o entidad.</li>
+        <li>Cualquier texto que se copie del perfil de otro trabajador.</li>
+        <li>Cualquier muestra de trabajo por la que el propietario del perfil no tiene derechos legales o de propiedad.</li>
+      </ul>
+      <h4>Políticas acerca de la duración de las relaciones laborales en el sitio</h4>
+      <ul class="politicas-list">
+        <li>Las relaciones entre clientes y profesionales que comienzan en Freelance26, deberán continuar desarrollándose a través de Freelance26 por el término de 1(un) año a partir del último proyecto completado entre ambos.</li>
+        <li>Cualquier relación laboral que haya comenzado en Freelance26 y sea continuada por fuera del sitio, pierde el derecho a nuestra garantía y puede resultar perjudicial para la permanencia de ambas partes en el sitio, pudiendo Freelance26 cancelar su permanencia en cualquier momento.</li>
+      </ul>
+      <h4>Las sanciones por violación de una Política</h4>
+      <p>Freelance26 suspenderá o cerrará las cuentas de los miembros que violen sus políticas.</p>
+	  </div>
+  </section>
+  </div>
+<%- include('../partials/footer') %>

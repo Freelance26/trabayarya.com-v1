@@ -1,0 +1,144 @@
+
+
+<%- include ('../partials/header'); %>
+
+
+
+<% if(typeof errors != 'undefined') { %>
+  <% errors.forEach(function(error) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <%=  error.text %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <%})%>
+<%}%>
+
+<body>
+  <div class="container-margin">
+    <div class="conregE">
+      <div class=" conregistroE">
+        <div class="col-md-12 d-flex justify-content-center ">
+          
+          <div class="card cardregistro ">
+            <div class="reg-sticky2">
+              <img src="/images/registro-bg22.svg" alt="">
+            </div>
+            <div class="card-body">
+              <p class="pregistro">REGISTRO EMPRESA</p>
+              <br>
+              <form action="/user/signup" method="POST">
+                <div class="form-group">
+                  <input class="form-input" id="rd-navbar-register-name" type="text" name="username"
+                    data-constraints="@Required" placeholder="Nombre" />
+                </div>
+                <div class="form-group">
+                  <input class="form-input" id="rd-navbar-register-email" type="email" name="email"
+                    data-constraints="@Email @Required" placeholder="Correo" />
+                </div>
+                <div class="form-group">
+                  <input class="form-input" id="rd-navbar-register-password" type="password" name="password"
+                    data-constraints="@Required" placeholder="Contraseña" />
+                </div>
+                <div class="form-group">
+                  <input class="form-input" id="rd-navbar-register-password-confirm" type="password" name="password_confirm"
+                    data-constraints="@Required" placeholder="Confirmar Contraseña" />
+                </div>
+                <div class="input-group mb-3" style="display: none;">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text" for="inputGroupSelect01">Tipo de Cuenta</label>
+                  </div>
+                  <select class="custom-select" id="rd-navbar-register-tip_cuenta" name="tipo_cuenta" data-constraints="@Required" aria-placeholder="sele">Seleccionar...
+                    <option value="Empresa">Empresa</option>
+                    <!-- <option value="Freelancer">Freelancer</option> -->
+                  </select>
+                </div>  
+                <div class="form-row ">
+                  <div class="form-group col-md-6 ">
+                    <label for="inputState" style="color:white; display: in-block; min-width: 40px;;">Pais</label>
+                    <select id="inputState" class="form-control" name="pais" data-constraints="@Required">
+                      <option selected>Escoja su pais</option>
+                        <option value="México">México</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="España">España</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Perú">Perú</option>
+                        <option value="Venezuela">Venezuela</option>
+                        <option value="Chile">Chile</option>
+                        <option value="Guatemala">Guatemala</option>
+                        <option value="Ecuador">Ecuador</option>
+                        <option value="Cuba">Cuba</option>
+                        <option value="Bolivia">Bolivia</option>
+                        <option value="República Dominicana">República Dominicana</option>
+                        <option value="Honduras">Honduras</option>
+                        <option value="El Salvador">El Salvador</option>
+                        <option value="Paraguay">Paraguay</option>
+                        <option value="Nicaragua">Nicaragua</option>
+                        <option value="Costa Rica">Costa Rica</option>
+                        <option value="Panamá">Panamá</option>
+                        <option value="Puerto Rico">Puerto Rico</option>
+                        <option value="Uruguay">Uruguay</option>
+                        <option value="Guinea Ecuatorial">Guinea Ecuatorial</option>
+                        <option value="Belice">Belice</option>
+                    </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputCity" style="color:white;" >Ciudad</label>
+                    <input type="text" class="form-control" name="ciudad" data-constraints="@Required" id="inputCity">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="check" data-constraints="@Required">
+                    <label class="form-check-label" for="gridCheck" style="color:white;">
+                      <a href="/blog/terminos-y-condiciones">Terminos y condiciones</a>
+                    </label>
+                  </div>
+                </div>
+                <button class="button button-xs button-primary button-icon button-icon-left rd-navbar-popup-toggle"
+                  data-rd-navbar-toggle="#rd-navbar-register" id="btSubmit" value="Submit"  disabled><span class="icon mdi mdi-account"></span>Regístrate</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div> 
+    </div>
+  </div>
+
+
+<!-- 
+position: absolute;
+/* top: -300px; */
+}
+@media (min-width: 768px)
+.jc-decoration-item {
+position: absolute;
+display: block;
+min-width: 100%;
+min-height: 100%;
+padding-bottom: 67.0816%;
+top: -10%; -->
+
+</body>
+
+
+<script>
+let ch = document.getElementById('check');
+let bt = document.getElementById('btSubmit');
+function validator(){
+  if (ch.checked == false){
+    document.getElementById('btSubmit').disabled = true;
+  }else{
+    document.getElementById('btSubmit').disabled = false;
+  }
+}
+ch.addEventListener('click',validator);
+bt.addEventListener('click')
+
+
+
+</script>
+
+<%- include('../partials/footer') %>

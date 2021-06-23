@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html class="wide" lang="en">
+
+<head>
+  <title>Freelance26</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <link rel="stylesheet" href="/css/fonts.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .ie-panel {
+      display: none;
+      background: #212121;
+      padding: 10px 0;
+      box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, .3);
+      clear: both;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    html.ie-10 .ie-panel,
+    html.lt-ie-10 .ie-panel {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <!-- {{> navegacion }} -->
+
+  <main class="container p-5">
+    <!-- {{> messages }}
+    {{> errors }}
+    {{{body}}} -->
+      
+    
+      <%- messages %>
+      <%- errors %>
+      <%- body %>
+
+
+  </main>
+
+  <!-- Page Footer-->
+  <footer class="section footer-creative context-dark">
+    <div class="footer-creative-main">
+      <div class="container">
+        <div class="row row-50 justify-content-lg-between">
+          <div class="col-lg-5 col-xl-4">
+            <p class="footer-creative-title">Redes Sociales</p>
+            <div class="footer-creative-divider"></div>
+            <div class="row row-narrow row-15">
+              <div class="col-6">
+                <ul class="list-marked-1">
+                  <li><a href="#">Facebook</a></li>
+                  <li><a href="#">Instagram</a></li>
+                  <li><a href="#">Twitter</a></li>
+                  <li><a href="#">LinkedIn</a></li>
+
+                </ul>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-4 col-xl-3">
+            <p class="footer-creative-title">Contacto</p>
+            <div class="footer-creative-divider"></div>
+            <div class="post-line-group">
+              <p class="heading-7">Teléfonos</p>
+              <ul class="list-0">
+                <li>
+                  <dl class="list-terms-inline">
+
+                    <dd><a href="tel:#">+1 (409) 987–5874</a></dd>
+                  </dl>
+                </li>
+                <li>
+                  <dl class="list-terms-inline">
+                    <dd><a href="tel:#">+1 (409) 987–5874</a></dd>
+                  </dl>
+                </li>
+              </ul>
+              <br>
+              <p class="heading-7">Correos</p>
+              <ul class="list-0">
+                <li><a href="mailto:#">Office@demolink.org</a></li>
+                <li><a href="mailto:#">Support@demolink.org</a></li>
+              </ul>
+
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-3">
+            <p class="footer-creative-title"></p>
+            <br><br>
+            <img class="brand-logo-dark" src="/images/logo-default-286x52.png" alt="" width="200" height="60" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-creative-aside">
+      <div class="container">
+        <p class="rights"><span>Todos los derechos reservados. Desarrollado por
+            Studio73</span><span>&nbsp;&copy;&nbsp;</span><span class="copyright-year"></span><span>&nbsp;</span></p>
+      </div>
+    </div>
+  </footer>
+  </div>
+  <div class="snackbars" id="form-output-global"></div>
+  <script src="/js/core.min.js"></script>
+  <script src="/js/script.js"></script>
+
+  <!-- Javascript Personalizado 
+ <script src='js/main.js'></script>-->
+</body>
+
+</html>

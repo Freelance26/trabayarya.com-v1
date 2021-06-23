@@ -1,0 +1,114 @@
+<%- include ('../partials/header'); %>
+<% if (user.tipo_cuenta == 'Freelancer'){ %>
+  <form action="/user/pay" method="POST">
+  <section class="parallax-container section-md bg-primary bg-overlay-1" data-parallax-img="images/"><div class="material-parallax parallax"><img src="../images/membresia.svg" alt="" style="display: block; transform: translate3d(-50%, 145px, 0px) rotate(0.1deg);"></div>
+    <div class="parallax-content" >
+      <form action="/user/pay" method="POST"></form>
+      <div class="container" >
+        <h3 class="text-center">PLANES DE MEMBRESÍAS</h3>
+        <!-- Pricing Table Creative Group-->
+        <div class="pt-creative-group"  >
+          <!-- Pricing Table Creative-->
+          <article class="pt pt-creative">
+            <p class="pt-title">BÁSICA</p>
+            <p class="pt-price"><span class="pt-price-small pt-price-currency">$</span><span>0</span><span class="pt-price-small">00</span></p>
+            <div class="pt-creative-features">
+              <ul class="list list-marked">
+                <li>Portafolio de servicios</li>
+                <li>Chat Cliente -  Freelancer</li>
+              </ul>
+              
+            </div>
+            <p class="pt-title">Cuotas </p>
+            <div class="pt-creative-features">
+              <ul class="list list-marked">
+                <li>Cuota - Gratis</li>
+                <li>Comisión - 10% (Min. $ 3.00) </li>
+              </ul>
+              
+            </div>
+            
+            <!-- <input type="submit" value="¡EMPIEZA AHORA!" class="button button-primary button-shadow-1"> -->
+                <a class="button button-primary button-shadow-1"  href="/user/edit-perfil" >¡EMPIEZA AHORA!</a>
+          </article>
+         
+          <article class="pt pt-creative" >
+            <p class="pt-title">PLUS</p>
+            <p class="pt-price"><span class="pt-price-small pt-price-currency">$</span><span>24</span><span class="pt-price-small">00</span></p>
+            <div class="pt-creative-features">
+              <ul class="list list-marked">
+                <li>1 año de membresía</li>
+                <li>Portafolio de servicios</li>
+                <li>Chat Cliente - Freelancer</li>
+                <li>Aplica a proyectos ilimitados</li>
+                <li>Distintivo plus en tu perfil</li>
+                <li>Adjuntar archivos a tu oferta</li>
+                <li>Prioridad en resultados de busqueda</li>
+              </ul>
+            </div>
+            <p class="pt-title">Cuotas</p>
+            <div class="pt-creative-features">
+              <ul class="list list-marked">
+                <li name="two">Cuota - USD 24.00/Anual</li>
+                <li>Comisión - 5% (Min. $ 2.00) </li>
+              </ul>
+              
+            </div>
+            <input type="submit" value="¡EMPIEZA AHORA!" class="button button-primary button-shadow-1">
+                <!-- <a class="button button-primary button-shadow-1"  href="/user/edit-perfil" >Llevame a editar mi perfil</a> -->
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>
+
+  <% } else { %>
+
+    <section class="parallax-container section-md bg-primary bg-overlay-1" data-parallax-img="images/"><div class="material-parallax parallax"><img src="../images/membresiaE.svg" alt="" style="display: block; transform: translate3d(-50%, 145px, 0px) rotate(0.1deg);"></div>
+      <div class="parallax-content" >
+        <form action="/user/pay" method="POST">
+          <div class="container" >
+            <h3 class="text-center">PLANES DE MEMBRESÍAS </h3>
+            <!-- Pricing Table Creative Group-->
+           <div style="text-align:center">  
+            <div class="pt-creative-group"  >
+              <!-- Pricing Table Creative-->
+             
+  
+              
+              <article class="pt pt-creative pt-creative_preferred" style="margin-left: auto; margin-right: auto;">
+                <p class="pt-title">Empleador</p>
+                <p class="pt-price"><span>2</span><span class="pt-price-small"></span><span class="pt-price-small pt-price-currency">%</span></p>
+                <p class="pt-title">De comisión</p>
+                <div class="pt-creative-features">
+                  <ul class="list list-marked">
+                    <li>Publica trabajos ilimitados</li>
+                    <li>Solicite cotizaciones de los mejores autónomos</li>
+                  </ul>
+                </div>
+                <p class="pt-title">Tarifas</p>
+                <div class="pt-creative-features">
+                  <ul class="list list-marked">
+                    <li>Pague la tarifa de manejo más baja del mercado</li>
+                    <li>Comisión - 2.00%  </li>
+                  </ul>
+                </div>
+
+                <!-- <input type="submit" value="¡EMPIEZA AHORA!" id="membresia1" class="button button-primary button-shadow-1"> -->
+                 <a class="button button-primary button-shadow-1"  href="/user/edit-perfil" >Llevame a editar mi perfil</a>
+              </article>
+            </div>
+           </div>
+          </div>
+          
+        </form>
+      </div>
+    </section>
+
+
+
+
+
+    <% }  %>
+<%- include('../partials/footer') %>

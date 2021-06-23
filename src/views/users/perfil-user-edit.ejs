@@ -1,0 +1,972 @@
+<%- include ('../partials/header'); %>
+<% if (user.tipo_cuenta == 'Freelancer'){ %>
+  <!-- <div class="contedit">
+    <form action="/edit-perfil" method="POST">
+      <div class="container editp">
+        <div class="row">
+         
+          <div class="col-md-3" style="max-height: 100vh;">
+            <div class="side-bar">
+              <div class="layout-2">
+                <div class="layout-2-item layout-2-item-main">
+                 
+                
+                  <article class="profile-light" action="/user/edit-perfil" method="POST" name="editPerfil">
+                    <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
+                      <input type="file" style="display: none;" value="<%= user.userpic %>" name="userpic">
+                    </label>
+
+                    <div class="profile-light-main">
+                      <label> Nombre y Apellido
+                        <input type="text" class="form-control" placeholder="" value="<%= user.username %>"
+                          name="username">
+                      </label>
+                      <label> Cargo
+                        <input type="text" class="form-control" placeholder="" value="<%= user.cargo %>"
+                          name="cargo">
+                      </label>
+                      <label> Direccion
+                        <input type="text" class="form-control" placeholder="" value="<%= user.direccion %>"
+                          name="direccion">
+                      </label>
+                      <label> Pretencion Salarial
+                        <input type="text" class="form-control" placeholder="" value="<%= user.salario %>"
+                          name="salario">
+                      </label>
+                      <button class="button button-block button-primary" id='btn'
+                                            type="submit">Guardar
+                                            </button>
+                    </div>
+                  </article>
+                  
+
+                  <br>
+                  <article class="" action="/user/edit-perfil" method="POST" name="editPerfil">
+                  <p class="heading-9" style="color: red;">Redes Sociales</p>
+                  <br>
+                  <div class="social-icon bor-btm padding-25">
+                    <ul>
+
+                      <li>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-facebook"></i></span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1" value="<%= user.userfacebook %>" name="userfacebook">
+                        </div>
+                      </li>
+                      <li>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-twitter"></i></span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1" value="<%= user.usertwitter %>" name="usertwitter">
+                        </div>
+                      </li>
+                      <li>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-google-plus"></i></span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1" value="<%= user.usergoogle %>" name="usergoogle">
+                        </div>
+                      </li>
+                      <li>
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fa fa-linkedin"></i></span>
+                          </div>
+                          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1" value="<%= user.userlinkedin %>" name="userlinkedin">
+                        </div>
+                      </li>
+
+                    </ul>
+                    <button class="button button-block button-primary profile-light-main" id='btn'
+                                            type="submit">Guardar
+                                            </button>
+                  </div>
+                  
+                </article>
+
+                </div>
+              </div>
+            </div>
+          </div>
+    </form>
+    <div class="col-md-9"> -->
+
+<!-- 
+      <div class="container datos">
+        <div class="row row-50">
+          <div class="col-lg-8">
+            <div class="row row-50">
+              <div class="col-12" action="/user/edit-perfil" method="POST" name="editPerfil">
+                <p class="heading-9">Acerca de mí</p>
+                <br>
+               
+                <textarea class="form-control"  placeholder="Escribe tu descripción aquí" name="acerca"  > <%= user.acerca %> </textarea>
+                <button class="button button-block button-primary profile-light-main" id='btn'
+                                            type="submit">Guardar
+                                            </button>
+              </div>
+              
+              <div class="col-12">
+
+                <p class="heading-9">EXPERIENCIA LABORAL</p>
+
+                <br> -->
+                <!-- <% if(user.trabajos) { user.trabajos.forEach(function(trabajos){ %>
+                  <div class="padding-30 exp-history">
+                    
+                    <div class="exp">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <label class="laboral"> Periodo
+                            <input type="text" class="form-control" value="<%= trabajos.periodo%>" disabled="disable">
+                          </label>
+                          
+                          <br>
+                          <label class="laboral"> Titulo de trabajo
+                            <input type="text" class="form-control" value="<%= trabajos.titulo_trabajo%>"
+                              disabled="disable">
+                          </label>
+                          <br>
+                          <label class="laboral"> Nombre de la compañia
+                            <input type="text" class="form-control" value="<%= trabajos.nom_empresa%>" disabled="disable">
+                          </label>
+                          <br>
+                          <label class="laboral"> Dirección
+                            <input type="text" class="form-control" value="<%= trabajos.desc_trabajo%>"
+                              disabled="disable">
+                          </label>
+                        </div>
+                        
+
+                        
+
+                        <div class="col-sm-12">
+                          <label class="laboral"> Detalles
+                            <textarea class="form-control" 
+                              disabled="disable"> <%= trabajos.deta_trabajo%></textarea>
+                          </label>
+                          <br>
+                          <% })} %> -->
+                         
+
+                        <form action="/edit-perfil" method="POST" >
+                          <section class="cont-profile" style="margin-top: 12vh;" >
+                            <article  class="perfil"  action="/user/edit-perfil" method="POST" name="editPerfil">
+
+                              <div class="profile-light-main">
+                                <label class=" perfil">
+                                  <p class="heading-9">Status de usuario </p>
+                                  <span class="button button-block button-primary-2" id='btn'
+                                                      type="text"><%= user.isNewUser %>
+                                                      </span>
+                                                      <br>
+                                  <img class="profile-light-image" src="<%= user.filename %>" alt="" width="169" height="169">
+                                 
+                                  
+                                </label>
+                                <a href="#" id="button" class="button">Cambiar foto</a>
+                                <!-- <a href="#" id="button_" class="button">Subir CV</a> -->
+                                <!-- <a class="button button-lg button-primary-outline" id="button" class="button" href="#">Subir CV</a> -->
+                                <label> Nombre y Apellido
+                                  <input type="text" class="form-control" placeholder="" value="<%= user.username %>"
+                                    name="username">
+                                </label>
+                                <label> Cargo
+                                  <input type="text" class="form-control" placeholder="" value="<%= user.cargo %>"
+                                    name="cargo">
+                                </label>
+                                <label> Direccion
+                                  <input type="text" class="form-control" placeholder="" value="<%= user.direccion %>"
+                                    name="direccion">
+                                </label>
+                                <label> Pretención Salarial
+                                  <input type="text" class="form-control" placeholder="" value="<%= user.salario %> $"
+                                    name="salario">
+                                </label>
+                                <br>
+                                <br>
+                                <p class="heading-9" style="color: red;">Redes Sociales</p>
+                                <br>
+                                <div class="social-icon bor-btm padding-25">
+                                  <ul >
+                      
+                                    <li>
+                                      <div class="input-group  lista-redes">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-facebook"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                          aria-describedby="basic-addon1" value="<%= user.userfacebook %>" name="userfacebook">
+                                      </div>
+                                    </li>
+                                    <li>
+                                      <div class="input-group lista-redes">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-twitter"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                          aria-describedby="basic-addon1" value="<%= user.usertwitter %>" name="usertwitter">
+                                      </div>
+                                    </li>
+                                    <li>
+                                      <div class="input-group lista-redes">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-google-plus"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                          aria-describedby="basic-addon1" value="<%= user.usergoogle %>" name="usergoogle">
+                                      </div>
+                                    </li>
+                                    <li>
+                                      <div class="input-group lista-redes">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text" id="basic-addon1"><i class="fa fa-linkedin"></i></span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                                          aria-describedby="basic-addon1" value="<%= user.userlinkedin %>" name="userlinkedin">
+                                      </div>
+                                    </li>
+                      
+                                  </ul>
+                                 
+                                </div>
+                                <button class="button button-block button-primary" id='btn' style="margin-bottom: 10px;"
+                                                      type="submit">Guardar
+                                                      </button>
+                              </div>
+                              
+                              
+                            </article>
+                            
+                          </form>
+
+                          <div>
+                            <div class="hero-content" style="display: grid; padding: 1rem;">
+                              
+                              <h2>Información</h2>
+                              <div class="container-acercaE">
+                                <div class="col-12" action="/user/edit-perfil" method="POST" name="editPerfil" >
+                                  <p class="heading-9">Acerca de <%= user.username %> </p>
+                                  <br>
+                                  <!-- placeholder="Escribe tu descripción aquí" -->
+                                  <textarea class="form-control"  placeholder="Escribe tu descripción aquí" name="acerca"  > <%= user.acerca %> </textarea>
+                                  <button class="button button-block button-primary profile-light-main" id='btn'
+                                                              type="submit" >Guardar
+                                                              </button>
+                                </div>
+                              </div>
+                              <h3>Agrega tu experiencia</h3>
+                              <a href="#" id="button_l" class="button">LABORAL</a>
+                              
+                              <a href="#" id="button_e" class="button">ESTUDIO</a>
+                              <a class="button button-primary" href="/user/edit-pass" style="
+                                border-radius: 10px 10px 10px 10px;
+                                box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Cambiar contraseña</a>
+                            </div>
+                          </div>
+                          
+
+                          
+                            
+                         
+                            <div class="bg-modal" >
+                              <div class="modal-content">
+                                <div class="close">+</div>
+                                <form action="/user/edit_pic" method="POST" enctype="multipart/form-data" >
+                                  <article class="profile-user">
+                                    <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
+                                      <input type="file" style="display: none;" value="" name="userpic">
+                                    </label>  
+                                    <button class="button button-block button-primary" id='btn'
+                                                            type="submit">Guardar
+                                                            </button>
+                                    </article>
+                                </form> 
+                              </div>                            
+                            </div>
+
+
+                            <div class="bg-modal2" >
+                              <div class="modal-content">
+                                <div class="close2">+</div>
+                                <form action="/user/edit_pic" method="POST" enctype="multipart/form-data" >
+                                  <article class="profile-user">
+                                    <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar CV
+                                      <input type="file" style="display: none;" value="" name="userpic">
+                                    </label>  
+                                    <button class="button button-block button-primary" id='btn'
+                                                            type="submit">Guardar
+                                                            </button>
+                                    </article>
+                                </form> 
+                              </div>                            
+                            </div>
+                             
+                            
+                            <div class="bg-modal3" >
+                              <div class="modal-content">
+                                <div class="close3">+</div>
+                                <form action="/user/expe_trabajos" method="POST" name="expeTrabajo" onsubmit="return validateForm()">
+                                  <label class="laboral"> Periodo
+                                    <input type="text" class="input-modal" placeholder="AAAA - AAAA"
+                                      name="periodo_laboral" data-constraints="@Required" id="check">
+                                  </label>
+                                  <br>
+                                  <label class="laboral"> Titulo de trabajo
+                                    <input type="text" class="input-modal" placeholder="" name="titulo_trabajo"
+                                    data-constraints="@Required" id="check">
+                                  </label>
+                                  <br>
+                                  <label class="laboral"> Nombre de la compañia
+                                    <input type="text" class="input-modal" placeholder="" name="nom_empresa"
+                                    data-constraints="@Required" id="check">
+                                  </label>
+                                  <br>
+                                  <label class="laboral"> Dirección
+                                    <input type="text" class="input-modal" placeholder=""
+                                      name="descripcion_trabajo" data-constraints="@Required" id="check">
+                                  </label>
+                                  <label class="laboral "> Detalles
+                                    <textarea class=" input-modal" placeholder=""
+                                      name="detalles_trabajo" data-constraints="@Required" id="check"> </textarea>
+                                  </label>
+                                  <button class="button button-block button-primary" id='btn_'
+                                            type="submit">Agregar
+                                            Experiencia</button>
+                                </form> 
+                              </div>                            
+                            </div>
+                            <div class="bg-modal4" >
+                              <div class="modal-content2">
+                                <div class="close4">+</div>
+                                <form action="/user/expe_estudios" method="POST" name="formestudios" onsubmit="return validateForm2()">
+                                  <label class="laboral"> Periodo
+                                    <input type="text" class="input-modal" placeholder="AAAA - AAAA"
+                                      name="periodo_estudio" data-constraints="@Required" id="check">
+                                  </label>
+                                  <br>
+                                  <label class="laboral"> Instituto/Universidad
+                                    <input type="text" class="input-modal" placeholder=""
+                                     name="nom_estudio" data-constraints="@Required" id="check">
+                                  </label>
+                                  <br>                                                                
+                                  <label class="laboral "> Detalles
+                                    <textarea class=" input-modal" placeholder=""
+                                      name="detalles_estudio" data-constraints="@Required" id="check"> </textarea>
+                                  </label>
+                                  <button class="button button-block button-primary" id='btn_'
+                                            type="submit">Agregar
+                                            Estudios</button>
+                                </form> 
+                              </div>                            
+                            </div>
+                          </section>
+                         
+                          
+                              
+  <% if(user.trabajos) { user.trabajos.forEach(function(trabajos){ %>
+    <section class="hero2">
+       <div class="hero-content">
+        <h3>EXPERIENCIA LABORAL</h3>
+         <div class="container-modal2">
+           <div class="container-modal-content">
+            <label class="laboral"> Periodo
+              <input type="text" class="input-modal" placeholder="AAAA - AAAA"
+                name="periodo_laboral" value="<%= trabajos.periodo%>" disabled="disable">
+            </label>
+            <br>
+            <label class="laboral"> Titulo de trabajo
+              <input type="text" class="input-modal" placeholder="" name="titulo_trabajo" 
+              value="<%= trabajos.titulo_trabajo%>"disabled="disable">
+            </label>
+            <br>
+            <label class="laboral"> Nombre de la compañia
+              <input type="text" class="input-modal" placeholder="" name="nom_empresa"
+               value="<%= trabajos.nom_empresa%>" disabled="disable">
+            </label>
+            <br>
+            <label class="laboral"> Dirección
+              <input type="text" class="input-modal" placeholder="" name="descripcion_trabajo" 
+              value="<%= trabajos.desc_trabajo%>" disabled="disable">
+            </label>
+            <label class="laboral "> Detalles
+              <textarea class=" input-modal" placeholder=""
+                name="detalles_trabajo" disabled="disable"> <%= trabajos.deta_trabajo%> </textarea>
+            </label>
+            
+           </div>
+        </div>                              
+     </div>
+  </section>
+  <br>
+                         
+   <% })} %> 
+
+   <% if(user.estudios){ user.estudios.forEach(function(estudios){ %>
+    
+    <section class="hero2">
+      <div class="hero-content">
+       <h3>ESTUDIOS</h3>
+        <div class="container-modal2">
+          <div class="container-modal-content">
+            <label class="laboral"> Periodo
+              <input type="text" class="input-modal" value="<%= estudios.periodo%>"
+                disabled="disable">
+            </label>
+            <label class="laboral"> Instituto / Universidad nombre
+              <input type="text" class="input-modal" value="<%= estudios.nom_academia%>"
+                disabled="disable">
+            </label>
+            <label class="laboral"> Detalles
+              <textarea class="input-modal" 
+                disabled="disable"><%= estudios.deta_estudio%></textarea>
+            </label>
+          </div>
+        </div>                              
+     </div>
+  </section>
+  <br>
+
+            <% })} %>
+              
+
+         
+                          
+                          
+
+
+<!-- 
+                           
+                            <div class="inside-sec margin-top-30">
+                              
+                              <div>
+                                <form action="/user/expe_trabajos" method="POST" name="expeTrabajo">
+                                  <div class="padding-30 exp-history">
+                                    
+                                    <div class="exp">
+                                      <div class="row">
+                                        <div class="col-md-12">
+                                          <label class="laboral"> Periodo
+                                            <input type="text" class="form-control" placeholder="AAAA - AAAA"
+                                              name="periodo_laboral">
+                                          </label>
+                                          <br>
+                                          <label class="laboral"> Titulo de trabajo
+                                            <input type="text" class="form-control" placeholder="" name="titulo_trabajo">
+                                          </label>
+                                          <br>
+                                          <label class="laboral"> Nombre de la compañia
+                                            <input type="text" class="form-control" placeholder="" name="nom_empresa">
+                                          </label>
+                                          <br>
+                                          <label class="laboral"> Dirección
+                                            <input type="text" class="form-control" placeholder=""
+                                              name="descripcion_trabajo">
+                                          </label>
+                                        </div>
+                                        
+                                        <div class="col-sm-12">
+                                          <label class="laboral"> Detalles
+                                            <textarea class="form-control" placeholder=""
+                                              name="detalles_trabajo"> </textarea>
+                                          </label>
+                                          <br>
+                                        
+                                          <button class="button button-block button-primary" id='btn'
+                                            type="submit">Agregar
+                                            Experiencia</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </form>
+                              </div>
+                              <br>
+                              <div class="inside-sec margin-top-30">
+
+                                
+                                <p class="heading-9">ESTUDIOS</p>
+                                <hr>
+                                <% if(user.estudios){ user.estudios.forEach(function(estudios){ %>
+                                  <div class="padding-30 exp-history">
+                                    <div class="exp">
+                                      <div class="row">
+                                        <div class="col-md-12">
+                                          <label class="laboral"> Periodo
+                                            <input type="text" class="form-control" value="<%= estudios.periodo%>"
+                                              disabled="disable">
+                                          </label>
+                                          <label class="laboral"> Instituto / Universidad nombre
+                                            <input type="text" class="form-control" value="<%= estudios.nom_academia%>"
+                                              disabled="disable">
+                                          </label>
+                                        </div>
+                                        <div class="col-sm-12">
+                                          <label class="laboral"> Detalles
+                                            <textarea class="form-control" 
+                                              disabled="disable"><%= estudios.deta_estudio%></textarea>
+                                          </label>
+                                          <% })} %>
+                                            <br>
+                                            <br>
+                                            <form action="/user/expe_estudios" method="POST">
+                                              <div class="padding-30 exp-history">
+                                                
+                                                <div class="exp">
+                                                  <div class="row">
+                                                    <div class="col-md-12">
+                                                      <label class="laboral"> Periodo
+                                                        <input type="text" class="form-control" placeholder="YYYY - YYYY"
+                                                          name="periodo_estudio">
+                                                      </label>
+
+                                                      <label class="laboral"> Instituto / Universidad nombre
+                                                        <input type="text" class="form-control" placeholder=""
+                                                          name="nom_estudio">
+                                                      </label>
+
+                                                    </div>
+                                                    
+                                                    <div class="col-sm-12">
+                                                      <label class="laboral"> Detalles
+                                                        <textarea class="form-control" placeholder=""
+                                                          name="detalles_estudio"></textarea>
+                                                      </label>
+                                                      
+                                                      <br>
+                                                      <button class="button button-block button-primary" id='btn'
+                                                        type="submit">Agregar
+                                                        Estudios</button>
+                                            </form>
+
+
+                                            <div class="guardar">
+                                              <div class="row">
+                                                <div class="col-sm-6">
+                                                  <button class="button button-block button-primary salcan" id='btn'
+                                                    type="reset">Limpiar
+                                                    Formulario</button>
+                                                </div>
+                                                <div class="col-sm-6">
+
+                                                  <button class="button button-block button-primary salcan" id='btn'
+                                                    type="submit">Salvar</button>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                            </div> -->
+
+                        <!-- </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </form>
+
+  </div> -->
+    
+    
+  <% } if (user.tipo_cuenta == 'Empresa') { %>
+    
+  <form action="/edit-perfil" method="POST" class="form-edit">
+    
+    <section class="hero">
+      
+      <div class="container-editempresa"> 
+    
+            <a class="button button-primary" href="/user/edit-jobs" style="
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+            margin-top: 30px;
+            margin-bottom: 20px;">Ver trabajos anunciados</a>
+            <a class="button button-primary" href="/user/edit-pass" style="
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+            margin-bottom: 20px;">Cambiar contraseña</a>
+            <a class="button button-primary" href="/anunciar-trabajo" style="
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+            margin-bottom: 20px;">Publicar un trabajo</a>
+            <!-- <button class="button button-block button-primary" id='btn'
+            type="submit">Guardar
+            </button> -->
+            <button class="button  button-primary" id='btn'
+            type="submit"
+            style="
+            border-radius: 10px 10px 10px 10px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+            margin-top: 30px;
+            margin-bottom: 20px;">Guardar
+            </button>
+        <div class="container-empresa">
+          <article class="profile-empresa" action="/user/edit-perfil" method="POST" name="editPerfil">
+            <!-- <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
+              <input type="file" style="display: none;" value="<%= user.userpic %>" name="userpic">
+            </label> -->
+            
+    
+            <div class="profile-light-main">
+              <label class=" perfil">
+                <img class="profile-light-image" src="<%= user.filename %>" alt="" width="169" height="169">
+               
+                
+              </label>
+              <a href="#" id="button" class="button">Cambiar foto</a>
+              <label> Nombre y Apellido
+                <input type="text" class="form-control" placeholder="" value="<%= user.username %>"
+                  name="username">
+              </label>
+              <!-- <label> Correo electrónico
+                <input type="text" class="form-control" placeholder="" value="<%= user.email %>"
+                  name="email">
+              </label> -->
+              <label> Tipo de industria
+                <input type="text" class="form-control" placeholder="" value="<%= user.tipoempresa %>"
+                  name="tipoempresa">
+              </label>
+              <label> Direccion
+                <input type="text" class="form-control" placeholder="" value="<%= user.direccion %>"
+                  name="direccion">
+              </label>
+              <label> Pais origen
+                <input type="text" class="form-control" placeholder="" value="<%= user.pais %>"
+                  name="pais">
+              </label>
+              
+            
+            </div>
+            
+          </article>
+        </div>
+        <div class="container-empresaS">
+          <article class="" action="/user/edit-perfil" method="POST" name="editPerfil">
+            <p class="heading-9" style="color: red;">Redes Sociales</p>
+            <br>
+            <div class="social-icon bor-btm padding-25">
+              <ul >
+  
+                <li>
+                  <div class="input-group  lista-redes">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-facebook"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                      aria-describedby="basic-addon1" value="<%= user.userfacebook %>" name="userfacebook">
+                  </div>
+                </li>
+                <li>
+                  <div class="input-group lista-redes">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-twitter"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                      aria-describedby="basic-addon1" value="<%= user.usertwitter %>" name="usertwitter">
+                  </div>
+                </li>
+                <li>
+                  <div class="input-group lista-redes">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-google-plus"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                      aria-describedby="basic-addon1" value="<%= user.usergoogle %>" name="usergoogle">
+                  </div>
+                </li>
+                <li>
+                  <div class="input-group lista-redes">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1"><i class="fa fa-linkedin"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                      aria-describedby="basic-addon1" value="<%= user.userlinkedin %>" name="userlinkedin">
+                  </div>
+                </li>
+  
+              </ul>
+              <!-- <button class="button button-block button-primary profile-light-main" id='btn'
+                                      type="submit">Guardar
+                                      </button> -->
+            </div>
+            <div class="container-acercaE">
+          
+              <div class="col-12" action="/user/edit-perfil" method="POST" name="editPerfil" >
+                <p class="heading-9">Acerca de <%= user.username %> </p>
+                <br>
+                
+                <!-- placeholder="Escribe tu descripción aquí" -->
+                <textarea class="form-control"  placeholder="Escribe tu descripción aquí" name="acerca"  > <%= user.acerca %> </textarea>
+    
+                <br>
+                <p class="heading-9">¿Por qué trabajar para <%= user.username %> ? </p>
+                <br>
+    
+                <div class="profile-light-main">
+              
+             
+                  <label> 1.
+                    <input type="text" class="form-control" placeholder="" value="<%= user.skill_ %>"
+                      name="skill_">
+                  </label>
+                  <label> 2.
+                    <input type="text" class="form-control" placeholder="" value="<%= user.skill_1 %>"
+                      name="skill_1">
+                  </label>
+                  <label> 3.
+                    <input type="text" class="form-control" placeholder="" value="<%= user.skill_2 %>"
+                      name="skill_2">
+                  </label>
+                  <label> 4.
+                    <input type="text" class="form-control" placeholder="" value="<%= user.skill_3 %>"
+                      name="skill_3">
+                  </label>
+                  
+                </div>
+    
+                <!-- <button class="button button-block button-primary profile-light-main" id='btn'
+                                            type="submit" >Guardar
+                                            </button> -->
+              </div>
+              
+    
+            </div>
+            
+            
+          </article>
+        </div>
+        
+        
+        
+        
+        
+        
+      </div>
+    </section>  
+  </form>
+  <div class="bg-modal" >
+    <div class="modal-content">
+      <div class="close">+</div>
+      <form action="/user/edit_pic" method="POST" enctype="multipart/form-data" >
+        <article class="profile-user">
+          <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
+            <input type="file" style="display: none;" value="" name="userpic">
+          </label>  
+        
+          <button class="button button-block button-primary" id='btn'
+                                  type="submit">Guardar
+                                  </button>
+          </article>
+      
+        
+      </form> 
+    </div>                            
+  </div>
+  <% }  else if(user.tipo_cuenta == 'Admin') { %>
+
+
+    
+    <form action="/edit-perfil" method="POST" class="form-edit">
+      <section class="hero">
+        <div class="container-editempresa"> 
+         
+            <article  action="/user/edit-perfil" method="POST" name="editPerfil">
+        
+      
+              <div class="profile-light-main">
+                <label class=" perfil">
+                  <img class="profile-light-image" src="<%= user.filename %>" alt="" width="169" height="169">
+                 
+                  
+                </label>
+                <a href="#" id="button" class="button">Cambiar foto</a>
+            
+                <button class="button button-block button-primary" id='btn'
+                                      type="submit">Guardar
+                                      </button>
+              <a class="button button-primary" href="/lista-trabajos-admin/1" style="
+              border-radius: 10px 10px 10px 10px;
+              box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver trabajos anunciados</a>
+              <!-- <a class="button button-primary" href="/administracion/panel" style="
+              border-radius: 10px 10px 10px 10px;
+              box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver panel de usuarios</a> -->
+              <a class="button button-primary" href="/candidatos/1" style="
+              border-radius: 10px 10px 10px 10px;
+              box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver panel de candidatos</a>
+              <a class="button button-primary" href="/candidatos/pago" style="
+              border-radius: 10px 10px 10px 10px;
+              box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver pagos pendientes de freelancers</a>
+              <a class="button button-primary" href="/administracion/reportes" style="
+              border-radius: 10px 10px 10px 10px;
+              box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver reporte de pagos de empleadores</a>
+              <a class="button button-primary" href="/" style="
+              border-radius: 10px 10px 10px 10px;
+              box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+              margin-bottom: 20px;">Cambiar contraseña</a>
+              </div>
+              
+            </article>
+          
+        </div>
+      </section>  
+    </form>
+    <div class="bg-modal" >
+      <div class="modal-content">
+        <div class="close">+</div>
+        <form action="/user/edit_pic" method="POST" enctype="multipart/form-data" >
+          <article class="profile-user">
+            <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar foto de perfil
+              <input type="file" style="display: none;" value="" name="userpic">
+            </label>  
+          
+            <button class="button button-block button-primary" id='btn'
+                                    type="submit">Guardar
+                                    </button>
+            </article>
+        
+          
+        </form> 
+      </div>                            
+    </div>
+    <% } %>
+
+  <%- include('../partials/footer') %>
+
+  <script>
+   function validateForm() {
+  var x = document.forms["expeTrabajo"]["periodo_laboral"].value
+  var x1 = document.forms["expeTrabajo"]["titulo_trabajo"].value
+  var x2= document.forms["expeTrabajo"]["nom_empresa"].value
+  var x3 = document.forms["expeTrabajo"]["descripcion_trabajo"].value
+  var x4 = document.forms["expeTrabajo"]["detalles_trabajo"].value;
+  if (x == "") {
+    alert("Debe llenar todos los campos");
+    return false;
+  }
+  if (x1 == "") {
+    alert("Debe llenar todos los campos");
+    return false;
+  }
+  if (x2 == "") {
+    alert("Debe llenar todos los campos");
+    return false;
+  }
+  if (x3 == "") {
+    alert("Debe llenar todos los campos");
+    return false;
+  }
+  if (x4 == "") {
+    alert("Debe llenar todos los campos");
+    return false;
+  }
+}
+function validateForm2(){
+  var y = document.forms["formestudios"]["periodo_estudio"].value
+          var y1 = document.forms["formestudios"]["nom_estudio"].value
+          var y4 = document.forms["formestudios"]["detalles_estudio"].value;
+           if (y == "") {
+             alert("Debe llenar todos los campos");
+             return false;
+           }
+           if (y1 == "") {
+             alert("Debe llenar todos los campos");
+             return false;
+           }
+           if (y4 == "") {
+             alert("Debe llenar todos los campos");
+             return false;
+           }
+}
+
+  </script>
+
+               
+
+ <script>
+  var el = document.getElementById('button')
+ if(el){
+      el.addEventListener("click", function() {
+        document.querySelector('.bg-modal').style.display = "flex";
+        console.log('foto')
+      });
+       }
+ 
+     
+  var cl = document.querySelector('.close')
+    if(cl){
+        cl.addEventListener("click", function() {
+        document.querySelector('.bg-modal').style.display = "none";
+      });
+      
+        }
+
+        var el2 = document.getElementById('button_')
+  if(el2){
+        el2.addEventListener("click", function() {
+        document.querySelector('.bg-modal2').style.display = "flex";
+        console.log('CV')
+      });
+      }
+
+    var clcv = document.querySelector('.close2')
+    if(clcv){
+        clcv.addEventListener("click", function() {
+        document.querySelector('.bg-modal2').style.display = "none";
+        console.log('cerrar CV')
+      });
+      
+        }
+        
+       var el3 = document.getElementById('button_l')
+       
+   if(el3){
+         el3.addEventListener("click", function() {
+         document.querySelector('.bg-modal3').style.display = "flex";
+      console.log('exp')
+       });
+       }
+   
+       var cl2 = document.querySelector('.close3')
+     if(cl2){
+         cl2.addEventListener("click", function() {
+         document.querySelector('.bg-modal3').style.display = "none";
+        console.log('closebro')
+       });
+       
+       }
+       var el4 = document.getElementById('button_e')
+       if(el4){
+         el4.addEventListener("click", function() {
+          console.log('exp')
+         document.querySelector('.bg-modal4').style.display = "flex";
+          console.log('exp')
+       });
+       }
+ var cl3 = document.querySelector('.close4')
+     if(cl3){
+         cl3.addEventListener("click", function() {
+         document.querySelector('.bg-modal4').style.display = "none";
+         console.log('closebro2')
+       });
+      }
+   
+    
+   </script>
+                            
+                        

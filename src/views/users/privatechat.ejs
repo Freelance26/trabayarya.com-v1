@@ -1,0 +1,54 @@
+<%- include ('../partials/header'); %>
+<section class="section section-sm sala-chat conreg">
+    <% if (user) { %>
+
+        <div class="col-sm-3 col-sm-offset-4 frame">
+            <div class="container-chat" >
+                <div class="col-sm-10 col-md-10 message_section">
+                    <h3>Sala de Chat de <%= userc.username%> </h3>
+                    <div class="row">
+                
+                        <div class="chat_area">
+                            <ul id="messages" class="list-unstyled">
+                            </ul>
+                        </div>
+                
+                        <div class="message_write">
+                          <form id="message_form" method="post">
+                                <input type="hidden" id="userName" value="<%= userc._id %>">
+                                <input type="hidden" id="sender" value="<%= user.username %>">
+                                
+                
+                              <textarea class="form-control" name="message" id="msg" placeholder="Type a message"></textarea>
+                              <div class="clearfix"></div>
+                              <div class="chat_bottom">
+                                  <button id="send-message" class="pull-right btn btn-primary" style="background: #4aa1f3; border: #4aa1f3; ">
+                                      Send
+                                  </button>
+                              </div>
+                          </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+                
+                
+  
+      <% } %>
+</section>
+     
+      
+  
+<%- include('../partials/footer') %>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/chatio.js"></script>
+<script src="/js/global.js"></script>
+<script src="/js/deparam.js"></script>
+<script src="/js/messagelink.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->

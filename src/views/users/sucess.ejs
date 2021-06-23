@@ -1,0 +1,106 @@
+<%- include ('../partials/header'); %>
+<!-- <div class="jumbotron-creative-inner conindexj">
+    <div class="sucess-pay"> -->
+      <!-- <div style="align-items: center;">
+        <img src="../images/sucess1.svg" alt="">
+      </div> -->
+      <section class="section section-md bg-gray-100 text-center" style="min-height: 100vh;">
+        <div class="container">
+          <h3>Listo!</h3>
+          <ul class="list-linked">
+            
+            
+            <li class="ll-item">
+              <div class="icon ll-item-icon">
+                <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                  <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+                </svg>
+                <img src="../images/apple-touch-icon.png" alt="" width="100">
+              </div>
+              <div class="ll-item-main">
+                <h5 class=""><a href="/user/edit-perfil">Tu pago ha sido realizado, es hora de actualizar tu perfil!</a></h5>
+    
+              </div>
+            </li>
+          </ul>
+          <div class="ll-item-main pt-4"><a class="button button-sm button-primary-outline" href="/user/edit-perfil">Empezar
+              ahora</a></div>
+     
+                <%if (datos) { %>
+             <br>
+              <form id="post-a-job-form" method="post" action="/appli/report">
+                <h4>Reporta tu pago</h4>
+                <h6>Estos son los datos</h6>
+                <div class="form-wrap">
+                  
+                              
+<!-- 
+                    <div class="form-wrap">
+                      <label class="form-label-outside" for="general-information-job-title">
+                        Id del pago
+                      </label>
+                      <div class="form-wrap-inner">
+                        <input class="form-input" type="text"
+                        name="id_payment"  value="<%= datos.paymentId%>"> 
+                      </div>
+                    </div> -->
+                    <div class="form-wrap">
+                      <label class="form-label-outside" for="general-information-job-title">
+                        Token del pago
+                      </label>
+                      <div class="form-wrap-inner">
+                        <input class="form-input"  type="text"
+                          name="token" value="<%= datos.token%>">
+                        
+                      </div>
+                    </div>
+                    <div class="form-wrap">
+                      <label class="form-label-outside" for="general-information-job-title">
+                        Id del usuario paypal
+                      </label>
+                      <div class="form-wrap-inner">
+                        <input class="form-input"  type="text"
+                          name="id_payer" value="<%= datos.PayerID%>">
+                        
+                      </div>
+                    </div>
+                    <div class="form-wrap">
+                      <label class="form-label-outside" for="general-information-job-title">
+                        Monto
+                      </label>
+                      <div class="form-wrap-inner">
+                        <input class="form-input"  type="text"
+                          name="monto">
+                        <label class="form-label" for="general-information-job-title">Ingresa el monto pagado</label>
+                      </div>
+                    </div>
+                    <input class="form-input" type="hidden"
+                    name="email" hidden value="<%= status_user.email%>">
+                    <input class="form-input" type=" hidden"hidden
+                    name="id" value="<%= status_user.id%>">
+                    <input class="form-input" type="hidden"hidden
+                    name="tipo_cuenta" value="<%= status_user.tipo_cuenta%>">
+                    
+                  </div>
+
+                  <div class="form-wrap">
+                    <p>Una vez verificado el pago, se le reenviara al freelancer</p>
+                    <button class="button button-block button-primary" type="submit">Enviar</button>
+                  </div>
+            </form>
+                
+                  
+                  <% } %>
+         
+               
+               
+             
+                
+   
+        </div>
+      </section>
+    </div>
+
+  <!-- </div>
+</div> -->
+<%- include('../partials/footer') %>

@@ -1,0 +1,194 @@
+      <!-- FScreen-->
+<%- include ('../partials/header'); %>
+      <section class="section section-sm bg-primary">
+      <% if (user) { %>
+        <div class="container">
+          <div class="layout-2">
+            <div class="layout-2-item layout-2-item-main">
+              <!-- Profile Light-->
+              <article class="profile-light"><img class="profile-light-image" src="<%= user.filename %>" alt="" width="169" height="169"/>
+                <div class="profile-light-main">
+                  <h4 class="profile-light-name"><%= user.username %></h4>
+                  <h6 class="profile-light-position"><%= user.cargo %> </h6>
+                  <div class="profile-light-divider"></div>
+                  <ul class="profile-light-list">
+                    <li><span class="icon icon-sm mdi mdi-map-marker"></span><span> <%= user.pais %> </span></li>
+                    <li></li>
+                    <li><span class="icon icon-sm mdi mdi-cash"></span><span>$<%= user.salario %> , p.a minimo</span></li>
+                    <!-- <li><span class="icon icon-sm mdi mdi-cash"></span><span><%= user.email %></span></li> -->
+                  </ul>
+                </div>
+              </article>
+            </div>
+            <div class="layout-2-item text-center text-lg-left">
+              <div>
+                <div class="group group-xl group-middle">
+                  <div>
+                    <ul class="list-inline list-inline-xs">
+                      <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-facebook" href="https://www.facebook.com/"></a></li>
+                      <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-instagram" href="https://www.instagram.com/"></a></li>
+                      <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-twitter" href="https://twitter.com/"></a></li>
+                      <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-pinterest-p" href="https://www.pinterest.es/"></a></li>
+                    </ul>
+                  </div>
+                  <!-- <form method="GET" action="<%= user.cvfilename %>">
+                    <button class="button button-log button-primary-outline">Descargarr cv</button>
+                  </form>
+                  
+                  <a class="button button-lg button-primary-outline" href="<%= user.cvfilename %>">Descargar CV</a> -->
+
+                  <%if (empresa) { %>
+                    <a class="button button-primary btn-candidatos" href="/user/chat/<%= user.id%>&<%=idempresa%>" style="
+                      border-radius: 10px 10px 10px 10px;
+                      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Sala de chat</a>
+                  <% } %>
+
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section section-md">
+        <div class="container">
+          <div class="row row-50">
+            <div class="col-lg-8">
+              <div class="row row-50">
+                <div class="col-12">
+                  <p class="heading-9">Sobre mí</p>
+                  <hr>
+                  
+                  <p class="text-style-1"><%= user.acerca %> </p>
+                </div>
+                <div class="col-12">
+                  <p class="heading-9">EXPERIENCIA LABORAL</p>
+                  <hr>
+                  <div class="timeline-classic">
+                    <% if(user.trabajos) { user.trabajos.forEach(function(trabajos){ %>
+                    <div class="timeline-classic-item">
+                      <div class="timeline-classic-period"><span> <%= trabajos.periodo%> </span></div>
+                      <div class="timeline-classic-main">
+                        <h5 class="timeline-classic-title"><%= trabajos.titulo_trabajo%> </h5>
+                        <p><%= trabajos.deta_trabajo%></p>
+                      </div>
+                    </div>
+                    <% })} %>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <p class="heading-9">EDUCACIÓN</p>
+                  <hr>
+                  <div class="timeline-classic">
+                    <% if(user.estudios){ user.estudios.forEach(function(estudios){ %>
+                    <div class="timeline-classic-item">
+                      <div class="timeline-classic-period"><span><%= estudios.periodo%></span></div>
+                      <div class="timeline-classic-main">
+                        <h5 class="timeline-classic-title"><%= estudios.nom_academia%></h5>
+                        <p><%= estudios.deta_estudio%></p>
+                      </div>
+                    </div>
+                    
+                    <% })} %>
+                    
+                  </div>
+                </div>
+                <!-- <div class="col-12">
+                  <p class="heading-9">My Projects</p>
+                  <hr>
+                  <div class="row row-30 offset-top-30px">
+                    <div class="col-sm-6">
+                    <a class="thumbnail-classic" href="#">
+                        <figure class="thumbnail-classic-figure"><img class="thumbnail-classic-image" src="/images/resume-page-2-368x265.jpg" alt="" width="368" height="265"/>
+                        </figure>
+                        <div class="thumbnail-classic-caption">
+                          <p class="heading-9 thumbnail-classic-title">Project #1</p>
+                        </div>
+                        <div class="thumbnail-classic-dummy"></div></a>
+                    </div>
+                    <div class="col-sm-6">
+                     <a class="thumbnail-classic" href="#">
+                        <figure class="thumbnail-classic-figure"><img class="thumbnail-classic-image" src="/images/resume-page-3-368x265.jpg" alt="" width="368" height="265"/>
+                        </figure>
+                        <div class="thumbnail-classic-caption">
+                          <p class="heading-9 thumbnail-classic-title">Project #2</p>
+                        </div>
+                        <div class="thumbnail-classic-dummy"></div></a>
+                    </div>
+                    <div class="col-sm-6">
+                    <a class="thumbnail-classic" href="#">
+                        <figure class="thumbnail-classic-figure"><img class="thumbnail-classic-image" src="/images/resume-page-4-368x265.jpg" alt="" width="368" height="265"/>
+                        </figure>
+                        <div class="thumbnail-classic-caption">
+                          <p class="heading-9 thumbnail-classic-title">Project #3</p>
+                        </div>
+                        <div class="thumbnail-classic-dummy"></div></a>
+                    </div>
+                    <div class="col-sm-6">
+                    <a class="thumbnail-classic" href="#">
+                        <figure class="thumbnail-classic-figure"><img class="thumbnail-classic-image" src="/images/resume-page-5-368x265.jpg" alt="" width="368" height="265"/>
+                        </figure>
+                        <div class="thumbnail-classic-caption">
+                          <p class="heading-9 thumbnail-classic-title">Project #4</p>
+                        </div>
+                        <div class="thumbnail-classic-dummy"></div></a>
+                    </div>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="row row-30 row-lg-50">
+                <div class="col-md-6 col-lg-12">
+                  <!-- RD Mailform-->
+                   <form class="rd-mailform form-corporate form-spacing-small form-corporate_sm" data-form-output="form-output-global"   data-form-type="contact" method="POST" action="/send-mail-user" onsubmit="return submitUserForm();">
+                    <h4>Contactar</h4>
+                    <div class="form-wrap">
+                      <input class="form-input" type="text" name="username" type="hidden"  value="<%= username %>">
+                    </div>
+                    <div class="form-wrap" hidden>
+                      <input class="form-input"  type="text" name="email_user" type="hidden" hidden value="<%= user.email %>">
+                    </div>
+                    <div class="form-wrap">
+                      <label class="form-label" for="contact-message">Asunto</label>
+                      <textarea class="form-input" id="contact-message" name="message" data-constraints="@Required"></textarea>
+                    </div>
+ 
+                    <!-- <input class="form-input" id="contact-email_user" type="text" name="email_user" data-constraints="@Required" value="<%= user.email %>" hidden> -->
+                   <div class="g-recaptcha" data-sitekey="6Lfw-IwaAAAAAJIZCeMlNOiuKov01K1fYnAZMX4x" data-callback="verifyCaptcha"></div>
+                    <div id="g-recaptcha-error"></div> 
+                    <div class="form-wrap">
+                      <button class="button button-block button-primary" type="submit" value="Submit" name="submit">Enviar mensaje</button>
+                    </div>
+                  </form> 
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% } %>
+      </section>
+<%- include('../partials/footer') %>
+
+<script src='https://www.google.com/recaptcha/api.js'></script>
+        <script>
+        function submitUserForm() {
+            var response = grecaptcha.getResponse();
+            if(response.length == 0) {
+                document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This field is required.</span>';
+                return false;
+            }
+            return true;
+        }
+         
+        function verifyCaptcha() {
+            document.getElementById('g-recaptcha-error').innerHTML = '';
+        }
+        </script>
+
+        <script src="/socket.io/sockets.io.js">
+        </script>
+        <script src="/js/group/gchat.js">
+        </script>
+        

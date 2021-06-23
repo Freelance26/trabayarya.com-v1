@@ -1,0 +1,304 @@
+<%- include ('../partials/header'); %>      
+
+
+
+<% if (user.tipo_cuenta == 'Admin'){ %><div class="container-margin">
+  <section class="section breadcrumbs-custom">
+    <div class="breadcrumbs-custom-main bg-image bg-primary">
+      <div class="container">
+        <h3 class="breadcrumbs-custom-title">Listado de trabajos</h3>
+      </div>
+    </div>
+    <div class="breadcrumbs-custom-aside">
+      <div class="container">
+        <ul class="breadcrumbs-custom-path">
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/administracion/panel/">Ver candidatos</a></li>
+          <li class="active">Lista de trabajos</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="section section-md">
+    <div class="container">
+      <form class="form-layout-search form-lg" action="/lista-trabajos/1" method="GET">
+        <div class="form-wrap form-wrap-icon">
+          <input class="form-input" id="form-employer" type="text" name="buscar_jobs" data-constraints="@Required">
+          <label class="form-label" for="form-employer">Busca algo!</label><span class="icon fl-bigmug-line-search74"></span>
+        </div>
+        <div class="form-wrap form-wrap-icon form-wrap-select">
+          <!--Select 2-->
+          <select class="form-input select" id="form-region" data-placeholder="Todos los países" name="buscar_ubi" data-minimum-results-for-search="Infinity" data-constraints="@Selected">
+            <option label="Todos los países"></option>
+            <option value="México">México</option>
+            <option value="Colombia">Colombia</option>
+            <option value="España">España</option>
+            <option value="Argentina">Argentina</option>
+            <option value="Perú">Perú</option>
+            <option value="Venezuela">Venezuela</option>
+            <option value="Chile">Chile</option>
+            <option value="Guatemala">Guatemala</option>
+            <option value="Ecuador">Ecuador</option>
+            <option value="Cuba">Cuba</option>
+            <option value="Bolivia">Bolivia</option>
+            <option value="República Dominicana">República Dominicana</option>
+            <option value="Honduras">Honduras</option>
+            <option value="El Salvador">El Salvador</option>
+            <option value="Paraguay">Paraguay</option>
+            <option value="Nicaragua">Nicaragua</option>
+            <option value="Costa Rica">Costa Rica</option>
+            <option value="Panamá">Panamá</option>
+            <option value="Puerto Rico">Puerto Rico</option>
+            <option value="Uruguay">Uruguay</option>
+            <option value="Guinea Ecuatorial">Guinea Ecuatorial</option>
+            <option value="Belice">Belice</option>
+          </select><span class="icon fl-bigmug-line-big104"></span>
+        </div>
+        <div class="form-wrap form-wrap-button">
+          <button class="button button-lg button-primary" type="submit">Buscar</button>
+        </div>
+      </form>
+      <form action="/lista-trabajos/1" method="POST">
+        
+      <div class="row row-50 flex-lg-row-reverse">
+        <div class="col-lg-4 col-xl-3">
+          <div class="row row-30">
+            <!-- <div class="col-sm-6 col-lg-12">
+              <p class="heading-8">Fecha de Publicacion</p>
+              <hr>
+              <ul class="list list-xs">
+                <li>
+                  <label class="checkbox">
+                    <input name="fecha_publicacion" value="checkbox-1" type="checkbox">Ultima Hora
+                  </label>
+                </li>
+                <li>
+                  <label class="checkbox">
+                    <input name="fecha_publicacion" value="checkbox-2" type="checkbox">Ultimo Dia
+                  </label>
+                </li>
+                <li>
+                  <label class="checkbox">
+                    <input name="fecha_publicacion" value="checkbox-3" type="checkbox">Ultima Semana
+                  </label>
+                </li>
+                <li>
+                  <label class="checkbox">
+                    <input name="fecha_publicacion" value="checkbox-4" type="checkbox">Ultimo Mes
+                  </label>
+                </li>
+              </ul>
+            </div> -->
+            <div class="col-sm-6 col-lg-12">
+              <p class="heading-8">Tipo de Vacante</p>
+              <hr>
+              <ul class="list list-xs">
+                <li>
+                  <label class="checkbox checkbox_info text-tertiary">
+                    <input name="tipo_vacante" value="Freelancer" type="checkbox">Freelancer
+                  </label>
+                </li>
+                <li>
+                  <label class="checkbox checkbox_info text-primary">
+                    <input name="tipo_vacante" value="Tiempo Completo" type="checkbox">Tiempo Completo
+                  </label>
+                </li>
+                <li>
+                  <label class="checkbox checkbox_info text-secondary">
+                    <input name="tipo_vacante" value="Medio Tiempo" type="checkbox">Medio Tiempo
+                  </label>
+                </li>
+              </ul>
+            </div>
+            <div class="col-sm-6 col-lg-12">
+              <p class="heading-8">Categorías</p>
+              <hr>
+              <% categorias.forEach(function(categorias){ %>
+                <ul class="list list-xs">                      
+                <li>
+                  <label class="checkbox checkbox_info">
+                      <input name="categoria" value="<%= categorias.nombre %>" type="checkbox"><%= categorias.nombre %>
+                    </label>
+                </li>
+              </ul>
+              <% }) %>
+            </div>
+            <!--<div class="col-sm-6 col-lg-12">
+              <p class="heading-8">Etiquetas</p>
+              <hr>
+                <input class="form-input"type="text" name="buscar_etiqueta" placeholder="Search Keywords">
+                <br>
+                <button class="btn btn-primary btn-sm btn-block" type="submit">Search</button>
+              <br>
+            </div>
+            </div>-->
+            <!-- <div class="col-sm-6 col-lg-12">
+              <p class="heading-8">Filtrar por Salario</p>
+              <hr>
+              <ul class="list list-xs">
+                <li>
+                  <label class="checkbox checkbox_info">
+                    <input name="salario" value="[0, 100]" type="checkbox">$0 - $100<span class="checkbox-meta">0</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="checkbox checkbox_info">
+                    <input name="salario" value="[101, 500]" type="checkbox">$101 - $500<span class="checkbox-meta">0</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="checkbox checkbox_info">
+                    <input name="salario" value="[501, 2000]" type="checkbox">$501 - $2000<span class="checkbox-meta">0</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="checkbox checkbox_info">
+                    <input name="salario" value="[2001, 5000]" type="checkbox">$2001 - $5000<span class="checkbox-meta">0</span>
+                  </label>
+                </li>
+                <li>
+                  <label class="checkbox checkbox_info">
+                    <input name="salary-checkbox-5" value="[5001, 99999999]" type="checkbox">$5001+<span class="checkbox-meta">0</span>
+                  </label>
+                </li>
+              </ul>
+            </div> -->
+            <button class="btn btn-primary btn-sm btn-block" type="submit">Filtrar</button>
+          </form>
+          </div>
+        </div>
+        
+        <div class="col-lg-8 col-xl-9">
+          <table class="table-job-listing table-responsive">
+            <% jobs.forEach(function(jobs){ %>
+            <tr> 
+              <td class="table-job-listing-main">
+                <!-- Company Minimal-->
+                <article class="company-minimal">
+                  <figure class="company-minimal-figure"><img class="company-minimal-image" src="<%= jobs.perfil_img %>" alt="" width="150" height="150"/>
+                  </figure>
+                  
+                  <div class="company-minimal-main">
+                    <h5 class="company-minimal-title"><a href="/detalles-trabajo/<%= jobs.id %>"><%= jobs.titulo_trabajo %> </a></h5>
+                    <p> <%= jobs.ubicacion %> </p> 
+                  </div>
+                  <form action="/administracion/edit-jobs/eliminar/<%= jobs.id%>?_method=DELETE" method="POST">
+                          
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="button button-primary" style="border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);"id="btSubmit" value="Submit" >
+                    <span class="icon mdi mdi-account"></span>
+                    Eliminar</button>
+                  </form>
+                </article>
+              </td>
+              <td class="table-job-listing-date"><span></span></td>
+              <td class="table-job-listing-badge"><span class="badge badge-secondary"> <%= jobs.tipo_trabajo %> </span>
+                
+              </td>
+              
+            </tr>
+          <% }) %>
+          </table>
+          <!-- Paginacion -->
+          <!-- Inicio Paginacion -->
+          <div class="row">
+            <% if(pages) { %>
+              <nav class="mx-auto">
+                <ul class="pagination">
+                  <!-- Primera Pagina -->
+                  <% if(current == 1) { %>
+                    <li class="page-item disabled">
+                      <a href="" class="page-link">Primera Pagina</a>
+                    </li>
+                  <% } else { %>
+                    <li class="page-item">
+                      <a href="/lista-trabajos/1" class="page-link">Primera Pagina</a>
+                    </li>
+                  <% } %>
+                  <!--Paginas-->
+                  <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                  <% if(i !== 1) { %>
+                    <li class="page-item disabled">
+                      <a class="page-link" href="#">...</a>
+                    </li>
+                  <% } %>
+                  <% for(; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                    <% if(i == current) { %>
+                      <li class="page-item active">
+                        <a class="page-link" href="<%= i %>">
+                          <%= i %>
+                        </a>
+                      </li>
+                    <% } else { %>
+                      <li class="page-item">
+                        <a class="page-link" href="/lista-trabajos/<%= i %>">
+                          <%= i %>
+                        </a>
+                      </li>
+                    <% } %>
+                    <% if (i == Number(current) + 4 && i < pages) { %>
+                       <li class="page-item disabled">
+                         <a class="page-link" href="#">...</a>
+                       </li>
+                    <% } %>
+                  <% } %>
+                  <!--Ultima Pagina-->
+                  <% if(current==pages){ %>
+                    <li class="page-item disabled">
+                      <a href="" class="page-link">Ultima Pagina</a>
+                    </li>
+                  <% } else { %>
+                    <li class="page-item">
+                      <a href="/lista-trabajos/<%= pages %>">Ultima Pagina</a>
+                    </li>
+                  <% } %>
+                </ul>
+              </nav>
+              <% } %>
+          </div>
+          <!-- Fin Paginacion -->
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+  
+                         
+
+                        
+  
+
+
+
+<% } else { %>
+
+  
+  <section class="section section-md bg-gray-100 text-center" style="min-height: 100vh;">
+    <div class="container">
+      <h3>Hey no tienes permiso para ver esta pagina!</h3>
+      <ul class="list-linked">
+        
+        
+        <li class="ll-item">
+          <div class="icon ll-item-icon">
+            <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+              <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+            </svg>
+            <img src="../images/apple-touch-icon.png" alt="" width="100">
+          </div>
+          <div class="ll-item-main">
+            <h5 class=""><a href="/user/edit-perfil">Ve al inicio!</a></h5>
+
+          </div>
+        </li>
+      </ul>
+      <div class="ll-item-main pt-4"><a class="button button-sm button-primary-outline" href="/user/edit-perfil">O puedes ver tu perfil</a></div>
+    </div>
+  </section>
+</div>
+
+
+
+<% }  %>
+<%- include('../partials/footer') %>

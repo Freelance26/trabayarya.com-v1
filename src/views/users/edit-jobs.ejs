@@ -1,0 +1,178 @@
+<%- include ('../partials/header'); %>
+<% if (user.tipo_cuenta == 'Freelancer'){ %>
+  
+                         
+
+                        
+                         <div>
+                             hola
+                         </div>
+                          
+
+          
+
+    
+    
+  <% } else { %>
+    <section class="section breadcrumbs-custom" style="    margin-top: 50px;">
+      <div class="breadcrumbs-custom-main bg-image bg-primary">
+        <div class="container">
+          <h3 class="breadcrumbs-custom-title">Anuncios Activos</h3>
+        </div>
+      </div>
+      <div class="breadcrumbs-custom-aside">
+        <div class="container">
+          <ul class="breadcrumbs-custom-path">
+            <li><a href="/">Inicio</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+ 
+    
+       
+        <% if(jobs){ jobs.forEach(function(jobs){ %>
+    
+     
+          <br>
+          
+          <article class="profile-minimal">
+            <div class="profile-minimal-inner">
+              <div class="profile-minimal-main-outer">
+                <div class="profile-minimal-main"><img class="profile-minimal-image"
+                    src="<%= user.filename %>" alt="" width="101" height="96" />
+                  <div class="profile-minimal-main-info">
+                    <h5 class="profile-minimal-name"><a href="/detalles-trabajo/<%= jobs.id %>">
+                      <%= jobs.titulo_trabajo%>
+                        
+                      </a></h5>
+                    <p><%= jobs.salario%> $</p>
+                    <p class="profile-minimal-position"><%= jobs.tipo_trabajo%></p>
+                    <p class="profile-minimal-position"><%= jobs.email%></p>
+                  </div>
+                </div>
+              </div>
+              <div class="profile-minimal-meta">
+                <a class="button button-primary" href="/detalles-trabajo/<%= jobs.id %>" style="
+                  border-radius: 10px 10px 10px 10px;
+                  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver trabajo</a>
+  
+                
+                
+                         <form action="/user/edit-jobs/eliminar/<%= jobs.id%>?_method=DELETE" method="POST">
+                          
+                          <input type="hidden" name="_method" value="DELETE">
+                          <button class="button button-primary" style="border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);"id="btSubmit" value="Submit" >
+                          <span class="icon mdi mdi-account"></span>
+                          Eliminar</button>
+                        </form>
+                       
+              </div>
+            </div>
+          </article>
+        
+                    <% })} %>
+    
+ 
+  
+  <% }  %>
+
+  <%- include('../partials/footer') %>
+
+  <script>
+   function validateForm() {
+  var x = document.forms["expeTrabajo"]["periodo_laboral"].value
+  var x1 = document.forms["expeTrabajo"]["titulo_trabajo"].value
+  var x2= document.forms["expeTrabajo"]["nom_empresa"].value
+  var x3 = document.forms["expeTrabajo"]["descripcion_trabajo"].value
+  var x4 = document.forms["expeTrabajo"]["detalles_trabajo"].value;
+  if (x == "") {
+    alert("Debe llenar todos los campos");
+    return false;
+  }
+  if (x1 == "") {
+    alert("Debe llenar todos los campos");
+    return false;
+  }
+  if (x2 == "") {
+    alert("Debe llenar todos los campos");
+    return false;
+  }
+  if (x3 == "") {
+    alert("Debe llenar todos los campos");
+    return false;
+  }
+  if (x4 == "") {
+    alert("Debe llenar todos los campos");
+    return false;
+  }
+}
+function validateForm2(){
+  var y = document.forms["formestudios"]["periodo_estudio"].value
+          var y1 = document.forms["formestudios"]["nom_estudio"].value
+          var y4 = document.forms["formestudios"]["detalles_estudio"].value;
+           if (y == "") {
+             alert("Debe llenar todos los campos");
+             return false;
+           }
+           if (y1 == "") {
+             alert("Debe llenar todos los campos");
+             return false;
+           }
+           if (y4 == "") {
+             alert("Debe llenar todos los campos");
+             return false;
+           }
+}
+
+  </script>
+
+               
+
+ <script>
+  var el = document.getElementById('button')
+ if(el){
+      el.addEventListener("click", function() {
+        document.querySelector('.bg-modal').style.display = "flex";
+        console.log('si')
+      });
+       }
+ 
+     
+  var cl = document.querySelector('.close')
+    if(cl){
+        cl.addEventListener("click", function() {
+        document.querySelector('.bg-modal').style.display = "none";
+        
+      });
+      console.log('si')
+        }
+
+        var el2 = document.getElementById('button2')
+  if(el2){
+        el2.addEventListener("click", function() {
+        document.querySelector('.bg-modal').style.display = "flex";
+        console.log('sii')
+      });
+      }
+      var el3 = document.getElementById('button_')
+  if(el3){
+        el3para.addEventListener("click", function() {
+        document.querySelector('.bg-modal').style.display = "flex";
+        console.log('sii')
+      });
+      }
+      var cl2 = document.querySelector('.close2')
+    if(cl2){
+        cl2.addEventListener("click", function() {
+        document.querySelector('.bg-modal2').style.display = "none";
+        
+      });
+      console.log('si')
+        }
+
+   
+    
+   </script>
+                            
+                        

@@ -1,0 +1,43 @@
+<div class="container-margin conreg">
+    <div class="">
+      <div class=" conregistro">
+        <div class="col-md-12 d-flex justify-content-center ">
+          <div class="card cardregistro ">
+            
+            <div class="card-body">
+              <p class="pregistro">REGISTROo FREELANCER</p>
+              <br>
+              <form action="/administracion/signup_" method="POST">
+                <div class="form-group">
+                  <input class="form-input" id="rd-navbar-register-name" type="text" name="username"
+                    data-constraints="@Required" placeholder="Nombre y Apellido" />
+                </div>
+                <div class="form-group">
+                  <input class="form-input" id="rd-navbar-register-email" type="email" name="email"
+                    data-constraints="@Email @Required" placeholder="Correo" />
+                </div>
+                <div class="form-group">
+                  <input class="form-input" id="rd-navbar-register-password" type="password" name="password"
+                    data-constraints="@Required" placeholder="Contraseña" />
+                </div>
+                <div class="form-group">
+                  <input class="form-input" id="rd-navbar-register-password-confirm" type="password" name="password_confirm"
+                    data-constraints="@Required" placeholder="Confirmar Contraseña" />
+                </div>
+                <!-- <select class="custom-select" id="rd-navbar-register-tip_cuenta" name="tipo_cuenta" data-constraints="@Required" aria-placeholder="sele" hidden>Seleccionar...
+                 
+                  <option value="Admin"></option>
+                </select> -->
+                 
+                
+               
+                <button class="button button-xs button-primary button-icon button-icon-left rd-navbar-popup-toggle"
+                  data-rd-navbar-toggle="#rd-navbar-register" id="btSubmit" value="Submit"  ><span class="icon mdi mdi-account"></span>Regístrate</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div> 
+    </div>
+  </div>

@@ -1,0 +1,347 @@
+<%- include ('partials/header'); %>
+
+
+<body>
+  <div class="jumbotron-creative-inner conindexj">
+    <div class="container container-fullwidth conindex ">
+      <div class="jumbotron-creative-main conmainj">
+        <h2 class="jumbotron-creative-title">Servicios freelance en español para tu negocio</h2>
+        <a class="button button-primary" href="/anunciar-trabajo" style="border-radius: 10px 10px 10px 10px;box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Publicar trabajo</a>
+        <a class="button button-primary" href="/lista-trabajos/1" style="border-radius: 10px 10px 10px 10px;box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Trabaja como freelancer</a>
+        <img class="logo-mobile" src="./images/logo-pantone-1.png" alt="#">
+      </div>
+     
+    </div>
+    <!-- <div class="jc-decoration">
+      <div class="jc-decoration-item">
+        <img src="images/inicio_mesa_de_trabajo_(1920_x_1379_px).svg" alt="">
+        
+        <svg version="1.1" x="0px" y="0px" viewbox="0 0 1446 970" width="1446" height="970" preserveAspectRatio="none">
+          <path
+            d="M-0.000,33.000 C-0.000,33.000 80.000,54.000 113.000,83.000 C146.000,112.000 147.000,152.000 183.000,174.000 C219.000,196.000 288.000,172.000 334.000,193.000 C380.000,214.000 379.000,282.000 427.000,317.000 C475.000,352.000 548.000,336.000 588.000,371.000 C628.000,406.000 614.000,483.000 647.000,513.000 C680.000,543.000 786.000,537.000 841.000,587.000 C896.000,637.000 885.000,739.000 932.000,776.000 C979.000,813.000 1026.000,796.000 1069.000,817.000 C1112.000,838.000 1135.000,865.000 1189.000,893.000 C1243.000,921.000 1433.000,970.000 1433.000,970.000 L1446.000,0.000 L-0.000,33.000 Z">
+          </path>
+        </svg> -->
+      <!-- </div> --> 
+      <!-- <div class="jc-decoration-item jc-decoration-item-2">
+        <svg version="1.1" x="0px" y="0px" viewbox="0 0 1446 970" width="1446" height="970" preserveAspectRatio="none">
+          <path
+            d="M-0.000,33.000 C-0.000,33.000 80.000,54.000 113.000,83.000 C146.000,112.000 147.000,152.000 183.000,174.000 C219.000,196.000 288.000,172.000 334.000,193.000 C380.000,214.000 379.000,282.000 427.000,317.000 C475.000,352.000 548.000,336.000 588.000,371.000 C628.000,406.000 614.000,483.000 647.000,513.000 C680.000,543.000 786.000,537.000 841.000,587.000 C896.000,637.000 885.000,739.000 932.000,776.000 C979.000,813.000 1026.000,796.000 1069.000,817.000 C1112.000,838.000 1135.000,865.000 1189.000,893.000 C1243.000,921.000 1433.000,970.000 1433.000,970.000 L1446.000,0.000 L-0.000,33.000 Z">
+          </path>
+        </svg>
+      </div><img class="jc-decoration-image" src="/images/home-1-748x528.png" alt="" width="748" height="528" /> -->
+    </div>
+  </div>
+  </header>
+  <div class="nuevoModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id='modal' aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" style='cursor: pointer'>&times;</span>
+          </button>
+        </div>
+        <div class="container">
+          <div class="row row-50 justify-content-lg-between">
+            <div class="col-md-12">
+              <div class="blog-post-content">
+                <br>
+                <center>
+                  <h4 class="modal-title">Cambiar contraseña</h4>
+                </center>
+                <center>
+                  <h6 class="modal-title" id='instrucciones-contraseña-modal'>Introduzca su correo electrónico</h6>
+                </center>
+                <br>
+                <center><input id='correo-recuperar-contraseña'> </input></center>
+                <br>
+                <br>
+                <center><button id='btn-recuperar-contraseña' class="button button-primary">Enviar Correo</button>
+                </center>
+              </div>
+              <div>
+              </div>
+              <br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popular Categories-->
+  <section class="section section-md bg-default text-center">
+    <div class="container container-fullwidth">
+      <h3>Categorías Populares</h3>
+        <div class="row row-cols-2 row-cols-md-5 justify-content-center">
+          <div class="col">
+            <!-- <a class="box-creative" href="/lista-trabajos/categoria/5fcb0b1b70daa7a24dbb8b03"> -->
+            <a class="box-creative" href="#">
+              <div class="box-creative-inner">
+                <div class="icon box-creative-icon">
+                  <img src="/images/icono_diseno.svg" width="50">
+                </div>
+                <p class="box-creative-title">DISEÑO GRÁFICO</p>
+
+              </div>
+              <div class="box-creative-dummy"></div>
+            </a>
+          </div>
+          <div class="col">
+            <!-- <a class="box-creative" href="/lista-trabajos/categoria/5fcb0e0b70daa7a24dbb8b04"> -->
+            <a class="box-creative" href="#">
+              <div class="box-creative-inner">
+                <div class="icon box-creative-icon">
+                  <img src="/images/icono_traduccion.svg" width="50">
+                </div>
+                <p class="box-creative-title">TRADUCCIONES</p>
+      
+              </div>
+              <div class="box-creative-dummy"></div>
+            </a>
+            
+          </div>
+          <div class="col">
+            <!-- <a class="box-creative" href="/lista-trabajos/categoria/5fcb0e0b70daa7a24dbb8b05"> -->
+            <a class="box-creative" href="#">
+              <div class="box-creative-inner">
+                <div class="icon box-creative-icon">
+                  <img src="/images/icono_edicion.svg" width="50">
+                </div>
+                <p class="box-creative-title">EDICIÓN DE IMÁGENES</p>
+      
+              </div>
+      
+              <div class="box-creative-dummy"></div>
+            </a>
+          </div>
+          <div class="col">
+            <!-- <a class="box-creative" href="/lista-trabajos/categoria/5fcb0e0b70daa7a24dbb8b08"> -->
+            <a class="box-creative" href="#">
+              <div class="box-creative-inner">
+                <div class="icon box-creative-icon">
+                  <img src="/images/icono_desarrollo.svg" width="50">
+                </div>
+                <p class="box-creative-title">DESARROLLADOR WEB, MÓVIL Y SOFTWARE</p>
+      
+              </div>
+              <div class="box-creative-dummy"></div>
+            </a>
+          </div>
+          <div class="col">
+            <!-- <a class="box-creative" href="/lista-trabajos/categoria/5fcb0e0b70daa7a24dbb8b09"> -->
+            <a class="box-creative" href="#">
+              <div class="box-creative-inner">
+                <div class="icon box-creative-icon">
+                  <img src="/images/icono_soporte.svg" width="50">
+                </div>
+                <p class="box-creative-title">SOPORTE ADMINISTRATIVO</p>
+
+              </div>
+              <div class="box-creative-dummy"></div>
+            </a>
+          </div>
+          <div class="col">
+            <!-- <a class="box-creative" href="/lista-trabajos/categoria/5fcb0e0b70daa7a24dbb8b0a"> -->
+            <a class="box-creative" href="#">
+              <div class="box-creative-inner">
+                <div class="icon box-creative-icon">
+                  <img src="/images/icono_consultoria.svg" width="50">
+                </div>
+                <p class="box-creative-title">CONSULTORÍA Y CONTABILIDAD </p>
+
+              </div>
+              <div class="box-creative-dummy"></div>
+            </a>
+          </div>
+          <div class="col">
+            <!-- <a class="box-creative" href="/lista-trabajos/categoria/5fcb0e0b70daa7a24dbb8b0b"> -->
+            <a class="box-creative" href="#">
+              <div class="box-creative-inner">
+                <div class="icon box-creative-icon">
+                  <img src="/images/icono_marketing.svg" width="50">
+                </div>
+                <p class="box-creative-title">MARKETING ONLINE</p>
+
+              </div>
+
+              <div class="box-creative-dummy"></div>
+            </a>
+          </div>
+          <div class="col">
+            <a class="box-creative" href="#">
+              <div class="box-creative-inner">
+                <div class="icon box-creative-icon">
+                  <img src="/images/icono_cursos.svg" width="50">
+                </div>
+                <p class="box-creative-title">CURSOS</p>
+    
+              </div>
+    
+              <div class="box-creative-dummy"></div>
+            </a>
+          </div>
+          <div class="col">
+            <!-- <a class="box-creative" href="/lista-trabajos/categoria/5fcb0e0b70daa7a24dbb8b0c"> -->
+            <a class="box-creative" href="#">
+              <div class="box-creative-inner">
+                <div class="icon box-creative-icon">
+                  <img src="/images/icono_otros.svg" width="50">
+                </div>
+                <p class="box-creative-title">OTROS</p>
+    
+              </div>
+    
+              <div class="box-creative-dummy"></div>
+            </a>
+          </div>
+        </div>
+    </div>
+  </section>
+  <!-- Pricing-->
+
+  <!-- Steps-->
+  <div>
+    <h3 class="text-center">Solo 3 sencillos pasos para abrir un mundo de oportunidades</h3>
+    <br>
+    <section class="section section-md bg-gray-100 text-center" style="border-top: 1px solid #72b527;float: left; width: 50%; padding: 10px;">
+      <div class="container">
+        <h3>Empresas</h3>
+        <ul class="list-linked">
+          <li class="ll-item">
+            <div class="icon ll-item-icon">
+              <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+              </svg>
+              <img src="images/icon_freelancer_anuncio.svg" width="56">
+            </div>
+            <div class="ll-item-main">
+              <h5 class="ll-item-title"><a href="/anunciar-trabajo">Anunciar un trabajo</a></h5>
+  
+            </div>
+          </li>
+          <li class="ll-item">
+            <div class="icon ll-item-icon">
+              <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+              </svg>
+              <img src="images/icon_freelancer_recibe.svg" width="56">
+            </div>
+            <div class="ll-item-main">
+              <h5 class="ll-item-title"><a href="/lista-trabajos/1">Recibe propuestas</a></h5>
+  
+            </div>
+          </li>
+          <li class="ll-item">
+            <div class="icon ll-item-icon">
+              <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+              </svg>
+              <img src="images/icon_contratar_freelancer.svg" width="56">
+            </div>
+            <div class="ll-item-main">
+              <h5 class="ll-item-title"><a href="/">Contrata a un Freelancer</a></h5>
+  
+            </div>
+          </li>
+        </ul>
+        <div class="ll-item-main pt-4"><a class="button button-sm button-primary-outline" href="/">Empezar
+            ahora</a></div>
+      </div>
+    </section>
+    <section class="section section-md bg-gray-100 text-center" style="float: left; width: 50%; padding: 10px; border-top: 1px solid #72b527;border-left: 1px solid #72b527;">
+      <div class="container">
+        <h3>Freelancer</h3>
+        <ul class="list-linked">
+          <li class="ll-item">
+            <div class="icon ll-item-icon">
+              <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+              </svg>
+              <img src="images/icono_pasos_buscar.svg" width="56">
+            </div>
+            <div class="ll-item-main">
+              <h5 class="ll-item-title"><a href="/lista-trabajos/1">Búsqueda</a></h5>
+                <br>
+                
+            </div>
+          </li>
+          <li class="ll-item">
+            <div class="icon ll-item-icon">
+              <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+              </svg>
+              <img src="images/icono_pasos_area.svg" width="56">
+            </div>
+            <div class="ll-item-main">
+              <h5 class="ll-item-title"><a href="/lista-trabajos/1">Encuentra tu área</a></h5>
+  
+            </div>
+          </li>
+          <li class="ll-item">
+            <div class="icon ll-item-icon">
+              <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewbox="-1 -1 102 102">
+                <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+              </svg>
+              <img src="images/icono_pasos_contacto.svg" width="56">
+            </div>
+            <div class="ll-item-main">
+              <h5 class="ll-item-title"><a href="/">Contactar</a></h5>
+              <br>
+  
+            </div>
+          </li>
+        </ul>
+        <div class="ll-item-main pt-4"><a class="button button-sm button-primary-outline" href="/lista-trabajos/1">Empezar
+            ahora</a></div>
+      </div>
+    </section>
+
+  </div>
+  
+  <!-- Latest Posts-->
+  <section class="section section-md bg-gray-100">
+    <div class="container" style="   margin-top: 91vh;">
+      <h3 class="text-center">Blog</h3>
+      <div class="row row-30 row-xl-70">
+        <div class="col-12 col-lg-4">
+          <!-- Post Minimal-->
+          <article class="post-minimal h-100"><a class="post-minimal-media" href="/detalles-blog"><img
+                class="post-minimal-image" src="/images/blog-1-369x253.jpg" alt="" width="369" height="253" /></a>
+            <div class="post-minimal-main">
+              <h5 class="post-minimal-title"><a href="/">8 Predicciones Sorprendentes Sobre el Futuro del Trabajo</a></h5>
+              <p>No se puede negar que el panorama del trabajo está cambiando. Cada vez más empresas están adoptando políticas de trabajo flexibles...</p>
+              <time class="post-minimal-time" datetime="2019">Noviembre 23, 2020</time>
+            </div>
+          </article>
+        </div>
+        <div class="col-12 col-lg-4">
+          <!-- Post Minimal-->
+          <article class="post-minimal h-100"><a class="post-minimal-media" href="/detalles-blog"><img
+                class="post-minimal-image" src="/images/blog-2-369x253.jpg" alt="" width="369" height="253" /></a>
+            <div class="post-minimal-main">
+              <h5 class="post-minimal-title"><a href="/">Éxito en la búsqueda de empleo: encontrar un trabajo de desarrollo empresarial</a></h5>
+              <p>Los profesionales del desarrollo empresarial están en el corazón de todo tipo de organizaciones, desde startups hasta...</p>
+              <time class="post-minimal-time" datetime="2019">Noviembre 23, 2020</time>
+            </div>
+          </article>
+        </div>
+        <div class="col-12 col-lg-4">
+          <!-- Post Minimal-->
+          <article class="post-minimal h-100"><a class="post-minimal-media" href="/detalles-blog"><img
+                class="post-minimal-image" src="/images/blog-3-369x253.jpg" alt="" width="369" height="253" /></a>
+            <div class="post-minimal-main">
+              <h5 class="post-minimal-title"><a href="/">Cómo impresionar a su futuro empleador</a></h5>
+              <p>Estás comprometido con tu búsqueda de trabajo, y usas cada gramo de tu tiempo libre para ...</p>
+              <time class="post-minimal-time" datetime="2019">Noviembre 23, 2020</time>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+<%- include('partials/footer') %>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/chatio.js"></script>
+<!-- <script src="/public/js/chatio.js"></script> -->
