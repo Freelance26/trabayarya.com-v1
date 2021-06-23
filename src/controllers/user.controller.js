@@ -521,10 +521,10 @@ userCtrl.renderEditPerfil = async (req, res) => {
 //Actualizar Perfil de Usuario
 userCtrl.editPerfil = async (req, res) => {
     console.log(req.body)
-    const  {cargo,direccion,salario,acerca,pais,tipoempresa,userfacebook,usertwitter,usergoogle,userlinkedin,skill_,skill_1,skill_2,skill_3} = req.body
+    const  {cargo,direccion,salario,acerca,pais,tipoempresa,userfacebook,usertwitter,usergoogle,userlinkedin,skill_,skill_1,skill_2,skill_3,phone} = req.body
 
-    await User.findByIdAndUpdate(req.user.id,{$set:{cargo:cargo,direccion:direccion,salario:salario,acerca:acerca,pais:pais,
-        tipoempresa:tipoempresa,userfacebook:userfacebook,usertwitter:usertwitter,usergoogle:usergoogle,userlinkedin:userlinkedin,
+    await User.findByIdAndUpdate(req.user.id,{$set:{cargo:cargo,direccion:direccion,salario:salario,acerca:acerca,pais:pais,phone:phone
+        ,tipoempresa:tipoempresa,userfacebook:userfacebook,usertwitter:usertwitter,usergoogle:usergoogle,userlinkedin:userlinkedin,
         skill_:skill_,skill_1:skill_1,skill_2:skill_2,skill_3:skill_3}})
     const user = await User.findById(req.user.id)
     res.render('./users/perfil-user-edit', {user})
