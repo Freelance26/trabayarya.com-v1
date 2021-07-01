@@ -24,8 +24,7 @@ router.post('/send-mail', async (req,res) => {
         </ul>
         <p>${message}</p>
     `;
-    console.log(contentHTML)
-    console.log("Contacto");
+
     const transporter = nodemailer.createTransport({
         host: 'mail.studio73pty.com',
         port: 587,
@@ -48,7 +47,7 @@ router.post('/send-mail', async (req,res) => {
             html: contentHTML
         })
      
-        console.log('message sent', info.messageId)
+  
         res.render('contacto', {msg: 'Email enviado'})
     } catch (error) {
         console.log(error)
@@ -61,8 +60,7 @@ router.post('/send-mail-user/', async (req,res) => {
     
 
     const { username, email, message, email_user } = req.body;
-    console.log(username)
-    console.log(email_user)
+
 
 
     contentHTML = `
@@ -72,7 +70,7 @@ router.post('/send-mail-user/', async (req,res) => {
         </ul>
         <p>${message}</p>
     `;
-    console.log(contentHTML)
+
     const transporter = nodemailer.createTransport({
         host: 'mail.studio73pty.com',
         port: 587,

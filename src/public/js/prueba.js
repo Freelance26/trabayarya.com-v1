@@ -48,9 +48,9 @@ const enviarDatosCheck = () => {
     checkBoxCategorias.forEach(function(checkBoxCategorias){
         checkboxselect = Array.from(checkBoxCategorias).filter(i => i.checked).map(i => i.value.replace(/\s+/g,'+'))
         for(i = 0; i < checkboxselect.length; i++){
-            console.log(checkboxselect[i])
+            // console.log(checkboxselect[i])
         }
-        console.log('fuera del for')
+   
     })
 }
 

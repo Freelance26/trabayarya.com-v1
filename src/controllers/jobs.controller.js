@@ -63,7 +63,7 @@ jobsCtrl.renderDetallesTrabajo = async (req, res) => {
                 .skip((xPage * page) - xPage).limit(xPage).exec((err, applications) => {
                     Applications.count({ id_jobs: detailsJobs._id }, (err, count) => {
                         if (err) {
-                            console.log('error en el count')
+ 
                         } else {
                             res.render('./jobs/detalles-trabajo', {
                                 jobsRelacionados, user, userLoginPostulado, detailsJobs, applications,
@@ -74,11 +74,11 @@ jobsCtrl.renderDetallesTrabajo = async (req, res) => {
                 })
             }
         if (userLoginPostulado.length > 0) {
-            console.log(userLoginPostulado.length)
+  
             const jobsRelacionados = await Jobs.find({ $and: [{ cat_trabajo: detailsJobs.cat_trabajo }, { _id: { $not: { $eq: detailsJobs.id } } }] }).skip((xPage * page) - xPage).limit(xPage).exec((err, jobsRelacionados) => {
                 Jobs.count({ cat_trabajo: detailsJobs.cat_trabajo }, (err, count) => {
                     if (err) {
-                        console.log('Error en el count 2')
+              
                     } else {
                         res.render('./jobs/detalles-trabajo', { applications, user, detailsJobs, jobsRelacionados, userCreador, userLoginPostulado, current: page, pages: Math.ceil(count / xPage) })
                     }
@@ -89,9 +89,9 @@ jobsCtrl.renderDetallesTrabajo = async (req, res) => {
     const jobsRelacionados = await Jobs.find({ $and: [{ cat_trabajo: detailsJobs.cat_trabajo }, { _id: { $not: { $eq: detailsJobs.id } } }] }).skip((xPage * page) - xPage).limit(xPage).exec((err, jobsRelacionados) => {
         Jobs.count({ cat_trabajo: detailsJobs.cat_trabajo }, (err, count) => {
             if (err) {
-                console.log('Error en el count 2')
+   
             } else {
-                console.log(userLoginPostulado)
+
                 res.render('./jobs/detalles-trabajo', { applications, user, detailsJobs, jobsRelacionados, userLoginPostulado, userCreador, current: page, pages: Math.ceil(count / xPage) })
             }
         })
@@ -164,13 +164,13 @@ jobsCtrl.renderListaTrabajos = async (req, res, next) => {
             const categorias = await Categorias.find();
             const jobs = await Jobs.find({ titulo_trabajo: { $regex: '.*' + buscar_jobs + '.*', $options: "i" }, ubicacion: { $regex: '.*' + buscar_ubi + '.*', $options: "i" } }, function (error, jobs) {
                 if (error) {
-                    console.log('error en el find')
+      
                 }
             })
                 .sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, jobs) => {
                     Jobs.count((err, count) => {
                         if (err) {
-                            console.log('error en el count')
+         
                         } else {
                             res.render('./jobs/lista-trabajos', { categorias, tipo_cuenta, jobs, current: page, pages: Math.ceil(count / xPage) })
                         }
@@ -185,7 +185,7 @@ jobsCtrl.renderListaTrabajos = async (req, res, next) => {
             const jobs = await Jobs
                 .find({ titulo_trabajo: { $regex: '.*' + buscar_jobs + '.*', $options: "i" }, ubicacion: { $regex: '.*' + buscar_ubi + '.*', $options: "i" } }, function (error, jobs) {
                     if (error) {
-                        console.log('error en el find')
+        
                     }
                 })
                 .sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, jobs) => {
@@ -211,7 +211,7 @@ jobsCtrl.renderListaTrabajos = async (req, res, next) => {
         const jobs = await Jobs.find().sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, jobs) => {
             Jobs.count((err, count) => {
                 if (err) {
-                    console.log('error1')
+ 
                 } else {
                     res.render('./jobs/lista-trabajos', {
                         categorias,
@@ -230,9 +230,9 @@ jobsCtrl.renderListaTrabajos = async (req, res, next) => {
         const jobs = await Jobs.find().sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, jobs) => {
             Jobs.count((err, count) => {
                 if (err) {
-                    console.log('error')
+            
                 } else {
-                    console.log(jobs)
+         
                     res.render('./jobs/lista-trabajos', {
                         categorias,
                         jobs,
@@ -267,7 +267,7 @@ if (req.user) {
     const jobs = await Jobs.find({$and: [{cat_trabajo: {$in: filtro_cat}}, {tipo_trabajo: {$in: filtro_vacante}}]}).sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, jobs) => {
         Jobs.count((err, count) => {
             if (err) {
-                console.log('error1')
+    
             } else {
                 res.render('./jobs/lista-trabajos', {
                     categorias,
@@ -288,7 +288,7 @@ if (req.user) {
             if (err) {
                 console.log('error')
             } else {
-                console.log(jobs)
+         
                 res.render('./jobs/lista-trabajos', {
                     categorias,
                     jobs,

@@ -30,15 +30,15 @@ const auth = { user: CLIENT, pass: SECRET }
 //Vista de creacion de aplicacion
 applicationsCtrl.newApplicantions = async (req, res) => {
     if (req.user) {
-        console.log(1)
+
         if (req.user.tipo_cuenta === 'Freelancer') {
-            console.log(2)
+
             const appliJobs = await Applications.findOne({ id_jobs: req.body.id_anuncio, id_applicant: req.user.id })
             if (appliJobs !== null) {
-                console.log(appliJobs)
+
                 req.flash('error_msg', 'Ya te has postulado para este anuncio')
                 res.redirect('/lista-trabajos');
-                console.log(3)
+
             } else {
                 const { id_jobs, id_applicant, name_applicant, email_applicant, phone_applicant, message,email_user } = req.body;
                 const profile_img = await User.findOne({profile_img: req.user.filename});
@@ -55,8 +55,7 @@ applicationsCtrl.newApplicantions = async (req, res) => {
                     </ul>
                     <p>${message}</p>
                 `;
-                console.log(contentHTML)
-                console.log("Contacto");
+
                 const transporter = nodemailer.createTransport({
                     host: 'mail.studio73pty.com',
                     port: 587,
@@ -69,7 +68,7 @@ applicationsCtrl.newApplicantions = async (req, res) => {
                         rejectUnauthorized: false
                     }
                 })
-                console.log(email_user);
+      
 
                     try {
                         const info = await transporter.sendMail({
@@ -80,7 +79,7 @@ applicationsCtrl.newApplicantions = async (req, res) => {
                             html: contentHTML
                         })
                     
-                        console.log('message sent', info.messageId)
+           
                     //req.flash('success_msg', 'Solicitud Enviada')
                     res.redirect('/')
                         
@@ -142,7 +141,7 @@ applicationsCtrl.newPay = async (req, res) => {
               if(payment.links[i].rel === 'approval_url'){
                 res.redirect(payment.links[i].href);
               }
-              console.log('EXITO11')
+   
             }
             newPayment.save();
         }
@@ -151,7 +150,7 @@ applicationsCtrl.newPay = async (req, res) => {
 
 
 applicationsCtrl.newReport = async (req, res) => {
-    console.log(req.body);
+ 
     const { id_payment,token, id_payer,email, monto,id,tipo_cuenta } = req.body;
 
     var monto_pagado = parseFloat(monto);
@@ -172,8 +171,7 @@ applicationsCtrl.createPayment = (req, res) => {
 
     var price = parseFloat(salario);
     var tempTotal= (price).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-    console.log('test');
-    console.log(tempTotal);
+  
 
     const body = {
         intent: 'CAPTURE',
@@ -202,8 +200,7 @@ applicationsCtrl.createPayment = (req, res) => {
         for(let i = 0;i < response.body.links.length;i++){
             if(response.body.links[i].rel === 'approve'){
              res.redirect(response.body.links[i].href);
-             
-              console.log('EXITO1')
+  
            }
         }
         newPayment.save();

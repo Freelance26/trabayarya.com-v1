@@ -112,7 +112,7 @@ helpers.renderPanelPagos = async (req,res) => {
                         if (err) {
                             console.log('error en el conteo')
                         } else {
-                            console.log('aaaaaaaaaaaaaaaaaaaa');
+                    
                             res.render('administracion', { tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage) })
                         }
                     })
@@ -131,7 +131,7 @@ helpers.renderPanelPagos = async (req,res) => {
                         if (err) {
                             console.log('error en el conteo')
                         } else {
-                            console.log('c');
+                           
                             res.render('administracion', { applicant, current: page, pages: Math.ceil(count / xPage) })
                         }
                     })
@@ -147,7 +147,7 @@ helpers.renderPanelPagos = async (req,res) => {
                 if (error) {
                     console.log('error1')
                 } else {
-                    console.log('b');
+             
                     res.render('administracion', {
                         tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage)
                     })
@@ -162,7 +162,7 @@ helpers.renderPanelPagos = async (req,res) => {
                 if (error) {
                     console.log('error1')
                 } else {
-                    console.log('a');
+           
                     res.render('administracion', {
                         applicant, current: page, pages: Math.ceil(count / xPage)
                     })
@@ -194,7 +194,7 @@ helpers.renderPanelReportesPagos = async (req,res) => {
                         if (err) {
                             console.log('error en el conteo')
                         } else {
-                            console.log('aaaaaaaaaaaaaaaaaaaa');
+               
                             res.render('administracion', { tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage) })
                         }
                     })
@@ -213,7 +213,7 @@ helpers.renderPanelReportesPagos = async (req,res) => {
                         if (err) {
                             console.log('error en el conteo')
                         } else {
-                            console.log('c');
+                        
                             res.render('administracion', { applicant, current: page, pages: Math.ceil(count / xPage) })
                         }
                     })
@@ -229,7 +229,7 @@ helpers.renderPanelReportesPagos = async (req,res) => {
                 if (error) {
                     console.log('error1')
                 } else {
-                    console.log('b');
+            
                     res.render('administracion-report', {
                         tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage)
                     })
@@ -244,7 +244,7 @@ helpers.renderPanelReportesPagos = async (req,res) => {
                 if (error) {
                     console.log('error1')
                 } else {
-                    console.log('a');
+               
                     res.render('administracion', {
                         applicant, current: page, pages: Math.ceil(count / xPage)
                     })
@@ -258,7 +258,7 @@ helpers.renderPanelReportesPagos = async (req,res) => {
 
 helpers.eliminarUsuario = async (req,res)=> {
     const {id}=req.params;
-    console.log(id);
+
 
     try {
         const userDelete = await User.findByIdAndDelete(id)
@@ -270,7 +270,7 @@ helpers.eliminarUsuario = async (req,res)=> {
 }
 helpers.eliminarUsuarioPago = async (req,res)=> {
     const {id}=req.params;
-    console.log(id);
+
 
     try {
         const payDelete = await Payment.findByIdAndDelete(id)

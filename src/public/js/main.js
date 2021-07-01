@@ -148,9 +148,9 @@ const recuperarPass = () => {
                     if(res.success == true){
                         instruccionesModal.innerHTML = 'Correo enviado, sigas las instrucciones indicadas en el mismo';
                         correoRecuperarPass.value = '';
-                        console.log(res)
+                        // console.log(res)
                     }else{
-                        console.log('!' + res)
+                        // console.log('!' + res)
     
                     }
             })

@@ -19,7 +19,7 @@ router.get('/appli/sucess', isAuthenticated,execute);
 
 
 router.get('/payment', (req, res) => {
-    console.log(req.query);
+
     const payerId = req.query.PayerID;
     const paymentId = req.query.paymentId;
   
@@ -32,11 +32,11 @@ router.get('/payment', (req, res) => {
           }
       }]
     };
-    console.log('PAGO')
+
   
     paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
       if (error) {
-          console.log(error.response);
+   
           throw error;
           
       } else {

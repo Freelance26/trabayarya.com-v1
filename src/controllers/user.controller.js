@@ -64,21 +64,21 @@ userCtrl.renderMembership = (req, res) => {
     res.render('users/membresia')
 }
 userCtrl.renderPaymentSucess = async (req, res) => {
-    console.log(req.query);
+
     const user = await User.findById(req.user.id)
-    console.log(user);
+
     const datos = req.query;
     const status = 'plus'
     const status_basic = 'basico'
     const plusExp = new Date()
     const status_user = await User.findByIdAndUpdate(req.user.id,{$set:{isNewUser:status,plusExpires:plusExp}})
-    console.log(datos);
+
     res.render('users/sucess', {status_user,datos})
 }
 userCtrl.renderMembershipSucess = async (req, res) => {
 
     const user = await User.findById(req.user.id)
-    console.log(user);
+
     const datos = req.query;
     const status = 'plus'
     const status_basic = 'basico'
@@ -104,18 +104,14 @@ userCtrl.signup = async (req, res) => {
     if (password != password_confirm) {
        // req.flash('message','las contrasenas no coinciden');
        // res.redirect('/user/signup');
-        console.log('ERROR CONTRASENA NO ES IGUAL')
+
         errors.push({ text: "Las Contraseñas no coinciden." });
     }
     if (password.length < 4) {
         errors.push({ text: "La Contraseña debe tener al menos 4 digitos." });
     }
     if (errors.length > 0) {
-        //  res.redirect('/user/signup');
-        //const alert = errors.array()
-         console.log(errors);
-         ///console.log(alert)
-         console.log('errores')
+
          res.render('users/signup', {
            errors
         });
@@ -128,8 +124,7 @@ userCtrl.signup = async (req, res) => {
             //req.flash("error_msg", "El Email se encuentra en uso.");
             //res.redirect('/');
             errors.push({ text: "El email ya se encuentra en uso." });
-            console.log(errors);
-            console.log("ERROR EMAIL EN USO")
+  
             res.render('users/signup', {
                 errors
              });
@@ -143,12 +138,11 @@ userCtrl.signup = async (req, res) => {
             req.flash('success_msg', 'Usuario registrado exitosamente.')
             res.redirect('/user/login');
             
-            console.log(newUser)
+  
         }
     }
-    console.log(req.body);
-    
-    console.log('prueba')
+
+
 };
 //update data
 
@@ -166,12 +160,11 @@ userCtrl.signupAdmin = async (req, res) => {
     const pais='Admin'
     const ciudad='Admin'
 
-    console.log(username)
+
     //console.log(tipo_cuenta)
     if (password != password_confirm) {
        // req.flash('message','las contrasenas no coinciden');
-       // res.redirect('/user/signup');
-        console.log('ERROR CONTRASENA NO ES IGUAL')
+
         errors.push({ text: "Las Contraseñas no coinciden!!!." });
     }
     if (password.length < 4) {
@@ -180,9 +173,9 @@ userCtrl.signupAdmin = async (req, res) => {
     if (errors.length > 0) {
         //  res.redirect('/user/signup');
         //const alert = errors.array()
-         console.log(errors);
+
          ///console.log(alert)
-         console.log('errores')
+
          res.render('/administracion/signup_', {
            errors
         });
@@ -195,8 +188,7 @@ userCtrl.signupAdmin = async (req, res) => {
             //req.flash("error_msg", "El Email se encuentra en uso.");
             //res.redirect('/');
             errors.push({ text: "El email ya se encuentra en uso." });
-            console.log(errors);
-            console.log("ERROR EMAIL EN USO")
+
             res.render('signup-admin', {
                 errors
              });
@@ -210,17 +202,16 @@ userCtrl.signupAdmin = async (req, res) => {
             req.flash('success_msg', 'Usuario registrado exitosamente.')
             res.redirect('/administracion/login');
             
-            console.log(newAdmin)
+
         }
     }
-    console.log(req.body);
-  
-    console.log('TEST')
+
+ 
 };
 
 //Vista de formulario de Login
 userCtrl.renderLoginForm =  (req, res) => {
-    console.log('aaaaaa');
+
     res.render('users/signin')
 }
 userCtrl.renderChat = (req, res) => {
@@ -252,12 +243,10 @@ userCtrl.login =  (req,res,next) => {
                 if (err) throw err;
                 
                 User.findOne({'email': user.email},(err,user)=>{
-                    console.log(user)
+       
                     var dateMem = user.plusExpires
                     var date1 = new Date();
-                    console.log(dateMem)
-                    console.log(date1)
-                    
+           
                     
                         if (user.isNewUser == "basico" ){
                         
@@ -273,7 +262,7 @@ userCtrl.login =  (req,res,next) => {
                             } else {
                                 
                                 res.redirect('/user/edit-perfil')
-                                console.log('admin')
+                       
     
                             }
                     }else {
@@ -404,15 +393,14 @@ userCtrl.renderListaCandidatos = async (req, res) => {
     if (req.query.buscar_free) {
         if (req.user) {
             const userlog = req.user;
-            console.log(userlog);
-            console.log('usuario');
+
             const tipo_cuenta = req.user.tipo_cuenta;
             const buscar_free = req.query.buscar_free;
             const xPage = 6;
             const page = req.params.page || 1;
             const applicant = await User.find({ username: { $regex: '.*' + buscar_free + '.*', $options: 'i' }, tipo_cuenta: 'Freelancer' }, function (error, applicant) {
                 if (error) {
-                    console.log('error en el find')
+             
                 }
             })
                 .skip((xPage * page) - xPage).limit(xPage).exec((err, applicant) => {
@@ -447,8 +435,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
     }
     if (req.user) {
         const userlog = req.user;
-        console.log(userlog);
-        console.log('usuario2');
+  
         const tipo_cuenta = req.user.tipo_cuenta;
         const xPage = 6;
         const page = req.params.page || 1;
@@ -465,8 +452,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
         })
     } else {
         const userlog = req.user;
-        console.log(userlog);
-        console.log('no usuario');
+
         const xPage = 4;
         const page = req.params.page || 1;
         const applicant = await User.find({ tipo_cuenta: 'Freelancer' }).skip((xPage * page) - xPage).limit(xPage).exec((error, applicant) => {
@@ -491,7 +477,7 @@ userCtrl.renderPerfilUser = async (req, res) => {
             const username = req.user.username;
             const idempresa = req.user.id;
             const user = await User.findById(req.params.id)
-            console.log('yes');
+       
             res.render('./users/perfil-user', { empresa, user,idempresa,username })
         }
         if (req.user.tipo_cuenta === 'Admin') {
@@ -499,11 +485,11 @@ userCtrl.renderPerfilUser = async (req, res) => {
             const username = req.user.username;
             const idadmin = req.user.id;
             const user = await User.findById(req.params.id)
-            console.log('yes');
+      
             res.render('./users/perfil-user-admin', { admin, user,idadmin })
         }
     }
-    console.log('test');
+  
     const user = await User.findById(req.params.id)
  
     res.render('./users/perfil-user-public', { user })
@@ -520,7 +506,7 @@ userCtrl.renderEditPerfil = async (req, res) => {
 
 //Actualizar Perfil de Usuario
 userCtrl.editPerfil = async (req, res) => {
-    console.log(req.body)
+ 
     const  {cargo,direccion,salario,acerca,pais,tipoempresa,userfacebook,usertwitter,usergoogle,userlinkedin,skill_,skill_1,skill_2,skill_3,phone} = req.body
 
     await User.findByIdAndUpdate(req.user.id,{$set:{cargo:cargo,direccion:direccion,salario:salario,acerca:acerca,pais:pais,phone:phone
@@ -534,12 +520,12 @@ userCtrl.editPerfil = async (req, res) => {
 userCtrl.updateDatos = async (req, res) => {
     let errors = [];
     
-    console.log(req.body)
+
     const  {password, password_confirm} = req.body
     if (password != password_confirm) {
         // req.flash('message','las contrasenas no coinciden');
         // res.redirect('/user/signup');
-         console.log('ERROR CONTRASENA NO ES IGUAL')
+
          errors.push({ text: "Las Contraseñas no coinciden!!!." });
      }
      if (password.length < 4) {
@@ -578,7 +564,7 @@ userCtrl.updateDatosUser = async (req, res) => {
     if (password != password_confirm) {
         // req.flash('message','las contrasenas no coinciden');
         // res.redirect('/user/signup');
-         console.log('ERROR CONTRASENA NO ES IGUAL')
+     
          errors.push({ text: "Las Contraseñas no coinciden!!!." });
      }
      if (password.length < 4) {
@@ -589,7 +575,7 @@ userCtrl.updateDatosUser = async (req, res) => {
          //const alert = errors.array()
           console.log(errors);
           ///console.log(alert)
-          console.log('errores')
+ 
           
           res.render('./users/sucess-password', {
             errors
@@ -599,7 +585,7 @@ userCtrl.updateDatosUser = async (req, res) => {
          // Si el correo ya existe
         try {
             await User.findByIdAndUpdate(userid,{$set:{password:password}})
-            console.log('YES')
+
                const user = await User.findById(userid)
                user.password = await user.encryptPassword(password)
                await user.save()
@@ -619,10 +605,7 @@ userCtrl.renderEditJob = async (req, res) => {
     const jobs = await Jobs.find({id_user: user._id});
     //const userCreador = await Users.findById(detailsJobs.id_user);
 
- console.log('trabajos')
-    console.log(user._id)
-    console.log(jobs)
-   
+
 
     res.render('./users/edit-jobs', {user,jobs})
 }
@@ -715,7 +698,7 @@ userCtrl.renderEditJobs = async (req, res) => {
                 if (err) {
                     console.log('error')
                 } else {
-                    console.log(jobs)
+            
                     res.render('./jobs/lista-trabajos-admin', {
                         categorias,
                         jobs,
@@ -731,7 +714,7 @@ userCtrl.renderEditJobs = async (req, res) => {
 }
 userCtrl.renderEditPass = async (req, res) => {
    
-    console.log(req.params)
+
      res.render('./users/cambio-pass')
 }
 userCtrl.renderEditPassUsers = async (req, res) => {
@@ -744,12 +727,11 @@ userCtrl.renderEditPassUsers = async (req, res) => {
 
 userCtrl.eliminarTrabajo = async (req,res)=> {
     const {id} =req.params;
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-    console.log(id);
+
 
     try {
         const userDelete = await Jobs.findByIdAndDelete(id)
-        console.log('exito')
+   
         res.redirect('/user/edit-jobs')
         
     } catch (error) {
@@ -761,12 +743,11 @@ userCtrl.eliminarTrabajo = async (req,res)=> {
 }
 userCtrl.eliminarTrabajoAdmin = async (req,res)=> {
     const {id} =req.params;
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
-    console.log(id);
+ 
 
     try {
         const userDelete = await Jobs.findByIdAndDelete(id)
-        console.log('exito')
+  
         res.redirect('/lista-trabajos-admin/1')
         
     } catch (error) {
@@ -798,8 +779,7 @@ userCtrl.editPic = async (req, res) => {
 
       try {
         const result = await cloudinary.v2.uploader.upload(`src/public/uploads/${newImg}`);
-        console.log(result)
-        console.log(result.url)
+
         const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:result.url}})
 
         await fs.unlink(req.file.path)
@@ -809,11 +789,7 @@ userCtrl.editPic = async (req, res) => {
       } 
       
        // const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:newImg}})
-       // console.log(typeof(imageSaved))
-        // console.log(typeof(newImg))
-        // console.log(newImg +'ohshit')
-        // console.log(imageSaved+'ohshit2')
-        // console.log(typeof(imageSaved))
+
     } else if(extt === '.pdf') {
 
             await fs.rename(cvTempPath, targetPath_);
@@ -862,7 +838,7 @@ userCtrl.expeEstudios = async  (req, res) => {
 
 userCtrl.descargarCv = async (req,res) => {
     const  idUser = await User.findByIdAndUpdate(req.user.id)
-    console.log(idUser)
+
 }
 
 
@@ -1067,7 +1043,7 @@ userCtrl.createPayment = (req, res) => {
             if(response.body.links[i].rel === 'approve'){
              res.redirect(response.body.links[i].href);
              
-              console.log('EXITO1')
+        
            }
         }
         // res.json({ data: response.body })
@@ -1083,15 +1059,14 @@ userCtrl.createPayment = (req, res) => {
 
 
 userCtrl.execute = async (req, res) => {
-    console.log('ejecutar');
+
     const token = req.query.token; //<-----------
     const datos = req.query;
     const status = 'plus'
     const status_basic = 'basico'
     const plusExp = new Date()
     const status_user = await User.findByIdAndUpdate(req.user.id,{$set:{isNewUser:status,plusExpires:plusExp}})
-    console.log('guardado');
-   
+ 
 
     request.post(`${PAYPAL_API}/v2/checkout/orders/${token}/capture`, {
         auth,
