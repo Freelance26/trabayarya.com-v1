@@ -40,7 +40,7 @@ router.post('/send-mail', async (req,res) => {
 
     try {
         const info = await transporter.sendMail({
-            from: "'Studio73pty Server' <test_web@studio73pty.com>",
+            from: "'Freelance26' <info@freelance26.com>",
             to: "info@freelance26.com",
             subject:'Webiste contact form',
             //text:'hello world'
@@ -85,7 +85,7 @@ router.post('/send-mail-user/', async (req,res) => {
     })
     try {
         const info = await transporter.sendMail({
-            from: "'Studio73pty Server' <test_web@studio73pty.com>",
+            from: "'Freelance26' <info@freelance26.com>",
             to: `${email_user}`,
             
             subject:'Alguien quiere contactar contigo!',
