@@ -31,7 +31,7 @@
                   </label>
                   <div class="form-wrap-inner">
                     <input class="form-input" id="general-information-job-title" form="post-a-job-form" type="text"
-                      name="titulo_trabajo" data-constraints="@Required">
+                      name="titulo_trabajo" data-constraints="@Required" required>
                     <label class="form-label" for="general-information-job-title">Ingrese título</label>
                   </div>
                 </div>
@@ -60,7 +60,7 @@
                     <!-- Select 2-->
                     <select class="form-input select" id="general-information-job-type" form="post-a-job-form"
                       data-placeholder="Select Job Type" name="tipo_trabajo" data-minimum-results-for-search="Infinity"
-                      data-constraints="@Selected" data-constraints="@Required">
+                      data-constraints="@Selected" data-constraints="@Required" required>
                       <option label="Seleccionar tipo de trabajo"></option>
                       <option value="Tiempo Completo">Tiempo completo</option>
                       <option value="Medio Tiempo">Medio tiempo</option>
@@ -75,7 +75,7 @@
                   <div class="form-wrap-inner">
                     <select class="form-input select" id="general-information-job-type" form="post-a-job-form"
                       data-placeholder="Selecciona la Ubicación" name="ubicacion" data-minimum-results-for-search="Infinity"
-                      data-constraints="@Selected" data-constraints="@Required">
+                      data-constraints="@Selected" data-constraints="@Required" required>
                       <option label="Todos los países">Todos los países</option>
                       <option value="México">México</option>
                       <option value="Colombia">Colombia</option>
@@ -111,7 +111,7 @@
                   <label class="form-label-outside" for="general-information-salary">Salario $  </label>
                   <div class="form-wrap-inner">
                     <input class="form-input" id="general-information-salary" form="post-a-job-form" type="text"
-                      name="salario" data-constraints="@Required">
+                      name="salario" data-constraints="@Required" required>
                       
                     <label class="form-label" for="general-information-salary"> </label>
                   </div>
@@ -126,7 +126,7 @@
                     <!-- Select 2-->
                     <select class="form-input select" id="general-information-job-category" form="post-a-job-form"
                       data-placeholder="Choose a Category" name="cat_trabajo" data-minimum-results-for-search="Infinity"
-                      data-constraints="@Selected" data-constraints="@Required">
+                      data-constraints="@Selected" data-constraints="@Required" required>
                       <option label="Elije una Categoría"></option>
                       <option value="Diseño Gráfico">Diseño Gráfico</option>
                       <option value="Traducciones">Traducciones</option>
