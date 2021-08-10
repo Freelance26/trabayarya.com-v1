@@ -30,25 +30,25 @@
                 <form action="/user/signup" method="POST">
                   <div class="form-group">
                     <input class="form-input" id="rd-navbar-register-name" type="text" name="username"
-                      data-constraints="@Required" placeholder="Nombre y Apellido" />
+                      data-constraints="@Required" required placeholder="Nombre y Apellido" />
                   </div>
                   <div class="form-group">
                     <input class="form-input" id="rd-navbar-register-email" type="email" name="email"
-                      data-constraints="@Email @Required" placeholder="Correo" />
+                      data-constraints="@Email @Required" required placeholder="Correo" />
                   </div>
                   <div class="form-group">
                     <input class="form-input" id="rd-navbar-register-password" type="password" name="password"
-                      data-constraints="@Required" placeholder="Contraseña" />
+                      data-constraints="@Required" required placeholder="Contraseña" />
                   </div>
                   <div class="form-group">
                     <input class="form-input" id="rd-navbar-register-password-confirm" type="password" name="password_confirm"
-                      data-constraints="@Required" placeholder="Confirmar Contraseña" />
+                      data-constraints="@Required" required placeholder="Confirmar Contraseña" />
                   </div>
                   <div class="input-group mb-3" style="display: none;">
                     <div class="input-group-prepend">
                       <label class="input-group-text" for="inputGroupSelect01">Tipo de Cuenta</label>
                     </div>
-                    <select class="custom-select" id="rd-navbar-register-tip_cuenta" name="tipo_cuenta" data-constraints="@Required" aria-placeholder="sele">Seleccionar...
+                    <select class="custom-select" id="rd-navbar-register-tip_cuenta" name="tipo_cuenta" required data-constraints="@Required" aria-placeholder="sele">Seleccionar...
                       <!-- <option value="Empresa">Empresa</option> -->
                       <option value="Freelancer">Freelancer</option>
                     </select>
@@ -56,7 +56,7 @@
                   <div class="form-row ">
                     <div class="form-group col-md-6 ">
                       <label for="inputState" style="color:white; display: in-block; min-width: 40px;;">Pais</label>
-                      <select id="inputState" class="form-control" name="pais" data-constraints="@Required">
+                      <select id="inputState" class="form-control" name="pais" required data-constraints="@Required">
                         <option selected>Escoja su pais</option>
                         <option value="México">México</option>
                         <option value="Colombia">Colombia</option>
@@ -84,12 +84,58 @@
                     </div>
                     <div class="form-group col-md-6">
                       <label for="inputCity" style="color:white;" >Ciudad</label>
-                      <input type="text" class="form-control" name="ciudad" data-constraints="@Required" id="inputCity">
+                      <input type="text" class="form-control" name="ciudad" required data-constraints="@Required" id="inputCity">
+                    </div>
+                  </div>
+                  <p class="pregistro">EXPERIENCIA LABORAL</p>
+                  <div class="form-row ">
+                    <div class="form-group col-md-6 ">
+                      <label class="laboral" style="color:white;"> Periodo
+                        <input type="text" class="form-control" required placeholder="AAAA - AAAA"
+                          name="periodo_laboral" value="" >
+                      </label>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputCity" style="color:white;" >Titulo de trabajo</label>
+                      <input type="text" class="form-control" name="nom_empresa" required data-constraints="@Required" id="inputCity">
+                    </div>
+                  </div>
+                  <div class="form-row ">
+                    <div class="form-group col-md-6 ">
+                      <label class="laboral" style="color:white;"> Descripción
+                        <input type="text" class="form-control" required placeholder=""
+                          name="descripcion_trabajo" value="" >
+                      </label>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputCity" style="color:white;" >Detalles</label>
+                      <input type="text" class="form-control" name="detalles_trabajo" required data-constraints="@Required" id="inputCity">
+                    </div>
+                  </div>
+                  <p class="pregistro">ESTUDIOS</p>
+                  <div class="form-row ">
+                    <div class="form-group col-md-6 ">
+                      <label class="laboral" style="color:white;"> Periodo
+                        <input type="text" class="form-control" required placeholder="AAAA - AAAA"
+                          name="periodo_ESTUDIO" value="" >
+                      </label>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="inputCity" style="color:white;" >Instituto / Universidad nombre</label>
+                      <input type="text" class="form-control" name="nom_estudio" required data-constraints="@Required" id="inputCity">
+                    </div>
+                  </div>
+                  <div class="form-row ">
+                    <div class="form-group col-md-12 ">
+                      <label class="laboral" style="color:white;"> Detalles
+                        <input  class="form-control" placeholder=""
+                          name="detalles_estudio" value=""required >
+                      </label>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="check" data-constraints="@Required">
+                      <input class="form-check-input" type="checkbox" id="check" required data-constraints="@Required">
                       <label class="form-check-label" for="gridCheck" style="color:white;">
                         <a href="/blog/terminos-y-condiciones">Terminos y condiciones</a> 
                       </label>
