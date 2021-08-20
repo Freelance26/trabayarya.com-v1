@@ -138,13 +138,14 @@ userCtrl.signup = async (req, res) => {
         } else {
             // Guardo el usuario
             const newUser = new User({ username, email, password, tipo_cuenta,ciudad,pais });
-            console.log(newUser);
+            const userId  = newUser._id
             newUser.password = await newUser.encryptPassword(password);
-
+            console.log(userId);
             await newUser.save();
-            await User.findByIdAndUpdate(newUser._id, {$addToSet: {trabajos: expe_traba}})
-            await User.findByIdAndUpdate(newUser._id, {$addToSet: {estudios: expe_estu}})
-            
+          const tra =  await User.findByIdAndUpdate(userId, {$addToSet: {trabajos: expe_traba}})
+            const stui = await User.findByIdAndUpdate(userId, {$addToSet: {estudios: expe_estu}})
+            console.log(tra);
+            console.log(stui);
             req.flash('success_msg', 'Usuario registrado exitosamente.')
             res.redirect('/user/login');
             
