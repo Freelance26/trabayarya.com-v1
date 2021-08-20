@@ -99,8 +99,15 @@ userCtrl.signup = async (req, res) => {
     
     failureFlash: true;
     const { username, email, password, password_confirm, tipo_cuenta,ciudad,pais } = req.body;
-    //tipo_cuenta='Empresa';
-    //console.log(tipo_cuenta)
+    const expe_traba = {periodo: req.body.periodo_laboral, 
+        titulo_trabajo: req.body.titulo_trabajo,
+        nom_empresa: req.body.nom_empresa,
+        desc_trabajo: req.body.descripcion_trabajo,
+        deta_trabajo: req.body.detalles_trabajo }
+    const expe_estu = {periodo: req.body.periodo_estudio,
+        nom_academia: req.body.nom_estudio,
+        deta_estudio: req.body.detalles_estudio}
+        
     if (password != password_confirm) {
        // req.flash('message','las contrasenas no coinciden');
        // res.redirect('/user/signup');
@@ -131,9 +138,12 @@ userCtrl.signup = async (req, res) => {
         } else {
             // Guardo el usuario
             const newUser = new User({ username, email, password, tipo_cuenta,ciudad,pais });
-            
+            console.log(newUser);
             newUser.password = await newUser.encryptPassword(password);
+
             await newUser.save();
+            await User.findByIdAndUpdate(newUser._id, {$addToSet: {trabajos: expe_traba}})
+            await User.findByIdAndUpdate(newUser._id, {$addToSet: {estudios: expe_estu}})
             
             req.flash('success_msg', 'Usuario registrado exitosamente.')
             res.redirect('/user/login');
