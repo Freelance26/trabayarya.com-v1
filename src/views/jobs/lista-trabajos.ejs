@@ -11,7 +11,7 @@
         <ul class="breadcrumbs-custom-path">
           <li><a href="/">Inicio</a></li>
           <li><a href="/candidatos/1">Para candidatos</a></li>
-          <li class="active">Lista de trabajos</li>
+          <li class="active">Lista de trabajos ( <%= jobs.length %>)</li>
         </ul>
       </div>
     </div>
@@ -110,7 +110,70 @@
             <div class="col-sm-6 col-lg-12">
               <p class="heading-8">Categorías</p>
               <hr>
-              <% categorias.forEach(function(categorias){ %>
+              <ul class="list list-xs">                      
+                <li>
+                  <label class="checkbox checkbox_info">
+                      <input name="categoria" value="Traducciones" type="checkbox">Traducciones (<%= resultCat[0].length %>)
+                    </label>
+                </li>
+              </ul>
+                <ul class="list list-xs">                      
+                <li>
+                  <label class="checkbox checkbox_info">
+                      <input name="categoria" value="Diseño Gráfico" type="checkbox">Diseño Gráfico (<%= resultCat[1].length %>)
+                    </label>
+                </li>
+              </ul>
+                <ul class="list list-xs">                      
+                <li>
+                  <label class="checkbox checkbox_info">
+                      <input name="categoria" value="Edición de Imágenes" type="checkbox">Edición de Imágenes (<%= resultCat[2].length %>)
+                    </label>
+                </li>
+              </ul>
+                <ul class="list list-xs">                      
+                <li>
+                  <label class="checkbox checkbox_info">
+                      <input name="categoria" value="Desarrollador web, móvil y software" type="checkbox">Desarrollador web, móvil y software (<%= resultCat[3].length %>)
+                    </label>
+                </li>
+              </ul>
+                <ul class="list list-xs">                      
+                <li>
+                  <label class="checkbox checkbox_info">
+                      <input name="categoria" value="Soporte Administrativo" type="checkbox">Soporte Administrativo (<%= resultCat[4].length %>)
+                    </label>
+                </li>
+              </ul>
+                <ul class="list list-xs">                      
+                <li>
+                  <label class="checkbox checkbox_info">
+                      <input name="categoria" value="Consultoría y Contabilidad" type="checkbox">Consultoría y Contabilidad (<%= resultCat[5].length %>)
+                    </label>
+                </li>
+              </ul>
+                <ul class="list list-xs">                      
+                <li>
+                  <label class="checkbox checkbox_info">
+                      <input name="categoria" value="Marketing Online" type="checkbox">Marketing Online (<%= resultCat[6].length %>)
+                    </label>
+                </li>
+              </ul>
+                <ul class="list list-xs">                      
+                <li>
+                  <label class="checkbox checkbox_info">
+                      <input name="categoria" value="Otros" type="checkbox">Otros (<%= resultCat[7].length %>)
+                    </label>
+                </li>
+              </ul>
+                <ul class="list list-xs">                      
+                <li>
+                  <label class="checkbox checkbox_info">
+                      <input name="categoria" value="Cursos" type="checkbox">Cursos (<%= resultCat[7].length %>)
+                    </label>
+                </li>
+              </ul>
+              <!-- <% categorias.forEach(function(categorias){ %>
                 <ul class="list list-xs">                      
                 <li>
                   <label class="checkbox checkbox_info">
@@ -118,7 +181,7 @@
                     </label>
                 </li>
               </ul>
-              <% }) %>
+              <% }) %> -->
             </div>
             <!--<div class="col-sm-6 col-lg-12">
               <p class="heading-8">Etiquetas</p>

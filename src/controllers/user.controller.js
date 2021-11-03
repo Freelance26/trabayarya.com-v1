@@ -43,9 +43,57 @@ cloudinary.config({
 })
 
 
+// const multerStorage = multer.memoryStorage();
+
+const multerStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    // cb(null, 'public/assets/images/users');
+    // cb(null, path.join(__dirname,'../public/uploads/temp'));
+    cb(null, path.join(__dirname,'../public/uploads'));
+  },
+  filename: (req, file, cb) => {
+    //user-id-timestamp.extension
+    const ext = file.mimetype.split('/')[1];
+    cb(null, `user-${Date.now()}.${ext}`);
+  },
+});
+
+const multerFilter = (req, file, cb) => {
+    console.log(file)
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(
+      new AppError('No es una imagen! Por favor solo suba imagenes', 400),
+      false
+    );
+  }
+};
+const multerFilterPdf = (req, file, cb) => {
+    console.log(file)
+  if (file.mimetype.startsWith('application')) {
+    cb(null, true);
+  } else {
+    cb(
+      new AppError('No es una imagen! Por favor solo suba pdf', 400),
+      false
+    );
+  }
+};
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+const uploadFile = multer({
+  storage: multerStorage,
+  fileFilter: multerFilterPdf,
+});
 
 
-
+userCtrl.uploadUserPhoto = upload.single('photo');
+userCtrl.uploadUserPic = upload.single('userpic');
+userCtrl.uploadUserPDF = uploadFile.single('userpdf');
 //Vista de sección de elección
 userCtrl.renderChooseSignupOption = (req, res) => {
     res.render('users/choose-signup-option')
@@ -96,9 +144,10 @@ userCtrl.renderSignupFormAdmin = (req, res) => {
 //Creacion de Usuarios
 userCtrl.signup = async (req, res) => {
     let errors = [];
-    
+    // console.log(req.file)
+    // console.log(req.body)
     failureFlash: true;
-    const { username, email, password, password_confirm, tipo_cuenta,ciudad,pais } = req.body;
+    const { username, email, password, password_confirm, tipo_cuenta,ciudad,pais, categoria } = req.body;
     const expe_traba = {periodo: req.body.periodo_laboral, 
         titulo_trabajo: req.body.titulo_trabajo,
         nom_empresa: req.body.nom_empresa,
@@ -130,25 +179,63 @@ userCtrl.signup = async (req, res) => {
         if (emailUser || errors.length>0) {
             //req.flash("error_msg", "El Email se encuentra en uso.");
             //res.redirect('/');
+            console.log(req.file)
             errors.push({ text: "El email ya se encuentra en uso." });
-  
-            res.render('users/signup', {
-                errors
-             });
+            await fs.unlink(req.file.path)
+            res.status(400).send('El email se encuentra en uso')
+            // .render('users/signup', {
+            //     errors
+            //  });
         } else {
             // Guardo el usuario
-            const newUser = new User({ username, email, password, tipo_cuenta,ciudad,pais });
-            const userId  = newUser._id
-            newUser.password = await newUser.encryptPassword(password);
-            console.log(userId);
-            await newUser.save();
-          const tra =  await User.findByIdAndUpdate(userId, {$addToSet: {trabajos: expe_traba}})
-            const stui = await User.findByIdAndUpdate(userId, {$addToSet: {estudios: expe_estu}})
-            console.log(tra);
-            console.log(stui);
-            req.flash('success_msg', 'Usuario registrado exitosamente.')
-            res.redirect('/user/login');
-            
+            const imgUrl = randomNumber();
+            const imageTempPath = req.file.path;
+            const ext = path.extname(req.file.originalname).toLowerCase();
+            const targetPath = path.resolve(`src/public/uploads/${imgUrl}${ext}`)
+        
+            console.log(targetPath)
+            console.log(imageTempPath)
+            console.log(ext)
+        
+            if (ext === '.png' || ext === '.jpeg' ||ext === '.jpg' || ext === '.gif' ){
+                await fs.rename(imageTempPath, targetPath);
+        
+                const newImg = imgUrl+ext
+       
+              try {
+                //   console.log(newImage)
+                const resultCloud = await cloudinary.v2.uploader.upload(`src/public/uploads/${newImg}`);
+        
+                // const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:result.url}})
+
+                const newUser = new User({ username, email, password, tipo_cuenta,ciudad,pais,categoria, filename:resultCloud.url });
+                const userId  = newUser._id
+                newUser.password = await newUser.encryptPassword(password);
+                // console.log(userId);
+                const result = await newUser.save();
+                console.log(result)
+              const tra =  await User.findByIdAndUpdate(userId, {$addToSet: {trabajos: expe_traba}})
+                const stui = await User.findByIdAndUpdate(userId, {$addToSet: {estudios: expe_estu}})
+                // console.log(tra);
+                // console.log(stui);
+                await fs.unlink(targetPath)
+                // await fs.unlink(req.file.path)
+                req.flash('success_msg', 'Usuario registrado exitosamente.')
+                // res.redirect('/user/login');
+                res.status(200).send('Registro exitoso, por favor inicia sesión')
+                
+        
+              
+        
+              } catch (error) {
+                  console.log(error)
+              } 
+              
+               // const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:newImg}})
+        
+            }
+
+
   
         }
     }
@@ -404,7 +491,19 @@ userCtrl.renderListaCandidatos = async (req, res) => {
     if (req.query.buscar_free) {
         if (req.user) {
             const userlog = req.user;
-
+            const amount = await User.find()
+            const categoriasN = await Categorias.find()
+            var resultCat = []
+    
+            // await Promise.all(
+                categoriasN.map( async(value,index) => {
+                    var userCategori = await User.find({categoria: value.nombre})
+                    console.log(value)
+                    resultCat.push(userCategori)
+                })
+            //   );
+            //   console.log(resultCat)
+            var totalusers = amount.length
             const tipo_cuenta = req.user.tipo_cuenta;
             const buscar_free = req.query.buscar_free;
             const xPage = 6;
@@ -419,12 +518,31 @@ userCtrl.renderListaCandidatos = async (req, res) => {
                         if (err) {
                             console.log('error en el conteo')
                         } else {
-                            res.render('./users/candidatos', { userlog,tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage) })
+                            res.render('./users/candidatos', { userlog,tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage), amount: totalusers, categorias:categoriasN,resultCat })
                         }
                     })
                 })
         } else {
             const userlog = req.user;
+              
+        const amount = await User.find()
+        const categoriasN = await Categorias.find().sort({number: 1})
+        var resultCat = []
+        for (const item of categoriasN) {
+            var userCategori = await User.find({categoria: item.nombre})
+            resultCat.push(userCategori)
+          }
+        
+
+        // await Promise.all(
+            // categoriasN.map( async(value,index) => {
+            //     var userCategori = await User.find({categoria: value.nombre})
+            //     // console.log(value)
+            //     resultCat.push(userCategori)
+            // })
+        //   );
+          console.log(resultCat)
+        var totalusers = amount.length
             const buscar_free = req.query.buscar_free;
             const xPage = 6;
             const page = req.params.page || 1;
@@ -438,7 +556,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
                         if (err) {
                             console.log('error en el conteo')
                         } else {
-                            res.render('./users/candidatos', { applicant,userlog, current: page, pages: Math.ceil(count / xPage) })
+                            res.render('./users/candidatos', { applicant,userlog, current: page, pages: Math.ceil(count / xPage), amount: totalusers, categorias:categoriasN,resultCat })
                         }
                     })
                 })
@@ -447,16 +565,35 @@ userCtrl.renderListaCandidatos = async (req, res) => {
     if (req.user) {
         const userlog = req.user;
   
+        const amount = await User.find()
+        const categoriasN = await Categorias.find().sort({number: 1})
+        var resultCat = []
+        for (const item of categoriasN) {
+            var userCategori = await User.find({categoria: item.nombre})
+            resultCat.push(userCategori)
+          }
+        
+
+        // await Promise.all(
+            // categoriasN.map( async(value,index) => {
+            //     var userCategori = await User.find({categoria: value.nombre})
+            //     // console.log(value)
+            //     resultCat.push(userCategori)
+            // })
+        //   );
+          console.log(resultCat)
+          var totalusers = amount.length
         const tipo_cuenta = req.user.tipo_cuenta;
         const xPage = 6;
         const page = req.params.page || 1;
-        const applicant = await User.find({ tipo_cuenta: 'Freelancer' }).skip((xPage * page) - xPage).limit(xPage).exec((error, applicant) => {
+        const applicant = await User.find({ tipo_cuenta: 'Freelancer', approved: true }).skip((xPage * page) - xPage).limit(xPage).exec((error, applicant) => {
             User.count({tipo_cuenta: 'Freelancer'}, (error, count) => {
                 if (error) {
                     console.log('error1')
                 } else {
+                    console.log('a')
                     res.render('./users/candidatos', {
-                        tipo_cuenta,userlog, applicant, current: page, pages: Math.ceil(count / xPage)
+                        tipo_cuenta,userlog, applicant, current: page, pages: Math.ceil(count / xPage), amount: totalusers, categorias:categoriasN,resultCat
                     })
                 }
             })
@@ -464,15 +601,134 @@ userCtrl.renderListaCandidatos = async (req, res) => {
     } else {
         const userlog = req.user;
 
-        const xPage = 4;
+        const xPage = 10;
         const page = req.params.page || 1;
-        const applicant = await User.find({ tipo_cuenta: 'Freelancer' }).skip((xPage * page) - xPage).limit(xPage).exec((error, applicant) => {
+        const amount = await User.find()
+        const categoriasN = await Categorias.find().sort({number: 1})
+        var resultCat = []
+        // console.log(categoriasN)
+        for (const item of categoriasN) {
+            var userCategori = await User.find({categoria: item.nombre})
+            resultCat.push(userCategori)
+          }
+        
+        // await Promise.all(
+        //     categoriasN.map( async(value,index) => {
+        //         var userCategori = await User.find({categoria: value.nombre})
+        //         // console.log(value)
+        //         console.log(userCategori)
+        //         resultCat.push(userCategori)
+        //     })
+        //   );
+        console.log(resultCat)
+        var totalusers = amount.length
+        const applicant = await User.find({ tipo_cuenta: 'Freelancer', approved: true }).skip((xPage * page) - xPage).limit(xPage).exec((error, applicant) => {
             User.count({tipo_cuenta: 'Freelancer'}, (error, count) => {
                 if (error) {
                     console.log('error1')
                 } else {
+                    // console.log( applicant.length)
                     res.render('./users/candidatos', {
-                        userlog,applicant, current: page, pages: Math.ceil(count / xPage)
+                        userlog,applicant, current: page, pages: Math.ceil(count / xPage), amount: totalusers, categorias:categoriasN,resultCat
+                    })
+                }
+            })
+        })
+    }
+}
+
+userCtrl.renderListaCandidatosFiltro = async (req, res) => {
+    const filtro_cat = req.body.categoria || 
+    [
+        'Diseño Gráfico',
+        'Traducciones',
+        'Edición de Imágenes',
+        'Desarrollor web, móvil y software',
+        'Soporte Administrativo',
+        'Consultoría y Contabilidad',
+        'Marketing Online',
+        'Otros',
+        'Cursos',
+      ]
+    if (req.user) {
+        const userlog = req.user;
+        const tipo_cuenta = req.user.tipo_cuenta;
+        const xPage = 50;
+        const page = req.params.page || 1;
+        const categorias = await Categorias.find().sort({number: 1})
+        var resultCat = []
+        for (const item of categorias) {
+            var userCategori = await User.find({categoria: item.nombre})
+            resultCat.push(userCategori)
+          }
+
+        // await Promise.all(
+            // categorias.map( async(value,index) => {
+            //     var userCategori = await User.find({categoria: value.nombre})
+            //     console.log(value)
+            //     resultCat.push(userCategori)
+            // })
+        //   );
+        // console.log(resultCat)
+        console.log('a')
+        const amount = await User.find()
+        const jobs = await Users.find({$and: [{categoria: {$in: filtro_cat}, approved: true}]}).sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, applicant) => {
+            Users.count((err, count) => {
+                if (err) {
+        
+                } else {
+                    res.render('./users/candidatos-nuevos', {
+                        userlog,
+                        categorias,
+                        tipo_cuenta,
+                        applicant,
+                        current: page,
+                        amount:amount.length,
+                        pages: Math.ceil(count / xPage),
+                        resultCat
+                    })
+                }
+            })
+        })
+    } else {
+
+
+        const userlog = req.user;
+        console.log('b')
+        const xPage = 50;
+        const page = req.params.page || 1;
+        const categorias = await Categorias.find().sort({number: 1})
+        var resultCat = []
+        for (const item of categorias) {
+            var userCategori = await User.find({categoria: item.nombre})
+            resultCat.push(userCategori)
+          }
+
+        // await Promise.all(
+            // categorias.map( async(value,index) => {
+            //     var userCategori = await User.find({categoria: value.nombre})
+            //     // console.log(userCategori)
+            //     resultCat.push(userCategori)
+            // })
+        //   );
+        console.log(resultCat)
+        // console.log('result')
+        const amount = await User.find()
+        const jobs = await Users.find({$and: [{categoria: {$in: filtro_cat},approved: true}]}).sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, applicant) => {
+            // console.log(applicant)
+            Users.count((err, count) => {
+                if (err) {
+                    console.log('error')
+                } else {
+             
+                    res.render('./users/candidatos-nuevos', {
+                        userlog,
+                        categorias,
+                        applicant,
+                        current: page,
+                        pages: Math.ceil(count / xPage),
+                        amount:amount.length,
+                        resultCat
                     })
                 }
             })
@@ -514,14 +770,46 @@ userCtrl.renderEditPerfil = async (req, res) => {
     
     res.render('./users/perfil-user-edit', {user})
 }
+userCtrl.updateAllUsers = async (req, res) => {
+    var users = await User.find()
+    const update = { approved: false };
+    await Promise.all(
+        users.map( async(value,index) => {
+            var updatedUser = await User.findByIdAndUpdate({_id: value._id}, update)
+            console.log(updatedUser)
+            // resultCat.push(userCategori)
+        })
+      ).then((result) => {
+        console.log('done')
+        res.status(200)
+      })
+
+}
+userCtrl.actualizarCategoria = async (req, res) => {
+    console.log(req.params.id)
+    console.log(req.body)
+    const update = { categoria: req.body.categoria };
+    try {
+        var updatedUser = await User.findByIdAndUpdate({_id: req.params.id}, update)
+        console.log(updatedUser)
+        res.redirect(`/perfil-user/${req.params.id}`)
+    } catch (error) {
+        res.status(400).send('error')
+        const user = await User.findById(req.user.id)
+        res.redirect(`/perfil-user/${req.params.id}`)
+    }
+
+
+
+}
 
 //Actualizar Perfil de Usuario
 userCtrl.editPerfil = async (req, res) => {
  
-    const  {cargo,direccion,salario,acerca,pais,tipoempresa,userfacebook,usertwitter,usergoogle,userlinkedin,skill_,skill_1,skill_2,skill_3,phone} = req.body
+    const  {cargo,direccion,salario,acerca,pais,tipoempresa,userfacebook,usertwitter,usergoogle,userlinkedin,skill_,skill_1,skill_2,skill_3,phone,categoria} = req.body
 
     await User.findByIdAndUpdate(req.user.id,{$set:{cargo:cargo,direccion:direccion,salario:salario,acerca:acerca,pais:pais,phone:phone
-        ,tipoempresa:tipoempresa,userfacebook:userfacebook,usertwitter:usertwitter,usergoogle:usergoogle,userlinkedin:userlinkedin,
+        ,tipoempresa:tipoempresa,userfacebook:userfacebook,usertwitter:usertwitter,usergoogle:usergoogle,userlinkedin:userlinkedin,categoria:categoria,
         skill_:skill_,skill_1:skill_1,skill_2:skill_2,skill_3:skill_3}})
     const user = await User.findById(req.user.id)
     res.render('./users/perfil-user-edit', {user})
@@ -793,7 +1081,8 @@ userCtrl.editPic = async (req, res) => {
 
         const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:result.url}})
 
-        await fs.unlink(req.file.path)
+        // await fs.unlink(req.file.path)
+        await fs.unlink(targetPath)
 
       } catch (error) {
           console.log(error)
@@ -807,8 +1096,11 @@ userCtrl.editPic = async (req, res) => {
             const newCv = cvUrl+extt
 
             try {
-                const result = await cloudinary.v2.uploader.upload(`src/public/uploads/${newCv}`);
-                const cvSaved = await User.findByIdAndUpdate(req.user.id,{$set:{cvfilename:result.url}})
+                console.log(newCv)
+                // const result = await cloudinary.v2.uploader.upload(`src/public/uploads/${newCv}`);
+                // console.log(result)
+                const cvSaved = await User.findByIdAndUpdate(req.user.id,{$set:{cvfilename:`src/public/uploads/${newCv}`}})
+                console.log(cvSaved)
             } catch (error) {
                 console.log(error)
             }
@@ -822,6 +1114,32 @@ userCtrl.editPic = async (req, res) => {
     
     const user = await User.findById(req.user.id)
     res.render('./users/perfil-user-edit', {user})   
+}
+userCtrl.editCv = async (req, res) => {
+
+
+    const cvTempPath = req.file.path;
+    const extt = path.extname(req.file.originalname).toLowerCase();
+
+    if(extt === '.pdf') {
+        console.log('the path is')
+        console.log(cvTempPath)
+        console.log(req.file)
+        try {
+            // const cvSaved = await User.findByIdAndUpdate(req.user.id,{$set:{cvfilename:`src/public/uploads/${newCv}`}})
+            const cvSaved = await User.findByIdAndUpdate(req.user.id,{$set:{cvfilename:`/uploads/${req.file.filename}`}})
+            const user = await User.findById(req.user.id)
+            res.render('./users/perfil-user-edit', {user})  
+        } catch (error) {
+            console.log(error)
+        } 
+    } else {
+         await fs.unlink(targetPath_);
+        res.status(500).json({error: 'Solo pdf son admitidos'});
+    }
+    
+    // const user = await User.findById(req.user.id)
+    // res.render('./users/perfil-user-edit', {user})   
 }
 
 

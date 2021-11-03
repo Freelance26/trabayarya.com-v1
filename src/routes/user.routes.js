@@ -38,14 +38,26 @@ const { renderPerfilUser,
         createPayment,
         renderPaymentSucess,
         renderListaCandidatosPanel,
+        renderListaCandidatosFiltro,
         isPlus,
         logout, 
+        uploadUserPhoto,
+        uploadUserPic,
+        uploadUserPDF,
+        editCv,
+        updateAllUsers,
+        actualizarCategoria,
         execute} = require('../controllers/user.controller');
-const { isAuthenticated,renderPanel,eliminarUsuario, renderPanelPagos, eliminarUsuarioPago, renderPanelReportesPagos } = require('../helpers/auth');
+const { isAuthenticated,renderPanel,eliminarUsuario, renderPanelPagos, eliminarUsuarioPago,aprobarUsuario, renderPanelReportesPagos,renderPanelNuevosUsuarios } = require('../helpers/auth');
 const { getchatPage } = require('../controllers/privatechat.controller');
 
+
+router.get('/user/updateAll', updateAllUsers);
 //Ruta de lista de freelancers
+
+
 router.get('/candidatos/:page', renderListaCandidatos);
+router.post('/lista-candidatos/:page', renderListaCandidatosFiltro);
 
 
 //Ruta de perfil de freelancer
@@ -62,7 +74,9 @@ router.get('/user/chat/:id&:iduser',isAuthenticated,getchatPage);
 router.get('/user/edit-perfil', isAuthenticated, renderEditPerfil);
 
 router.post('/edit-perfil', editPerfil);
-router.post('/user/edit_pic', editPic);
+router.post('/user/edit_pic', uploadUserPic, editPic);
+router.post('/user/pdf-upload', uploadUserPDF,editCv,
+);
 
 router.get('/user/edit-jobs',isAuthenticated,renderEditJob);
 
@@ -159,7 +173,8 @@ router.get('/user/pago',isAuthenticated,renderPaymentSucess);
 
 //Ruta de creacion de usuario
 router.get('/user/signup', renderSignupForm);
-router.post('/user/signup', signup);
+// router.post('/user/signup', signup);
+router.post('/user/signup',uploadUserPhoto, signup);
 
 
 //Ruta de creacion usuario-empresa
@@ -167,6 +182,7 @@ router.get('/user/signup-enterprise', renderSignupFormE);
 router.post('/user/signup-enterprise', signup);
 
 //Ruta de cerrar sesion
+
 router.get('/user/logout', logout);
 
 // router.get('/administracion/panel', isAuthenticated,renderPanel)
@@ -175,6 +191,7 @@ router.get('/administracion/pagos', isAuthenticated,renderPanelPagos)
 router.get('/administracion/reportes', isAuthenticated,renderPanelReportesPagos)
 
 router.delete('/administracion/eliminar/:id',isAuthenticated, eliminarUsuarioPago)
+router.post('/administracion/aprobar/:id',isAuthenticated, aprobarUsuario)
 
 router.get('/administracion/panel/:id', isAuthenticated,renderEditPassUsers)
 
@@ -192,6 +209,9 @@ router.delete('/administracion/edit-jobs/eliminar/:id',isAuthenticated, eliminar
 
 
 router.delete('/administracion/panel/eliminar/:id',isAuthenticated, eliminarUsuario)
+
+router.get('/administracion/nuevos-usuarios/:page', isAuthenticated,renderPanelNuevosUsuarios)
+router.post('/administracion/panel/actualizar-categoria/:id', isAuthenticated,actualizarCategoria)
 
 router.get('/user/update-datos', updateDatos);
 

@@ -43,6 +43,11 @@
                       box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Sala de chat</a>
                   <% } %>
                   <%if (admin) { %>
+                    <a class="button button-block button-primary-2" target="_blank" href="<%= user.cvfilename %>" style="width: 250px;"
+                      type="text">Ver Curriculum Vitae
+              </a>
+                  <% } %>
+                  <%if (admin) { %>
                     <a class="button button-primary btn-candidatos" href="" style="
                       border-radius: 10px 10px 10px 10px;
                       box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);"><%= user.email%></a>
@@ -59,6 +64,29 @@
                       <button class="button button-primary" style="border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5); margin-top: 0px;"id="btSubmit" value="Submit" >
                       <span class="icon mdi mdi-account"></span>
                       Eliminar</button>
+                    </form>
+                  <% } %>
+                  <%if (admin) { %>
+                    <form action="/administracion/panel/actualizar-categoria/<%= user.id%>" method="POST">
+                      <!-- <input type="hidden" name="_method" value="DELETE"> -->
+                      <div class="form-group">
+                        <label for="categoria" style="color:white; display: in-block; min-width: 40px;;">Categoría(<%= user.categoria %>)</label>
+                        <select id="categoria" class="form-control" name="categoria" required data-constraints="@Required">
+                          <option selected>Escoja su categoría</option>
+                          <option value="Traducciones">Traducciones</option>
+                          <option value="Diseño Gráfico">Diseño Gráfico</option>
+                          <option value="Edición de Imágenes">Edición de Imágenes</option>
+                          <option value="Desarrollador web, móvil y software">Desarrollador web, móvil y software</option>
+                          <option value="Soporte Administrativo">Soporte Administrativo</option>
+                          <option value="Consultoría y Contabilidad">Consultoría y Contabilidad</option>
+                          <option value="Marketing Online">Marketing Online</option>
+                          <option value="Otros">Otros</option>
+                          <option value="Cursos">Cursos</option>
+                        </select>
+                      </div>
+                      <button class="button button-primary" style="border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5); margin-top: 0px;"id="btSubmit" value="Submit" >
+                      <span class="icon mdi mdi-account"></span>
+                      Actualizar</button>
                     </form>
                   <% } %>
                   

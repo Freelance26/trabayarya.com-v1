@@ -1,5 +1,8 @@
       <!-- FScreen-->
 <%- include ('../partials/header'); %>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
       <section class="section section-sm bg-primary">
       <% if (user) { %>
         <div class="container">
@@ -52,6 +55,10 @@
                                   <span class="button button-block button-primary-2" id='btn'
                                         type="text"><%= user.isNewUser %>
                                   </span>
+       
+                                  <a class="button button-block button-primary-2" target="_blank" href="<%= user.cvfilename %>" style="width: 250px;"
+                                        type="text">Ver Curriculum Vitae
+                                </a>
               <div class="row row-50">
                 <div class="col-12">
                   <p class="heading-9">Sobre mí</p>

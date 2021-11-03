@@ -8,10 +8,12 @@ const UserSchema = new Schema({
     nombre_empresa: {type: String},
     email: {type: String, required: true, unique: true},
     phone: {type: String},
+    categoria: {type: String},
     password: {type: String, required: true},
     tipo_cuenta: {type: String, required: true},
     isNewUser:{type: String,default: 'basico'},
     isUser: {type: Boolean,default: true},
+    approved: {type: Boolean,default: false},
     plusExpires: {type: Date,default: null},
     
     ciudad: {type: String, required: true},

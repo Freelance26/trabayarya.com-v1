@@ -162,6 +162,15 @@ jobsCtrl.renderListaTrabajos = async (req, res, next) => {
             const xPage = 6
             const page = req.params.page || 1
             const categorias = await Categorias.find();
+            const categoriasN = await Categorias.find().sort({number: 1})
+
+            var resultCat = []
+            for (const item of categoriasN) {
+                var userCategori = await Jobs.find({cat_trabajo: item.nombre})
+                resultCat.push(userCategori)
+              }
+              console.log(resultCat)
+      
             const jobs = await Jobs.find({ titulo_trabajo: { $regex: '.*' + buscar_jobs + '.*', $options: "i" }, ubicacion: { $regex: '.*' + buscar_ubi + '.*', $options: "i" } }, function (error, jobs) {
                 if (error) {
       
@@ -172,16 +181,25 @@ jobsCtrl.renderListaTrabajos = async (req, res, next) => {
                         if (err) {
          
                         } else {
-                            res.render('./jobs/lista-trabajos', { categorias, tipo_cuenta, jobs, current: page, pages: Math.ceil(count / xPage) })
+                            res.render('./jobs/lista-trabajos', { categorias, tipo_cuenta, jobs, current: page,resultCat, pages: Math.ceil(count / xPage) })
                         }
                     })
                 })
         } else {
+
             const buscar_jobs = req.query.buscar_jobs;
             const buscar_ubi = req.query.buscar_ubi;
             const xPage = 6;
             const page = req.params.page || 1;
             const categorias = Categorias.find();
+            const categoriasN = await Categorias.find().sort({number: 1})
+
+            var resultCat = []
+            for (const item of categoriasN) {
+                var userCategori = await Jobs.find({cat_trabajo: item.nombre})
+                resultCat.push(userCategori)
+              }
+              console.log(resultCat)
             const jobs = await Jobs
                 .find({ titulo_trabajo: { $regex: '.*' + buscar_jobs + '.*', $options: "i" }, ubicacion: { $regex: '.*' + buscar_ubi + '.*', $options: "i" } }, function (error, jobs) {
                     if (error) {
@@ -196,6 +214,7 @@ jobsCtrl.renderListaTrabajos = async (req, res, next) => {
                                 categorias,
                                 jobs,
                                 current: page,
+                                resultCat,
                                 pages: Math.ceil(count / xPage)
                             })
                         }
@@ -208,6 +227,15 @@ jobsCtrl.renderListaTrabajos = async (req, res, next) => {
         const xPage = 6;
         const page = req.params.page || 1;
         const categorias = await Categorias.find();
+
+        const categoriasN = await Categorias.find().sort({number: 1})
+
+        var resultCat = []
+        for (const item of categoriasN) {
+            var userCategori = await Jobs.find({cat_trabajo: item.nombre})
+            resultCat.push(userCategori)
+          }
+          console.log(resultCat)
         const jobs = await Jobs.find().sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, jobs) => {
             Jobs.count((err, count) => {
                 if (err) {
@@ -218,6 +246,7 @@ jobsCtrl.renderListaTrabajos = async (req, res, next) => {
                         tipo_cuenta,
                         jobs,
                         current: page,
+                        resultCat,
                         pages: Math.ceil(count / xPage)
                     })
                 }
@@ -227,6 +256,14 @@ jobsCtrl.renderListaTrabajos = async (req, res, next) => {
         const xPage = 6;
         const page = req.params.page || 1;
         const categorias = await Categorias.find();
+        const categoriasN = await Categorias.find().sort({number: 1})
+
+        var resultCat = []
+        for (const item of categoriasN) {
+            var userCategori = await Jobs.find({cat_trabajo: item.nombre})
+            resultCat.push(userCategori)
+          }
+
         const jobs = await Jobs.find().sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, jobs) => {
             Jobs.count((err, count) => {
                 if (err) {
@@ -237,7 +274,8 @@ jobsCtrl.renderListaTrabajos = async (req, res, next) => {
                         categorias,
                         jobs,
                         current: page,
-                        pages: Math.ceil(count / xPage)
+                        pages: Math.ceil(count / xPage),
+                        resultCat
                     })
                 }
             })
@@ -264,6 +302,14 @@ if (req.user) {
     const xPage = 6;
     const page = req.params.page || 1;
     const categorias = await Categorias.find();
+    const categoriasN = await Categorias.find().sort({number: 1})
+
+    var resultCat = []
+    for (const item of categoriasN) {
+        var userCategori = await Jobs.find({cat_trabajo: item.nombre})
+        resultCat.push(userCategori)
+      }
+      console.log(resultCat)
     const jobs = await Jobs.find({$and: [{cat_trabajo: {$in: filtro_cat}}, {tipo_trabajo: {$in: filtro_vacante}}]}).sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, jobs) => {
         Jobs.count((err, count) => {
             if (err) {
@@ -274,7 +320,8 @@ if (req.user) {
                     tipo_cuenta,
                     jobs,
                     current: page,
-                    pages: Math.ceil(count / xPage)
+                    pages: Math.ceil(count / xPage),
+                    resultCat
                 })
             }
         })
@@ -283,6 +330,14 @@ if (req.user) {
     const xPage = 6;
     const page = req.params.page || 1;
     const categorias = await Categorias.find();
+    const categoriasN = await Categorias.find().sort({number: 1})
+
+    var resultCat = []
+    for (const item of categoriasN) {
+        var userCategori = await Jobs.find({cat_trabajo: item.nombre})
+        resultCat.push(userCategori)
+      }
+      console.log(resultCat)
     const jobs = await Jobs.find({$and: [{cat_trabajo: {$in: filtro_cat}}, {tipo_trabajo: {$in: filtro_vacante}}]}).sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, jobs) => {
         Jobs.count((err, count) => {
             if (err) {
@@ -293,7 +348,8 @@ if (req.user) {
                     categorias,
                     jobs,
                     current: page,
-                    pages: Math.ceil(count / xPage)
+                    pages: Math.ceil(count / xPage),
+                    resultCat
                 })
             }
         })

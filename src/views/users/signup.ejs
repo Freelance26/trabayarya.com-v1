@@ -2,7 +2,8 @@
 
 <%- include ('../partials/header'); %>
 
-
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <% if(typeof errors != 'undefined') { %>
       <% errors.forEach(function(error) { %>
@@ -27,7 +28,8 @@
               <div class="card-body" style="    margin-top: 90px;">
                 <p class="pregistro">REGISTRO FREELANCER</p>
                 <br>
-                <form action="/user/signup" method="POST">
+                <!-- <form action="/user/signup" method="POST" enctype="multipart/form-data"> -->
+                <form id="myForm">
                   <div class="form-group">
                     <input class="form-input" id="rd-navbar-register-name" type="text" name="username"
                       data-constraints="@Required" required placeholder="Nombre y Apellido" />
@@ -43,6 +45,21 @@
                   <div class="form-group">
                     <input class="form-input" id="rd-navbar-register-password-confirm" type="password" name="password_confirm"
                       data-constraints="@Required" required placeholder="Confirmar Contraseña" />
+                  </div>
+                  <div class="form-group">
+                    <label for="categoria" style="color:white; display: in-block; min-width: 40px;;">Categoría</label>
+                    <select id="categoria" class="form-control" name="categoria" required data-constraints="@Required">
+                      <option selected>Escoja su categoría</option>
+                      <option value="Traducciones">Traducciones</option>
+                      <option value="Diseño Gráfico">Diseño Gráfico</option>
+                      <option value="Edición de Imágenes">Edición de Imágenes</option>
+                      <option value="Desarrollador web, móvil y software">Desarrollador web, móvil y software</option>
+                      <option value="Soporte Administrativo">Soporte Administrativo</option>
+                      <option value="Consultoría y Contabilidad">Consultoría y Contabilidad</option>
+                      <option value="Marketing Online">Marketing Online</option>
+                      <option value="Otros">Otros</option>
+                      <option value="Cursos">Cursos</option>
+                    </select>
                   </div>
                   <div class="input-group mb-3" style="display: none;">
                     <div class="input-group-prepend">
@@ -137,6 +154,13 @@
                       </label>
                     </div>
                   </div>
+                  <div class="form-row ">
+                    <label class="laboral" style="color:white;"> Foto perfil
+                      <input  class="form-control" placeholder=""
+                      name="photo"  type="file" required >
+                    </label>
+
+                  </div>
                   <div class="form-group">
                     <div class="form-check">
                       <input class="form-check-input" type="checkbox" id="check" required data-constraints="@Required">
@@ -157,6 +181,56 @@
     </div>
     
    
+    <script>
+      $(document).ready(function () {
+  $("#myForm").on("submit", addForm);
+  // $("#myForm").on("click", addForm);
+  function addForm(event) {
+    event.preventDefault();
+    console.log('test')
+    $("#btSubmit").attr("disabled", true);
+    var data = new FormData($("#myForm").get(0));
+
+    for (var pair of data.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
+    console.log(data);
+
+    $.ajax({
+      type: "POST",
+      url: "/user/signup",
+      data: data,
+      // crossDomain: true,
+        // dataType: "jsonp",
+      processData: false,
+      contentType: false,
+    })
+      .done(function (res) {
+        // alert(res)
+        console.log(res)
+            Swal.fire(
+            'Exitoso',
+            `${res}`,
+            'success'
+          )
+          setTimeout(function(){ window.location.href = "/user/login"; }, 3000);
+      
+        $("#btSubmit").attr("disabled", false);
+      })
+      .always(function () {})
+      .fail(function (err) {
+        console.log(err)
+        Swal.fire(
+            'Hubo un error',
+            `El email se encuentra en uso`,
+            'error'
+          )
+        $("#btSubmit").attr("disabled", false);
+      });
+  }
+});
+
+    </script>
 <!-- 
     position: absolute;
     /* top: -300px; */
@@ -184,7 +258,7 @@
       }
     }
     ch.addEventListener('click',validator);
-    bt.addEventListener('click')
+    // bt.addEventListener('click')
 
     
 

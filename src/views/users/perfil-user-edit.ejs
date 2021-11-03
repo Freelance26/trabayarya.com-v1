@@ -173,7 +173,7 @@
                                   
                                 </label>
                                 <a href="#" id="button" class="button">Cambiar foto</a>
-                                <!-- <a href="#" id="button_" class="button">Subir CV</a> -->
+                                <a href="#" id="buttonCv" class="button">Subir CV</a>
                                 <!-- <a class="button button-lg button-primary-outline" id="button" class="button" href="#">Subir CV</a> -->
                                 <label> Nombre y Apellido
                                   <input type="text" class="form-control" placeholder="" value="<%= user.username %>"
@@ -194,6 +194,20 @@
                                 <label> Pretención Salarial
                                   <input type="text" class="form-control" placeholder="" value="<%= user.salario %> $"
                                     name="salario">
+                                </label>
+                                <label> Categoría(<%= user.categoria %>)
+                                  <select id="categoria" class="form-control" name="categoria" required data-constraints="@Required">
+                                    <option selected>Escoja su categoría</option>
+                                    <option value="Traducciones">Traducciones</option>
+                                    <option value="Diseño Gráfico">Diseño Gráfico</option>
+                                    <option value="Edición de Imágenes">Edición de Imágenes</option>
+                                    <option value="Desarrollador web, móvil y software">Desarrollador web, móvil y software</option>
+                                    <option value="Soporte Administrativo">Soporte Administrativo</option>
+                                    <option value="Consultoría y Contabilidad">Consultoría y Contabilidad</option>
+                                    <option value="Marketing Online">Marketing Online</option>
+                                    <option value="Otros">Otros</option>
+                                    <option value="Cursos">Cursos</option>
+                                  </select>
                                 </label>
                                 <br>
                                 <br>
@@ -301,10 +315,10 @@
                             <div class="bg-modal2" >
                               <div class="modal-content">
                                 <div class="close2">+</div>
-                                <form action="/user/edit_pic" method="POST" enctype="multipart/form-data" >
+                                <form action="/user/pdf-upload" method="POST" enctype="multipart/form-data" >
                                   <article class="profile-user">
                                     <label class="btn-file perfil"> <i class="fa fa-camera"></i> Agregar CV
-                                      <input type="file" style="display: none;" value="" name="userpic">
+                                      <input type="file" style="display: none;" value="" name="userpdf">
                                     </label>  
                                     <button class="button button-block button-primary" id='btn'
                                                             type="submit">Guardar
@@ -634,6 +648,7 @@
                 
               </label>
               <a href="#" id="button" class="button">Cambiar foto</a>
+              <a href="#" id="button" class="button">Subir CV</a>
               <label> Nombre y Apellido
                 <input type="text" class="form-control" placeholder="" value="<%= user.username %>"
                   name="username">
@@ -794,10 +809,16 @@
       <section class="hero">
         <div class="container-editempresa"> 
          
-            <article  action="/user/edit-perfil" method="POST" name="editPerfil">
+            <article  action="/user/edit-perfil" method="POST" name="editPerfil"
+
+            >
         
       
-              <div class="profile-light-main">
+              <div class="profile-light-main"             
+              style="display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;">
                 <label class=" perfil">
                   <img class="profile-light-image" src="<%= user.filename %>" alt="" width="169" height="169">
                  
@@ -817,6 +838,9 @@
               <a class="button button-primary" href="/candidatos/1" style="
               border-radius: 10px 10px 10px 10px;
               box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver panel de candidatos</a>
+              <a class="button button-primary" href="/administracion/nuevos-usuarios/1" style="
+              border-radius: 10px 10px 10px 10px;
+              box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Nuevos usuarios</a>
               <a class="button button-primary" href="/candidatos/pago" style="
               border-radius: 10px 10px 10px 10px;
               box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);">Ver pagos pendientes de freelancers</a>
@@ -924,7 +948,7 @@ function validateForm2(){
       
         }
 
-        var el2 = document.getElementById('button_')
+        var el2 = document.getElementById('buttonCv')
   if(el2){
         el2.addEventListener("click", function() {
         document.querySelector('.bg-modal2').style.display = "flex";

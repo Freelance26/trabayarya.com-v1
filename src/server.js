@@ -1,4 +1,5 @@
 const express = require('express');
+const compression = require('compression');
 // const Handlebars = require('handlebars');
 // const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
 // const exphbs = require('express-handlebars');
@@ -37,16 +38,17 @@ server.listen(app.get('port'), () => {
 })
 
 
- app.enable('trust proxy')
+app.enable('trust proxy')
 
- app.use(function(request, response, next) {
 
-   if (process.env.NODE_ENV != 'development' && !request.secure) {
-      return response.redirect("https://" + request.headers.host + request.url);
-   }
+app.use(function(request, response, next) {
 
-   next();
- })
+  if (process.env.NODE_ENV != 'development' && !request.secure) {
+     return response.redirect("https://" + request.headers.host + request.url);
+  }
+
+  next();
+})
 
 
 //paypal
@@ -65,7 +67,6 @@ paypal.configure({
 //Middlewares
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
 
   socket.emit('message','Welcome to chatlance')
 
@@ -81,8 +82,7 @@ io.on('connection', (socket) => {
 
   socket.on('chatMessage', (msg,callback) => {
     // io.emit('message')
-    console.log(msg);
-    console.log('Recibido, enviando a cliente');
+    
     io.to(msg.room).emit('newMessage',{
       text: msg.text,
       room: msg.room,
@@ -93,6 +93,13 @@ io.on('connection', (socket) => {
 
 
 });
+
+
+app.use(compression({
+  level:6,
+  threshold:100*1000,
+
+}))
 
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
@@ -107,13 +114,12 @@ app.use(session ({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-app.use(multer({
-  dest: path.join(__dirname,'./public/uploads/temp')
-}).single('userpic'))
-app.use(multer({
-  dest: path.join(__dirname,'./public/uploads/temp')
-}).single('usercv'))
-
+// app.use(multer({
+//   dest: path.join(__dirname,'./public/uploads/temp')
+// }).single('userpic'))
+// app.use(multer({
+//   dest: path.join(__dirname,'./public/uploads/temp')
+// }).single('usercv'))
 
 
 //Variablles Globales
@@ -139,7 +145,6 @@ app.use(require('./routes/emails.routes'));
 
 //Static Files
 app.use(express.static(path.join(__dirname, 'public')));
-
 
 
 //ERROR 404
