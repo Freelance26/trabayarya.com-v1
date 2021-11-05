@@ -71,16 +71,15 @@ router.post('/send-mail-user/', async (req,res) => {
         <p>${message}</p>
     `;
 
+
+    console.log('test')
     const transporter = nodemailer.createTransport({
         host: 'mail.fonsecatours.com',
         port: 587,
         secure: false,
         auth: {
-            user: '	test_@fonsecatours.com',
+            user: 'test_@fonsecatours.com',
             pass: '123456789'
-        // auth: {
-        //     user: 'test_web@studio73pty.com',
-        //     pass: '123456qwerty'
         },
         tls:{
             rejectUnauthorized: false
@@ -95,6 +94,7 @@ router.post('/send-mail-user/', async (req,res) => {
             //text:'hello world'
             html: contentHTML
         })
+        console.log(info)
         res.redirect('/')
         
     } catch (error) {
