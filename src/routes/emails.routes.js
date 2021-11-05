@@ -72,12 +72,15 @@ router.post('/send-mail-user/', async (req,res) => {
     `;
 
     const transporter = nodemailer.createTransport({
-        host: 'mail.studio73pty.com',
+        host: 'mail.fonsecatours.com',
         port: 587,
         secure: false,
         auth: {
-            user: 'test_web@studio73pty.com',
-            pass: '123456qwerty'
+            user: '	test_@fonsecatours.com',
+            pass: '123456789'
+        // auth: {
+        //     user: 'test_web@studio73pty.com',
+        //     pass: '123456qwerty'
         },
         tls:{
             rejectUnauthorized: false
