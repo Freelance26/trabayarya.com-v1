@@ -503,6 +503,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
                 })
             //   );
             //   console.log(resultCat)
+                    console.log('ii')
             var totalusers = amount.length
             const tipo_cuenta = req.user.tipo_cuenta;
             const buscar_free = req.query.buscar_free;
@@ -532,7 +533,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
             var userCategori = await User.find({categoria: item.nombre})
             resultCat.push(userCategori)
           }
-        
+                console.log('eee')
 
         // await Promise.all(
             // categoriasN.map( async(value,index) => {
@@ -541,7 +542,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
             //     resultCat.push(userCategori)
             // })
         //   );
-          console.log(resultCat)
+        //   console.log(resultCat)
         var totalusers = amount.length
             const buscar_free = req.query.buscar_free;
             const xPage = 6;
@@ -569,7 +570,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
         const categoriasN = await Categorias.find().sort({number: 1})
         var resultCat = []
         for (const item of categoriasN) {
-            var userCategori = await User.find({categoria: item.nombre})
+            var userCategori = await User.find({categoria: item.nombre, approved: true})
             resultCat.push(userCategori)
           }
         
@@ -581,7 +582,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
             //     resultCat.push(userCategori)
             // })
         //   );
-          console.log(resultCat)
+        //   console.log(resultCat)
           var totalusers = amount.length
         const tipo_cuenta = req.user.tipo_cuenta;
         const xPage = 6;
@@ -608,10 +609,11 @@ userCtrl.renderListaCandidatos = async (req, res) => {
         var resultCat = []
         // console.log(categoriasN)
         for (const item of categoriasN) {
-            var userCategori = await User.find({categoria: item.nombre})
+            var userCategori = await User.find({categoria: item.nombre, approved: true})
             resultCat.push(userCategori)
           }
         
+        console.log('aaaaasdasdasdaa')
         // await Promise.all(
         //     categoriasN.map( async(value,index) => {
         //         var userCategori = await User.find({categoria: value.nombre})
@@ -620,9 +622,11 @@ userCtrl.renderListaCandidatos = async (req, res) => {
         //         resultCat.push(userCategori)
         //     })
         //   );
-        console.log(resultCat)
+        // console.log(resultCat)
+
         var totalusers = amount.length
         const applicant = await User.find({ tipo_cuenta: 'Freelancer', approved: true }).skip((xPage * page) - xPage).limit(xPage).exec((error, applicant) => {
+            console.log(applicant)
             User.count({tipo_cuenta: 'Freelancer'}, (error, count) => {
                 if (error) {
                     console.log('error1')
@@ -658,7 +662,7 @@ userCtrl.renderListaCandidatosFiltro = async (req, res) => {
         const categorias = await Categorias.find().sort({number: 1})
         var resultCat = []
         for (const item of categorias) {
-            var userCategori = await User.find({categoria: item.nombre})
+            var userCategori = await User.find({categoria: item.nombre, approved: true, tipo_cuenta: 'Freelancer'})
             resultCat.push(userCategori)
           }
 
@@ -672,7 +676,7 @@ userCtrl.renderListaCandidatosFiltro = async (req, res) => {
         // console.log(resultCat)
         console.log('a')
         const amount = await User.find()
-        const jobs = await Users.find({$and: [{categoria: {$in: filtro_cat}, approved: true}]}).sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, applicant) => {
+        const jobs = await Users.find({$and: [{categoria: {$in: filtro_cat}, approved: true, tipo_cuenta: 'Freelancer'}]}).sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, applicant) => {
             Users.count((err, count) => {
                 if (err) {
         
@@ -700,7 +704,7 @@ userCtrl.renderListaCandidatosFiltro = async (req, res) => {
         const categorias = await Categorias.find().sort({number: 1})
         var resultCat = []
         for (const item of categorias) {
-            var userCategori = await User.find({categoria: item.nombre})
+            var userCategori = await User.find({categoria: item.nombre, approved: true, tipo_cuenta: 'Freelancer'})
             resultCat.push(userCategori)
           }
 
@@ -714,7 +718,7 @@ userCtrl.renderListaCandidatosFiltro = async (req, res) => {
         console.log(resultCat)
         // console.log('result')
         const amount = await User.find()
-        const jobs = await Users.find({$and: [{categoria: {$in: filtro_cat},approved: true}]}).sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, applicant) => {
+        const jobs = await Users.find({$and: [{categoria: {$in: filtro_cat},approved: true, tipo_cuenta: 'Freelancer'}]}).sort({ _id: -1 }).skip((xPage * page) - xPage).limit(xPage).exec((err, applicant) => {
             // console.log(applicant)
             Users.count((err, count) => {
                 if (err) {

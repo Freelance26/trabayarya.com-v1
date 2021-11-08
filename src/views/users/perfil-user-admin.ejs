@@ -67,6 +67,16 @@
                     </form>
                   <% } %>
                   <%if (admin) { %>
+                  <%if (user.approved === false) { %>
+                            <form action="/administracion/aprobar/<%= user.id%>" method="POST">
+                              <!-- <input type="hidden" name="_method" value="POST"> -->
+                              <button class="button button-primary" style="margin-top: 15px;border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);"id="btSubmit" value="Submit" >
+                              <span class="icon mdi mdi-account"></span>
+                              APROBAR</button>
+                            </form>
+                            <% } %>
+                            <% } %>
+                  <%if (admin) { %>
                     <form action="/administracion/panel/actualizar-categoria/<%= user.id%>" method="POST">
                       <!-- <input type="hidden" name="_method" value="DELETE"> -->
                       <div class="form-group">
