@@ -6693,6 +6693,7 @@ p.footer-creative-title {
 }
 
 .profile-minimal-inner > * {
+	width: 205px !important;
 	display: inline-block;
 	margin-top: 0;
 	margin-bottom: 16px;
@@ -6717,6 +6718,7 @@ p.footer-creative-title {
 }
 
 .profile-minimal-main > * {
+	width: 200px;
 	display: inline-block;
 	margin-top: 0;
 	margin-bottom: 16px;

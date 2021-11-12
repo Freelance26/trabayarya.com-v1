@@ -536,7 +536,7 @@ userCtrl.isPlus = (req,res) => {
 //Vista de Cerrar sesion
 userCtrl.logout = (req, res) => {
     req.logout();
-    req.flash('success_msg', 'Tu sesion ha sido cerrada');
+    req.flash('success_msg', 'Tu sesion ha sido cerrada'); 
     res.redirect('/')
 };
 
@@ -545,7 +545,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
     if (req.query.buscar_free) {
         if (req.user) {
             const userlog = req.user;
-            const amount = await User.find()
+            const amount = await User.find({ approved: true})
             const categoriasN = await Categorias.find()
             var resultCat = []
     
@@ -580,7 +580,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
         } else {
             const userlog = req.user;
               
-        const amount = await User.find()
+        const amount = await User.find({ approved: true})
         const categoriasN = await Categorias.find().sort({number: 1})
         var resultCat = []
         for (const item of categoriasN) {
@@ -620,7 +620,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
     if (req.user) {
         const userlog = req.user;
   
-        const amount = await User.find()
+        const amount = await User.find({ approved: true})
         const categoriasN = await Categorias.find().sort({number: 1})
         var resultCat = []
         for (const item of categoriasN) {
@@ -659,7 +659,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
 
         const xPage = 10;
         const page = req.params.page || 1;
-        const amount = await User.find()
+        const amount = await User.find({ approved: true})
         const categoriasN = await Categorias.find().sort({number: 1})
         var resultCat = []
         // console.log(categoriasN)

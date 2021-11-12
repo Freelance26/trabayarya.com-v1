@@ -263,8 +263,10 @@ helpers.renderPanelNuevosUsuarios = async (req,res) => {
         if (req.user) {
             const tipo_cuenta = req.user.tipo_cuenta;
             const buscar_free = req.query.buscar_free;
-            const xPage = 6;
+            const xPage = 10;
             const page = req.params.page || 1;
+            const amount = await User.find({ approved: false})
+            console.log(amount)
             const paymentReport = await User.find({ username: { $regex: '.*' + buscar_free + '.*', $options: 'i' }, approved: false }, function (error, applicant) {
                 if (error) {
                     console.log('error en el find')
@@ -279,7 +281,7 @@ helpers.renderPanelNuevosUsuarios = async (req,res) => {
                             // console.log(count)
                             // console.log(applicant)
                             // // console.log('tetas')
-                            res.render('nuevos-usuarios', { tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage) })
+                            res.render('nuevos-usuarios', { tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage),amount: applicant.length })
                         }
                     })
                 })
@@ -287,8 +289,9 @@ helpers.renderPanelNuevosUsuarios = async (req,res) => {
             try {
                 console.log('uwu')
                 const buscar_free = req.query.buscar_free;
-                const xPage = 6;
+                const xPage = 10;
                 const page = req.params.page || 1;
+                const amount = await User.find({ approved: false})
                 const paymentReport = await User.find({ username: { $regex: '.*' + buscar_free + '.*', $options: 'i' }, approved: false }, function (error, applicant) {
                     if (error) {
                         console.log('error en el find')
@@ -300,35 +303,40 @@ helpers.renderPanelNuevosUsuarios = async (req,res) => {
                                 console.log('error en el conteo')
                             } else {
                             
-                                res.render('nuevos-usuarios', { applicant, current: page, pages: Math.ceil(count / xPage) })
+                                res.render('nuevos-usuarios', { applicant, current: page, pages: Math.ceil(count / xPage), amount: applicant.length })
                             }
                         })
                     })
             } catch (error) {
                 console.log(error)
-                res.render('nuevos-usuarios', { applicant, current: page, pages: Math.ceil(count / xPage) })
+                res.render('nuevos-usuarios', { applicant, current: page, pages: Math.ceil(count / xPage),amount: applicant.length })
             }
         }
     }
     if (req.user) {
         const tipo_cuenta = req.user.tipo_cuenta;
-        const xPage = 6;
+        const xPage = 10;
         const page = req.params.page || 1;
+        const amount = await User.find({ approved: false})
+        // console.log(amount)
         const applicant = await User.find({ approved: false }).skip((xPage * page) - xPage).limit(xPage).exec((error, applicant) => {
+            console.log(applicant.length)
             User.count({approved: false}, (error, count) => {
                 if (error) {
                     console.log('error1')
                 } else {
             
                     res.render('nuevos-usuarios', {
-                        tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage)
+                        tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage),amount: applicant.length
                     })
                 }
             })
         })
     } else {
-        const xPage = 4;
+        const xPage = 10;
         const page = req.params.page || 1;
+        const amount = await User.find({ approved: false})
+        console.log('puta')
         const applicant = await User.find({ approved: false }).skip((xPage * page) - xPage).limit(xPage).exec((error, applicant) => {
             User.count({approved: false}, (error, count) => {
                 if (error) {
@@ -336,7 +344,7 @@ helpers.renderPanelNuevosUsuarios = async (req,res) => {
                 } else {
                
                     res.render('nuevos-usuarios', {
-                        applicant, current: page, pages: Math.ceil(count / xPage)
+                        applicant, current: page, pages: Math.ceil(count / xPage),amount: applicant.length
                     })
                 }
             })
