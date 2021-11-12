@@ -114,7 +114,7 @@ userCtrl.renderMembership = (req, res) => {
 userCtrl.renderPaymentSucess = async (req, res) => {
 
     const user = await User.findById(req.user.id)
-
+ 
     const datos = req.query;
     const status = 'plus'
     const status_basic = 'basico'
@@ -244,7 +244,61 @@ userCtrl.signup = async (req, res) => {
 };
 //update data
 
+userCtrl.signupEmpresa = async (req, res) => {
+    let errors = [];
+    
+    failureFlash: true;
+    const { username, email, password, password_confirm,pais,ciudad } = req.body;
+    //tipo_cuenta='Empresa';
+    const tipo_cuenta='Empresa';
 
+    //console.log(tipo_cuenta)
+    if (password != password_confirm) {
+       // req.flash('message','las contrasenas no coinciden');
+
+        errors.push({ text: "Las Contraseñas no coinciden!!!." });
+    }
+    if (password.length < 4) {
+        errors.push({ text: "La Contraseña debe tener al menos 4 digitos !!!!!!!!." });
+    }
+    if (errors.length > 0) {
+        //  res.redirect('/user/signup');
+        //const alert = errors.array()
+
+         ///console.log(alert)
+
+         res.render('/user/signup/signup-enterprise', {
+           errors
+        });
+    }
+
+    else {
+        // Si el correo ya existe
+        const emailAdmin = await Users.findOne({ email: email });
+        if (emailAdmin || errors.length>0) {
+            //req.flash("error_msg", "El Email se encuentra en uso.");
+            //res.redirect('/');
+            errors.push({ text: "El email ya se encuentra en uso." });
+
+            res.render('signup-admin', {
+                errors
+             });
+        } else {
+            // Guardo el usuario
+            const newAdmin = new Users({ username, email, password, tipo_cuenta,pais, ciudad});
+            
+            newAdmin.password = await newAdmin.encryptPassword(password);
+            await newAdmin.save();
+            
+            req.flash('success_msg', 'Usuario registrado exitosamente.')
+            res.redirect('/user/login');
+            
+
+        }
+    }
+
+ 
+};
 
 
 

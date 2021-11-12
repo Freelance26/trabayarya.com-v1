@@ -47,7 +47,8 @@ const { renderPerfilUser,
         editCv,
         updateAllUsers,
         actualizarCategoria,
-        execute} = require('../controllers/user.controller');
+        execute,
+        signupEmpresa} = require('../controllers/user.controller');
 const { isAuthenticated,renderPanel,eliminarUsuario, renderPanelPagos, eliminarUsuarioPago,aprobarUsuario, renderPanelReportesPagos,renderPanelNuevosUsuarios } = require('../helpers/auth');
 const { getchatPage } = require('../controllers/privatechat.controller');
 
@@ -179,7 +180,7 @@ router.post('/user/signup',uploadUserPhoto, signup);
 
 //Ruta de creacion usuario-empresa
 router.get('/user/signup-enterprise', renderSignupFormE);
-router.post('/user/signup-enterprise', signup);
+router.post('/user/signup-enterprise', signupEmpresa);
 
 //Ruta de cerrar sesion
 
@@ -198,8 +199,8 @@ router.get('/administracion/panel/:id', isAuthenticated,renderEditPassUsers)
 router.post('/administracion/panel/update',isAuthenticated, updateDatosUser)
 
 
-router.get('/administracion/signup_', renderSignupFormAdmin)
-router.post('/administracion/signup_', signupAdmin);
+// router.get('/administracion/signup_', renderSignupFormAdmin)
+// router.post('/administracion/signup_', signupAdmin);
 
 router.get('/administracion/login', renderLoginFormAdmin)
 router.post('/administracion/login', login);
