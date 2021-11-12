@@ -551,7 +551,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
     
             // await Promise.all(
                 categoriasN.map( async(value,index) => {
-                    var userCategori = await User.find({categoria: value.nombre})
+                    var userCategori = await User.find({categoria: item.nombre, approved: true, tipo_cuenta: 'Freelancer'})
                     console.log(value)
                     resultCat.push(userCategori)
                 })
@@ -584,7 +584,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
         const categoriasN = await Categorias.find().sort({number: 1})
         var resultCat = []
         for (const item of categoriasN) {
-            var userCategori = await User.find({categoria: item.nombre})
+            var userCategori = await User.find({categoria: item.nombre, approved: true, tipo_cuenta: 'Freelancer'})
             resultCat.push(userCategori)
           }
                 console.log('eee')
@@ -624,8 +624,9 @@ userCtrl.renderListaCandidatos = async (req, res) => {
         const categoriasN = await Categorias.find().sort({number: 1})
         var resultCat = []
         for (const item of categoriasN) {
-            var userCategori = await User.find({categoria: item.nombre, approved: true})
+            var userCategori = await User.find({categoria: item.nombre, approved: true, tipo_cuenta: 'Freelancer'})
             resultCat.push(userCategori)
+            console.log('eee')
           }
         
 
@@ -663,11 +664,12 @@ userCtrl.renderListaCandidatos = async (req, res) => {
         var resultCat = []
         // console.log(categoriasN)
         for (const item of categoriasN) {
-            var userCategori = await User.find({categoria: item.nombre, approved: true})
+            var userCategori = await User.find({categoria: item.nombre, approved: true, tipo_cuenta: 'Freelancer'})
+            console.log(userCategori)
             resultCat.push(userCategori)
           }
         
-        console.log('aaaaasdasdasdaa')
+        // console.log('aaaaasdasdasdaa')
         // await Promise.all(
         //     categoriasN.map( async(value,index) => {
         //         var userCategori = await User.find({categoria: value.nombre})
