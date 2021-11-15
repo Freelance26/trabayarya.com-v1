@@ -6750,6 +6750,7 @@ p.profile-minimal-position {
 	min-width: 30%;
 	letter-spacing: .05em;
 	white-space: nowrap;
+	display: grid;
 }
 
 .profile-minimal-meta > * {
