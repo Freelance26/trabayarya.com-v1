@@ -1,5 +1,7 @@
       <!-- FScreen-->
 <%- include ('../partials/header'); %>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <section class="section section-sm bg-primary">
       <% if (user) { %>
         <div class="container">
@@ -68,12 +70,20 @@
                   <% } %>
                   <%if (admin) { %>
                   <%if (user.approved === false) { %>
-                            <form action="/administracion/aprobar/<%= user.id%>" method="POST">
-                              <!-- <input type="hidden" name="_method" value="POST"> -->
+                    <button class="button button-primary btnAproveUser"
+                    style="margin-top: 15px;border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);" 
+                    data-iduser="<%= user.id%>"
+
+                      id="deleteSubmit">
+                      <span class="icon mdi mdi-account"></span>
+                      APROBAR
+                    </button>
+                            <!-- <form action="/administracion/aprobar/<%= user.id%>" method="POST">
+                              <input type="hidden" name="_method" value="POST">
                               <button class="button button-primary" style="margin-top: 15px;border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);"id="btSubmit" value="Submit" >
                               <span class="icon mdi mdi-account"></span>
                               APROBAR</button>
-                            </form>
+                            </form> -->
                             <% } %>
                             <% } %>
                   <%if (admin) { %>
@@ -226,6 +236,45 @@
         <% } %>
       </section>
 <%- include('../partials/footer') %>
+
+
+<script>
+  $(".btnAproveUser").click(function () {
+    var userId = $(this).data('iduser');
+    console.log(userId);
+    $.ajax({
+  type: "POST",
+  url: `/administracion/aprobar/${userId}`,
+  // crossDomain: true,
+    // dataType: "jsonp",
+  processData: false,
+  contentType: false,
+})
+  .done(function (res) {
+    // alert(res)
+    console.log(res)
+        Swal.fire(
+        'Exitoso',
+        `${res}`,
+        'success'
+      )
+      
+      setTimeout(function(){ window.location.reload(); }, 1500);
+  
+
+  })
+  .always(function () {})
+  .fail(function (err) {
+    console.log(err)
+    Swal.fire(
+        'Hubo un error',
+        `Intente mas tarde`,
+        'error'
+      )
+
+    })
+  });
+  </script>
 
 <script src='https://www.google.com/recaptcha/api.js'></script>
         <script>
