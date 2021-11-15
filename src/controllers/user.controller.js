@@ -713,7 +713,7 @@ userCtrl.renderListaCandidatosFiltro = async (req, res) => {
     if (req.user) {
         const userlog = req.user;
         const tipo_cuenta = req.user.tipo_cuenta;
-        const xPage = 50;
+        const xPage = 100;
         const page = req.params.page || 1;
         const categorias = await Categorias.find().sort({number: 1})
         var resultCat = []
@@ -737,7 +737,7 @@ userCtrl.renderListaCandidatosFiltro = async (req, res) => {
                 if (err) {
         
                 } else {
-                    res.render('./users/candidatos-nuevos', {
+                    res.render('./users/candidatos-filtrados', {
                         userlog,
                         categorias,
                         tipo_cuenta,
@@ -755,7 +755,7 @@ userCtrl.renderListaCandidatosFiltro = async (req, res) => {
 
         const userlog = req.user;
         console.log('b')
-        const xPage = 50;
+        const xPage = 100;
         const page = req.params.page || 1;
         const categorias = await Categorias.find().sort({number: 1})
         var resultCat = []
@@ -781,7 +781,7 @@ userCtrl.renderListaCandidatosFiltro = async (req, res) => {
                     console.log('error')
                 } else {
              
-                    res.render('./users/candidatos-nuevos', {
+                    res.render('./users/candidatos-filtrados', {
                         userlog,
                         categorias,
                         applicant,

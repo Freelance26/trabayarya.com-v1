@@ -267,6 +267,7 @@ helpers.renderPanelNuevosUsuarios = async (req,res) => {
             const page = req.params.page || 1;
             const amount = await User.find({ approved: false})
             console.log(amount)
+            console.log('a')
             const paymentReport = await User.find({ username: { $regex: '.*' + buscar_free + '.*', $options: 'i' }, approved: false }, function (error, applicant) {
                 if (error) {
                     console.log('error en el find')
@@ -281,7 +282,7 @@ helpers.renderPanelNuevosUsuarios = async (req,res) => {
                             // console.log(count)
                             // console.log(applicant)
                             // // console.log('tetas')
-                            res.render('nuevos-usuarios', { tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage),amount: applicant.length })
+                            res.render('nuevos-usuarios', { tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage),amount: amount.length })
                         }
                     })
                 })
@@ -309,7 +310,7 @@ helpers.renderPanelNuevosUsuarios = async (req,res) => {
                     })
             } catch (error) {
                 console.log(error)
-                res.render('nuevos-usuarios', { applicant, current: page, pages: Math.ceil(count / xPage),amount: applicant.length })
+                res.render('nuevos-usuarios', { applicant, current: page, pages: Math.ceil(count / xPage),amount: amount.length })
             }
         }
     }
@@ -318,16 +319,17 @@ helpers.renderPanelNuevosUsuarios = async (req,res) => {
         const xPage = 10;
         const page = req.params.page || 1;
         const amount = await User.find({ approved: false})
-        // console.log(amount)
+        console.log(amount)
         const applicant = await User.find({ approved: false }).skip((xPage * page) - xPage).limit(xPage).exec((error, applicant) => {
             console.log(applicant.length)
+            console.log('q onda')
             User.count({approved: false}, (error, count) => {
                 if (error) {
                     console.log('error1')
                 } else {
             
                     res.render('nuevos-usuarios', {
-                        tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage),amount: applicant.length
+                        tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage),amount: amount.length
                     })
                 }
             })
@@ -344,7 +346,7 @@ helpers.renderPanelNuevosUsuarios = async (req,res) => {
                 } else {
                
                     res.render('nuevos-usuarios', {
-                        applicant, current: page, pages: Math.ceil(count / xPage),amount: applicant.length
+                        applicant, current: page, pages: Math.ceil(count / xPage),amount: amount.length
                     })
                 }
             })
@@ -390,7 +392,8 @@ helpers.aprobarUsuario = async (req,res)=> {
             approved: true,
           }
           );
-        res.redirect('/administracion/nuevos-usuarios/1')
+        // res.redirect('/administracion/nuevos-usuarios/1')
+        res.status(200).send('Aprobado')
         
     } catch (error) {
         console.log(error);
