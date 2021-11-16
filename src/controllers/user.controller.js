@@ -744,7 +744,7 @@ userCtrl.renderListaCandidatosFiltro = async (req, res) => {
                         applicant,
                         current: page,
                         amount:amount.length,
-                        pages: Math.ceil(count / xPage),
+                        pages: Math.ceil(amount.length / xPage),
                         resultCat
                     })
                 }
@@ -786,7 +786,7 @@ userCtrl.renderListaCandidatosFiltro = async (req, res) => {
                         categorias,
                         applicant,
                         current: page,
-                        pages: Math.ceil(count / xPage),
+                        pages: Math.ceil(amount.length / xPage),
                         amount:amount.length,
                         resultCat
                     })
