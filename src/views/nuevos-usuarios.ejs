@@ -88,6 +88,9 @@
                                 <span class="icon mdi mdi-account"></span>
                                 APROBAR
                               </button>
+                              <button class="button button-primary deleteUser" data-iduser="<%= applicant.id%>" style="margin-top: 15px;border-radius: 10px 10px 10px 10px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);"id="btSubmit" value="Submit" >
+                                <span class="icon mdi mdi-account"></span>
+                                Eliminar</button>
                             <!-- </form> -->
 
 
@@ -230,6 +233,43 @@
       )
       
       setTimeout(function(){ window.location.reload(); }, 1500);
+  
+
+  })
+  .always(function () {})
+  .fail(function (err) {
+    console.log(err)
+    Swal.fire(
+        'Hubo un error',
+        `Intente mas tarde`,
+        'error'
+      )
+
+    })
+  });
+
+  $(".deleteUser").click(function () {
+    var userId = $(this).data('iduser');
+    console.log(userId);
+    $.ajax({
+  type: "DELETE",
+  url: `/administracion/panel/eliminar/${userId}`,
+  // crossDomain: true,
+    // dataType: "jsonp",
+  processData: false,
+  contentType: false,
+})
+  .done(function (res) {
+    // alert(res)
+    console.log(res)
+        Swal.fire(
+        'Exitoso',
+        `${res}`,
+        'success'
+      )
+      
+      setTimeout(function(){ window.location.reload(); }, 1500);
+      // setTimeout(function(){ window.history.back(); }, 1500);
   
 
   })

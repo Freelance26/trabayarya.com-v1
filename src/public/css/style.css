@@ -3156,6 +3156,15 @@ textarea.form-input {
 .radio-custom:checked + .radio-custom-dummy:after,
 .checkbox-custom:checked + .checkbox-custom-dummy:after {
 	opacity: 1;
+	left: 5px;
+  top: 0px;
+  width: 5px;
+  height: 10px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .radio,
@@ -3207,14 +3216,24 @@ textarea.form-input {
 
 .checkbox .checkbox-custom-dummy::after,
 .checkbox-inline .checkbox-custom-dummy::after {
-	content: '\f222';
-	font-family: "Material Design Icons";
+	/* content: '\f222'; */
+	content: '';
+	/* font-family: "Material Design Icons"; */
 	position: absolute;
 	top: -5px;
-	left: -2px;
+	left: 0px;
 	font-size: 21px;
 	line-height: 1;
 	color: #151515;
+	left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .checkbox-inline {

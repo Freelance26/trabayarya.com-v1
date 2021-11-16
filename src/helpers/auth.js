@@ -362,9 +362,11 @@ helpers.eliminarUsuario = async (req,res)=> {
 
     try {
         const userDelete = await User.findByIdAndDelete(id)
-        res.redirect('/administracion/nuevos-usuarios/1')
+        // res.redirect('/administracion/nuevos-usuarios/1')
+        res.status(200).send('Usuario eliminado exitosamente')
         
     } catch (error) {
+        res.status(400).send('Hubo un error')
         console.log(error);
     }
 }

@@ -204,11 +204,11 @@ router.post('/administracion/panel/update',isAuthenticated, updateDatosUser)
 
 router.get('/administracion/login', renderLoginFormAdmin)
 router.post('/administracion/login', login);
-
-router.get('/lista-trabajos-admin/:page', renderEditJobs);
+  
+router.get('/lista-trabajos-admin/:page', renderEditJobs); 
 router.delete('/administracion/edit-jobs/eliminar/:id',isAuthenticated, eliminarTrabajoAdmin)
 
-
+ 
 router.delete('/administracion/panel/eliminar/:id',isAuthenticated, eliminarUsuario)
 
 router.get('/administracion/nuevos-usuarios/:page', isAuthenticated,renderPanelNuevosUsuarios)
