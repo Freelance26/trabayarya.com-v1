@@ -561,9 +561,9 @@ userCtrl.renderListaCandidatos = async (req, res) => {
             var totalusers = amount.length
             const tipo_cuenta = req.user.tipo_cuenta;
             const buscar_free = req.query.buscar_free;
-            const xPage = 6;
+            const xPage = 10;
             const page = req.params.page || 1;
-            const applicant = await User.find({ username: { $regex: '.*' + buscar_free + '.*', $options: 'i' }, tipo_cuenta: 'Freelancer' }, function (error, applicant) {
+            const applicant = await User.find({ username: { $regex: '.*' + buscar_free + '.*', $options: 'i' }, tipo_cuenta: 'Freelancer', approved: true }, function (error, applicant) {
                 if (error) {
              
                 }
@@ -573,7 +573,8 @@ userCtrl.renderListaCandidatos = async (req, res) => {
                         if (err) {
                             console.log('error en el conteo')
                         } else {
-                            res.render('./users/candidatos', { userlog,tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage), amount: totalusers, categorias:categoriasN,resultCat })
+                            // res.render('./users/candidatos', { userlog,tipo_cuenta, applicant, current: page, pages: Math.ceil(count / xPage), amount: totalusers, categorias:categoriasN,resultCat })
+                            res.render('./users/candidatos', { userlog,tipo_cuenta, applicant, current: page, pages: Math.ceil(totalusers / xPage), amount: totalusers, categorias:categoriasN,resultCat })
                         }
                     })
                 })
@@ -601,7 +602,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
             const buscar_free = req.query.buscar_free;
             const xPage = 6;
             const page = req.params.page || 1;
-            const applicant = await User.find({ username: { $regex: '.*' + buscar_free + '.*', $options: 'i' }, tipo_cuenta: 'Freelancer' }, function (error, applicant) {
+            const applicant = await User.find({ username: { $regex: '.*' + buscar_free + '.*', $options: 'i' }, tipo_cuenta: 'Freelancer' , approved: true}, function (error, applicant) {
                 if (error) {
                     console.log('error en el find')
                 }
@@ -611,7 +612,8 @@ userCtrl.renderListaCandidatos = async (req, res) => {
                         if (err) {
                             console.log('error en el conteo')
                         } else {
-                            res.render('./users/candidatos', { applicant,userlog, current: page, pages: Math.ceil(count / xPage), amount: totalusers, categorias:categoriasN,resultCat })
+                            // res.render('./users/candidatos', { applicant,userlog, current: page, pages: Math.ceil(count / xPage), amount: totalusers, categorias:categoriasN,resultCat })
+                            res.render('./users/candidatos', { applicant,userlog, current: page, pages: Math.ceil(totalusers / xPage), amount: totalusers, categorias:categoriasN,resultCat })
                         }
                     })
                 })
@@ -649,7 +651,8 @@ userCtrl.renderListaCandidatos = async (req, res) => {
                 } else {
                     console.log('a')
                     res.render('./users/candidatos', {
-                        tipo_cuenta,userlog, applicant, current: page, pages: Math.ceil(count / xPage), amount: totalusers, categorias:categoriasN,resultCat
+                        // tipo_cuenta,userlog, applicant, current: page, pages: Math.ceil(count / xPage), amount: totalusers, categorias:categoriasN,resultCat
+                        tipo_cuenta,userlog, applicant, current: page, pages: Math.ceil(totalusers / xPage), amount: totalusers, categorias:categoriasN,resultCat
                     })
                 }
             })
@@ -689,7 +692,8 @@ userCtrl.renderListaCandidatos = async (req, res) => {
                 } else {
                     // console.log( applicant.length)
                     res.render('./users/candidatos', {
-                        userlog,applicant, current: page, pages: Math.ceil(count / xPage), amount: totalusers, categorias:categoriasN,resultCat
+                        userlog,applicant, current: page, pages: Math.ceil(totalusers / xPage), amount: totalusers, categorias:categoriasN,resultCat
+                        // userlog,applicant, current: page, pages: Math.ceil(count / xPage), amount: totalusers, categorias:categoriasN,resultCat
                     })
                 }
             })
