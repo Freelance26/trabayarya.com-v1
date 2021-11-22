@@ -59,8 +59,8 @@ const multerStorage = multer.diskStorage({
 });
 
 const multerFilter = (req, file, cb) => {
-    console.log(file)
-  if (file.mimetype.startsWith('image')) {
+    // console.log(file)
+  if (file.mimetype.startsWith('image') || file.mimetype.startsWith('application')) {
     cb(null, true);
   } else {
     cb(
@@ -91,7 +91,11 @@ const uploadFile = multer({
 });
 
 
-userCtrl.uploadUserPhoto = upload.single('photo');
+// userCtrl.uploadUserPhoto = upload.single('photo');
+userCtrl.uploadUserPhoto = upload.fields([
+    {name: 'photo', maxCount:1},
+    {name: 'cv', maxCount:1}
+]);
 userCtrl.uploadUserPic = upload.single('userpic');
 userCtrl.uploadUserPDF = uploadFile.single('userpdf');
 //Vista de sección de elección
@@ -144,10 +148,11 @@ userCtrl.renderSignupFormAdmin = (req, res) => {
 //Creacion de Usuarios
 userCtrl.signup = async (req, res) => {
     let errors = [];
-    // console.log(req.file)
+    // console.log(req.files.photo)
+    // console.log(req.files.cv)
     // console.log(req.body)
     failureFlash: true;
-    const { username, email, password, password_confirm, tipo_cuenta,ciudad,pais, categoria } = req.body;
+    const { username, email, password, password_confirm, tipo_cuenta,ciudad,pais, categoria,acerca } = req.body;
     const expe_traba = {periodo: req.body.periodo_laboral, 
         titulo_trabajo: req.body.titulo_trabajo,
         nom_empresa: req.body.nom_empresa,
@@ -179,36 +184,43 @@ userCtrl.signup = async (req, res) => {
         if (emailUser || errors.length>0) {
             //req.flash("error_msg", "El Email se encuentra en uso.");
             //res.redirect('/');
-            console.log(req.file)
             errors.push({ text: "El email ya se encuentra en uso." });
-            await fs.unlink(req.file.path)
+            await fs.unlink(req.files.photo[0].path)
+            await fs.unlink(req.files.cv[0].path)
             res.status(400).send('El email se encuentra en uso')
             // .render('users/signup', {
-            //     errors
-            //  });
-        } else {
+                //     errors
+                //  });
+            } else {
+            console.log(req.files.photo)
+            console.log(req.files.cv)
             // Guardo el usuario
             const imgUrl = randomNumber();
-            const imageTempPath = req.file.path;
-            const ext = path.extname(req.file.originalname).toLowerCase();
+            const imageTempPath = req.files.photo[0].path;
+            const ext = path.extname(req.files.photo[0].originalname).toLowerCase();
             const targetPath = path.resolve(`src/public/uploads/${imgUrl}${ext}`)
         
             console.log(targetPath)
             console.log(imageTempPath)
             console.log(ext)
+
+            const cvTempPath = req.files.cv[0].path;
+            const extt = path.extname(req.files.cv[0].originalname).toLowerCase();
         
-            if (ext === '.png' || ext === '.jpeg' ||ext === '.jpg' || ext === '.gif' ){
+
+            
+            if (ext === '.png' || ext === '.jpeg' ||ext === '.jpg' || extt === '.pdf' ){
                 await fs.rename(imageTempPath, targetPath);
         
                 const newImg = imgUrl+ext
        
               try {
-                //   console.log(newImage)
-                const resultCloud = await cloudinary.v2.uploader.upload(`src/public/uploads/${newImg}`);
-        
+                  const resultCloud = await cloudinary.v2.uploader.upload(`src/public/uploads/${newImg}`);
+                  
+                    console.log(resultCloud)
                 // const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:result.url}})
 
-                const newUser = new User({ username, email, password, tipo_cuenta,ciudad,pais,categoria, filename:resultCloud.url });
+                const newUser = new User({ username, email, password, tipo_cuenta,ciudad,pais,categoria,acerca, filename:resultCloud.url });
                 const userId  = newUser._id
                 newUser.password = await newUser.encryptPassword(password);
                 // console.log(userId);
@@ -217,8 +229,10 @@ userCtrl.signup = async (req, res) => {
               const tra =  await User.findByIdAndUpdate(userId, {$addToSet: {trabajos: expe_traba}})
                 const stui = await User.findByIdAndUpdate(userId, {$addToSet: {estudios: expe_estu}})
                 // console.log(tra);
+                const cvSaved = await User.findByIdAndUpdate(userId,{$set:{cvfilename:`/uploads/${req.files.cv[0].filename}`}})
                 // console.log(stui);
                 await fs.unlink(targetPath)
+                // await fs.unlink(cvTempPath);
                 // await fs.unlink(req.file.path)
                 req.flash('success_msg', 'Usuario registrado exitosamente.')
                 // res.redirect('/user/login');
@@ -552,12 +566,13 @@ userCtrl.renderListaCandidatos = async (req, res) => {
             // await Promise.all(
                 categoriasN.map( async(value,index) => {
                     var userCategori = await User.find({categoria: item.nombre, approved: true, tipo_cuenta: 'Freelancer'})
-                    console.log(value)
+              
                     resultCat.push(userCategori)
                 })
+                // console.log(resulCat)
             //   );
             //   console.log(resultCat)
-                    console.log('ii')
+            
             var totalusers = amount.length
             const tipo_cuenta = req.user.tipo_cuenta;
             const buscar_free = req.query.buscar_free;
@@ -588,7 +603,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
             var userCategori = await User.find({categoria: item.nombre, approved: true, tipo_cuenta: 'Freelancer'})
             resultCat.push(userCategori)
           }
-                console.log('eee')
+      
 
         // await Promise.all(
             // categoriasN.map( async(value,index) => {
@@ -628,7 +643,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
         for (const item of categoriasN) {
             var userCategori = await User.find({categoria: item.nombre, approved: true, tipo_cuenta: 'Freelancer'})
             resultCat.push(userCategori)
-            console.log('eee')
+            // console.log('eee')
           }
         
 
@@ -664,13 +679,14 @@ userCtrl.renderListaCandidatos = async (req, res) => {
         const page = req.params.page || 1;
         const amount = await User.find({ approved: true})
         const categoriasN = await Categorias.find().sort({number: 1})
+        console.log(categoriasN)
         var resultCat = []
-        // console.log(categoriasN)
         for (const item of categoriasN) {
             var userCategori = await User.find({categoria: item.nombre, approved: true, tipo_cuenta: 'Freelancer'})
-            console.log(userCategori)
+            // console.log(userCategori)
             resultCat.push(userCategori)
-          }
+        }
+        // console.log(resultCat)
         
         // console.log('aaaaasdasdasdaa')
         // await Promise.all(
@@ -685,7 +701,7 @@ userCtrl.renderListaCandidatos = async (req, res) => {
 
         var totalusers = amount.length
         const applicant = await User.find({ tipo_cuenta: 'Freelancer', approved: true }).skip((xPage * page) - xPage).limit(xPage).exec((error, applicant) => {
-            console.log(applicant)
+            // console.log(applicant)
             User.count({tipo_cuenta: 'Freelancer'}, (error, count) => {
                 if (error) {
                     console.log('error1')
