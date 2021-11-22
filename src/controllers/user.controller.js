@@ -707,7 +707,7 @@ userCtrl.renderListaCandidatosFiltro = async (req, res) => {
         'Diseño Gráfico',
         'Traducciones',
         'Edición de Imágenes',
-        'Desarrollor web, móvil y software',
+        'Desarrollador web, móvil y software',
         'Soporte Administrativo',
         'Consultoría y Contabilidad',
         'Marketing Online',
