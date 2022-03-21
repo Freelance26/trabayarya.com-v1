@@ -196,6 +196,7 @@ userCtrl.signup = async (req, res) => {
             console.log(req.files.cv)
             // Guardo el usuario
             const imgUrl = randomNumber();
+            const cvUrl = randomNumber();
             const imageTempPath = req.files.photo[0].path;
             const ext = path.extname(req.files.photo[0].originalname).toLowerCase();
             const targetPath = path.resolve(`src/public/uploads/${imgUrl}${ext}`)
@@ -206,21 +207,26 @@ userCtrl.signup = async (req, res) => {
 
             const cvTempPath = req.files.cv[0].path;
             const extt = path.extname(req.files.cv[0].originalname).toLowerCase();
-        
+            const cvTargetPath = path.resolve(`src/public/uploads/${cvUrl}${extt}`)
 
             
             if (ext === '.png' || ext === '.jpeg' ||ext === '.jpg' || extt === '.pdf' ){
                 await fs.rename(imageTempPath, targetPath);
+
+                await fs.rename(cvTempPath, cvTargetPath);
         
                 const newImg = imgUrl+ext
+                const newCv = cvUrl+extt
        
               try {
                   const resultCloud = await cloudinary.v2.uploader.upload(`src/public/uploads/${newImg}`);
+                  const resultCloudCv = await cloudinary.v2.uploader.upload(`src/public/uploads/${newCv}`);
                   
                     console.log(resultCloud)
+                    console.log(resultCloudCv)
                 // const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:result.url}})
 
-                const newUser = new User({ username, email, password, tipo_cuenta,ciudad,pais,categoria,acerca, filename:resultCloud.url });
+                const newUser = new User({ username, email, password, tipo_cuenta,ciudad,pais,categoria,acerca, filename:resultCloud.url,cvfilename:resultCloudCv.url });
                 const userId  = newUser._id
                 newUser.password = await newUser.encryptPassword(password);
                 // console.log(userId);
@@ -229,7 +235,7 @@ userCtrl.signup = async (req, res) => {
               const tra =  await User.findByIdAndUpdate(userId, {$addToSet: {trabajos: expe_traba}})
                 const stui = await User.findByIdAndUpdate(userId, {$addToSet: {estudios: expe_estu}})
                 // console.log(tra);
-                const cvSaved = await User.findByIdAndUpdate(userId,{$set:{cvfilename:`/uploads/${req.files.cv[0].filename}`}})
+                // const cvSaved = await User.findByIdAndUpdate(userId,{$set:{cvfilename:`/uploads/${req.files.cv[0].filename}`}})
                 // console.log(stui);
                 await fs.unlink(targetPath)
                 // await fs.unlink(cvTempPath);
@@ -256,6 +262,116 @@ userCtrl.signup = async (req, res) => {
 
 
 };
+// userCtrl.signup = async (req, res) => {
+//     let errors = [];
+//     // console.log(req.files.photo)
+//     // console.log(req.files.cv)
+//     // console.log(req.body)
+//     failureFlash: true;
+//     const { username, email, password, password_confirm, tipo_cuenta,ciudad,pais, categoria,acerca } = req.body;
+//     const expe_traba = {periodo: req.body.periodo_laboral, 
+//         titulo_trabajo: req.body.titulo_trabajo,
+//         nom_empresa: req.body.nom_empresa,
+//         desc_trabajo: req.body.descripcion_trabajo,
+//         deta_trabajo: req.body.detalles_trabajo }
+//     const expe_estu = {periodo: req.body.periodo_estudio,
+//         nom_academia: req.body.nom_estudio,
+//         deta_estudio: req.body.detalles_estudio}
+        
+//     if (password != password_confirm) {
+//        // req.flash('message','las contrasenas no coinciden');
+//        // res.redirect('/user/signup');
+
+//         errors.push({ text: "Las Contraseñas no coinciden." });
+//     }
+//     if (password.length < 4) {
+//         errors.push({ text: "La Contraseña debe tener al menos 4 digitos." });
+//     }
+//     if (errors.length > 0) {
+
+//          res.render('users/signup', {
+//            errors
+//         });
+//     }
+
+//     else {
+//         // Si el correo ya existe
+//         const emailUser = await User.findOne({ email: email });
+//         if (emailUser || errors.length>0) {
+//             //req.flash("error_msg", "El Email se encuentra en uso.");
+//             //res.redirect('/');
+//             errors.push({ text: "El email ya se encuentra en uso." });
+//             await fs.unlink(req.files.photo[0].path)
+//             await fs.unlink(req.files.cv[0].path)
+//             res.status(400).send('El email se encuentra en uso')
+//             // .render('users/signup', {
+//                 //     errors
+//                 //  });
+//             } else {
+//             console.log(req.files.photo)
+//             console.log(req.files.cv)
+//             // Guardo el usuario
+//             const imgUrl = randomNumber();
+//             const imageTempPath = req.files.photo[0].path;
+//             const ext = path.extname(req.files.photo[0].originalname).toLowerCase();
+//             const targetPath = path.resolve(`src/public/uploads/${imgUrl}${ext}`)
+        
+//             console.log(targetPath)
+//             console.log(imageTempPath)
+//             console.log(ext)
+
+//             const cvTempPath = req.files.cv[0].path;
+//             const extt = path.extname(req.files.cv[0].originalname).toLowerCase();
+        
+
+            
+//             if (ext === '.png' || ext === '.jpeg' ||ext === '.jpg' || extt === '.pdf' ){
+//                 await fs.rename(imageTempPath, targetPath);
+        
+//                 const newImg = imgUrl+ext
+       
+//               try {
+//                   const resultCloud = await cloudinary.v2.uploader.upload(`src/public/uploads/${newImg}`);
+                  
+//                     console.log(resultCloud)
+//                 // const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:result.url}})
+
+//                 const newUser = new User({ username, email, password, tipo_cuenta,ciudad,pais,categoria,acerca, filename:resultCloud.url });
+//                 const userId  = newUser._id
+//                 newUser.password = await newUser.encryptPassword(password);
+//                 // console.log(userId);
+//                 const result = await newUser.save();
+//                 console.log(result)
+//               const tra =  await User.findByIdAndUpdate(userId, {$addToSet: {trabajos: expe_traba}})
+//                 const stui = await User.findByIdAndUpdate(userId, {$addToSet: {estudios: expe_estu}})
+//                 // console.log(tra);
+//                 const cvSaved = await User.findByIdAndUpdate(userId,{$set:{cvfilename:`/uploads/${req.files.cv[0].filename}`}})
+//                 // console.log(stui);
+//                 await fs.unlink(targetPath)
+//                 // await fs.unlink(cvTempPath);
+//                 // await fs.unlink(req.file.path)
+//                 req.flash('success_msg', 'Usuario registrado exitosamente.')
+//                 // res.redirect('/user/login');
+//                 res.status(200).send('Registro exitoso, por favor inicia sesión')
+                
+        
+              
+        
+//               } catch (error) {
+//                   console.log(error)
+//               } 
+              
+//                // const imageSaved = await User.findByIdAndUpdate(req.user.id,{$set:{filename:newImg}})
+        
+//             }
+
+
+  
+//         }
+//     }
+
+
+// };
 //update data
 
 userCtrl.signupEmpresa = async (req, res) => {
@@ -1201,7 +1317,7 @@ userCtrl.editCv = async (req, res) => {
     const cvTempPath = req.file.path;
     const extt = path.extname(req.file.originalname).toLowerCase();
 
-    if(extt === '.pdf') {
+    if(extt === '.pdf') { 
         console.log('the path is')
         console.log(cvTempPath)
         console.log(req.file)
