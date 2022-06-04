@@ -55,11 +55,11 @@ blogCtrl.renderPoliticasDeFreelance26 = (req, res) => {
     if (req.user){
         if (req.user.tipo_cuenta === 'Empresa'){
             const empresa = req.user.tipo_cuenta;
-            res.render('./blog/politicas-de-freelance26', {empresa})        
+            res.render('./blog/politicas-de-trabajarya', {empresa})        
         }
 
     }
-    res.render('./blog/politicas-de-freelance26')
+    res.render('./blog/politicas-de-trabajarya')
 };
 
 //Exportando modulo

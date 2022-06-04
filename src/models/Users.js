@@ -20,7 +20,7 @@ const UserSchema = new Schema({
     pais: {type: String, },
     acerca: {type: String},
     skill_: {type: String},
-    skill_1: {type: String},
+    skill_1: {type: String}, 
     skill_2: {type: String},
     skill_3: {type: String},
     cargo: {type: String},
@@ -37,7 +37,7 @@ const UserSchema = new Schema({
     userlinkedin: {type: String},
     filename:{
         type:String,
-        default: 'https://i.imgur.com/9AhATd4.png',    
+        default: 'https://i.imgur.com/0oabE7K.png',    
     },
     cvfilename:{type:String},
 

@@ -102,6 +102,12 @@ userCtrl.uploadUserPDF = uploadFile.single('userpdf');
 userCtrl.renderChooseSignupOption = (req, res) => {
     res.render('users/choose-signup-option')
 }
+userCtrl.renderAccesoCandidatos = (req, res) => {  
+    res.render('users/acceso-candidatos')
+}
+userCtrl.renderAccesoEmpresas = (req, res) => {
+    res.render('users/acceso-empresas')
+}
 
 
 
@@ -421,7 +427,7 @@ userCtrl.signupEmpresa = async (req, res) => {
             await newAdmin.save();
             
             req.flash('success_msg', 'Usuario registrado exitosamente.')
-            res.redirect('/user/login');
+            res.redirect('/user/acceso-empresa');
             
 
         }
@@ -517,7 +523,7 @@ userCtrl.login =  (req,res,next) => {
         if (err) throw err;
         if (!user) {
             req.flash('success_msg', 'Estas credenciales no coinciden.')
-            res.redirect('/user/login')
+            res.redirect('/user/acceso-candidatos')
         }
         else {
             req.logIn(user, (err) => {
@@ -535,11 +541,12 @@ userCtrl.login =  (req,res,next) => {
 
                             if ( user.tipo_cuenta == 'Freelancer' ){
                                 
-                                res.redirect('/user/membresia')
+                                res.redirect('/user/edit-perfil')
+                                // res.redirect('/user/membresia')
                                 
                             } else if (user.tipo_cuenta == 'Empresa') {
                                
-                                res.redirect('/user/membresia')
+                                res.redirect('/user/edit-perfil')
                                     
                             } else {
                                 
