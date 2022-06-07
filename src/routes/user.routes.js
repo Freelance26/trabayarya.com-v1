@@ -2,6 +2,7 @@
 const { Router } = require('express');
 const app = require('../server')
 const router = Router();
+const TestDate = require('../models/TestDate')
 // const multer = require('multer');
 const passport = require('passport');
 const paypal = require('paypal-rest-sdk')
@@ -27,13 +28,13 @@ const { renderPerfilUser,
         paymentMembership,
         signup,
          signupAdmin,
-        renderSignupFormAdmin,
+        renderSignupFormAdmin, 
         eliminarTrabajo,
         eliminarTrabajoAdmin,
         renderEditPass,
         renderEditPassUsers,
         updateDatos,
-        updateDatosUser,
+        updateDatosUser,   
         renderChat,
         createPayment,
         renderPaymentSucess,
@@ -48,7 +49,10 @@ const { renderPerfilUser,
         updateAllUsers,
         actualizarCategoria,
         execute,
-        signupEmpresa} = require('../controllers/user.controller');
+        signupEmpresa,
+        renderAccesoCandidatos,
+        renderAccesoEmpresas
+} = require('../controllers/user.controller');
 const { isAuthenticated,renderPanel,eliminarUsuario, renderPanelPagos, eliminarUsuarioPago,aprobarUsuario, renderPanelReportesPagos,renderPanelNuevosUsuarios } = require('../helpers/auth');
 const { getchatPage } = require('../controllers/privatechat.controller');
 
@@ -59,6 +63,16 @@ router.get('/user/updateAll', updateAllUsers);
 
 router.get('/candidatos/:page', renderListaCandidatos);
 router.post('/lista-candidatos/:page', renderListaCandidatosFiltro);
+router.post('/testDate', async (req,res) => {
+        console.log('ok')
+        const theDate = new Date()
+
+        console.log(TestDate)
+        const newUser = new TestDate({ fecha:theDate });
+        console.log(newUser)
+        newUser.save()
+        res.status(200).send('ok')
+});
 
 
 //Ruta de perfil de freelancer
@@ -131,6 +145,9 @@ router.post('/user/login',  login);
 
 //Ruta de elección de registro de usuario
 router.get('/user/choose-signup-option', renderChooseSignupOption);
+router.get('/user/acceso-candidatos', renderAccesoCandidatos);
+router.get('/user/acceso-empresas', renderAccesoEmpresas);
+
 router.get('/user/membresia', isAuthenticated,renderMembership);
 // router.post('/user/pay',isAuthenticated,paymentMembership);
 

@@ -22,7 +22,7 @@ router.get('/blog/politica-de-privacidad', renderPoliticaDePrivacidad);
 router.get('/blog/terminos-y-condiciones', renderTerminosYCondiciones);
 
 //Ruta Políticas de freelance26
-router.get('/blog/politicas-de-freelance26', renderPoliticasDeFreelance26);
+router.get('/blog/politicas-de-trabajarya', renderPoliticasDeFreelance26);
 
 //Exportando modulo
 module.exports = router;

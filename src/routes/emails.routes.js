@@ -104,6 +104,47 @@ router.post('/send-mail-user/', async (req,res) => {
     
     
 })
+router.post('/send/', async (req,res) => {
+    
+
+
+    contentHTML = `
+        <p>hola</p>
+    `;
+
+
+    console.log('test')
+    const transporter = nodemailer.createTransport({
+        host: 'send.smtp.com',
+        port: 2525,
+        secure: false,
+        auth: {
+            user: 'no-reply@ewc-dev.com',
+            pass: '88FwRx$xhv$xXr%Gp9'
+        },
+        tls:{
+            rejectUnauthorized: false
+        }
+    })
+    try {
+        const info = await transporter.sendMail({
+            from: "'hui' <no-reply@ewc-dev.com>",
+            to: `erraco.wow@gmail.com`,
+            
+            subject:'Alguien quiere contactar contigo!',
+            //text:'hello world'
+            html: contentHTML
+        })
+        console.log(info)
+        res.status(200).send('ok')
+        
+    } catch (error) {
+        console.log(error)
+    }
+    
+    
+    
+})
 
 //Exportando modulo
 module.exports = router;
