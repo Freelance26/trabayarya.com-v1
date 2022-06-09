@@ -13953,7 +13953,8 @@ position: absolute;
 
 @media only screen and (max-width: 767px) {
 	.logo-mobile{
-		display: inline-block;
+		display: none;
+		/* display: inline-block; */
 		margin-top: 20px;
 	}
 	.conindexj{
@@ -13965,9 +13966,9 @@ position: absolute;
 		margin-top: 10vh;
 	}
 	.conindex{
-		background-image: url('../images/bgindexmovil.svg');
+		background-image: url('../images/bg-registroM.svg');
 		background-repeat: no-repeat;
-		background-position: 0px 60vh;
+		background-position: 0px 59vh;
 		background-size: contain;
 		min-width: 100%;
 		
