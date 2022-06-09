@@ -13867,7 +13867,7 @@ yx-axis
 .conindex{
 	background-image: url("../images/bgindex2.svg");
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: contain;
 	min-width: 100%;
 	
 	background-position: center;
